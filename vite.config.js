@@ -8,7 +8,6 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: [
-      { find: '@', replacement: path.resolve(__dirname, 'src') },
       { find: '@components', replacement: path.resolve(__dirname, 'src/components') },
       { find: '@pages', replacement: path.resolve(__dirname, 'src/pages') },
       { find: '@utils', replacement: path.resolve(__dirname, 'src/utils') },
@@ -16,6 +15,7 @@ export default defineConfig({
       { find: '@api', replacement: path.resolve(__dirname, 'src/api') },
       { find: '@layout', replacement: path.resolve(__dirname, 'src/shared/layout') },
       { find: '@routes', replacement: path.resolve(__dirname, 'src/shared/routes') },
+      { find: '@device', replacement: path.resolve(__dirname, './src/style/breakpoints') },
     ],
   },
 });
