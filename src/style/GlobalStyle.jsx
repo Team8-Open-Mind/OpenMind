@@ -1,15 +1,25 @@
 import { createGlobalStyle, css } from 'styled-components';
 
+import resetCss from './reset';
+
 const GlobalStyle = createGlobalStyle`${css`
+  ${resetCss}
+
   :root {
     --root-z-index: 1;
     --portal-z-index: 2;
-    font-size: 62.5%;
+  }
+
+  #root {
+    width: 100%;
+    height: 100%;
+
+    z-index: var(--root-z-index, 1);
   }
 
   #portal {
     position: fixed;
-    z-index: 2;
+    z-index: var(--portal-z-index, 2);
   }
 
   h1,
@@ -37,6 +47,25 @@ const GlobalStyle = createGlobalStyle`${css`
   h3 {
     font-size: 2.4rem;
     line-height: 3rem; /* 125% */
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .background-clip-text {
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 `}
 `;

@@ -1,0 +1,5 @@
+@import url('/custom-font/pretendard.css');
+
+:root {
+  font-family: 'Pretendard', sans-serif;
+}
