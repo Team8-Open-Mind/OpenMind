@@ -3,6 +3,7 @@
     "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "aaron-bond.better-comments"
+    "aaron-bond.better-comments",
+    "seatonjiang.gitmoji-vscode"
   ]
 }
