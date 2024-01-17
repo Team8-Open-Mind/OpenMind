@@ -4,6 +4,7 @@ const GlobalStyle = createGlobalStyle`${css`
   :root {
     --root-z-index: 1;
     --portal-z-index: 2;
+    font-size: 62.5%;
   }
 
   #portal {
