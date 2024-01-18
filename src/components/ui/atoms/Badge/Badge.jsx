@@ -7,9 +7,14 @@ const StBadge = styled.div`
   align-items: center;
   gap: 1rem;
 
+  font-family: Pretendard;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.8rem;
+  color: ${({ value }) => (value ? '#542F1A' : '#818181')};
+
   border-radius: 0.8rem;
   border: 0.1rem solid ${({ value }) => (value ? '#542F1A' : '#818181')};
-  color: ${({ value }) => (value ? '#542F1A' : '#818181')};
 `;
 
 const Badge = ({ value }) => {
