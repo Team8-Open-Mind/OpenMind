@@ -9,8 +9,6 @@ function App() {
   return (
     <ThemeProvider theme={foundation}>
       <GlobalStyle />
-      <p>test</p>
-      <p>test 거절이요</p>
       <TestComponent />
     </ThemeProvider>
   );
