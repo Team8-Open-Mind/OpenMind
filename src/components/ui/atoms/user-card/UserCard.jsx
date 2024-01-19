@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { foundation } from '/src/style/theme/theme';
+import { StMessageIcon } from '../sprite-icon/spriteIcon';
 
 const gray = foundation.color.Grayscale[40];
 const white = foundation.color.Grayscale[10];
@@ -66,9 +67,9 @@ const StUserCard = styled.div`
     & div {
       gap: 0.4rem;
 
-      & img {
-        width: 1.8rem;
-        height: 1.8rem;
+      & .message-icon {
+        width: 18px;
+        height: 18px;
 
         @media (max-width: 375px) {
           width: 1.6rem;
@@ -88,7 +89,7 @@ const UserCard = ({ userProfile = '/image/profile_sample.png', userName = '아�
       </div>
       <div className='count'>
         <div>
-          <img src='/image/Icon/Message_icon.svg' />
+          <StMessageIcon className='message-icon' />
           <span>받은 질문</span>
         </div>
         <span>{count}개</span>
