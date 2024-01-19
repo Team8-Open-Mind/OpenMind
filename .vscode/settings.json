@@ -1,0 +1,18 @@
+{
+  "files.autoSave": "onFocusChange",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always"
+  },
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+
+  "gitmoji.addCustomEmoji": [
+    {
+      "emoji": "🧹",
+      "code": ":broom:",
+      "description": "[chore] 그외 모든 자잘한 수정들"
+    }
+  ]
+}
