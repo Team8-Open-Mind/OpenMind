@@ -88,7 +88,7 @@ const UserCard = ({ userProfile = '/image/profile_sample.png', userName = '아�
       </div>
       <div className='count'>
         <div>
-          <img src='/image/Icon/Message_icon.svg' />
+          <img src='/image/Icon/message_icon.svg' />
           <span>받은 질문</span>
         </div>
         <span>{count}개</span>
