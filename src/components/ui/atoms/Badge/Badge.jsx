@@ -1,4 +1,8 @@
 import styled from 'styled-components';
+import { foundation } from '/src/style/theme/theme';
+
+const gray = foundation.color.Grayscale[40];
+const brown = foundation.color.Brown[40];
 
 const StBadge = styled.div`
   display: inline-flex;
@@ -11,10 +15,10 @@ const StBadge = styled.div`
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.8rem;
-  color: ${({ value }) => (value ? '#542F1A' : '#818181')};
+  color: ${({ value }) => (value ? brown : gray)};
 
   border-radius: 0.8rem;
-  border: 0.1rem solid ${({ value }) => (value ? '#542F1A' : '#818181')};
+  border: 0.1rem solid ${({ value }) => (value ? brown : gray)};
 `;
 
 const Badge = ({ value }) => {
