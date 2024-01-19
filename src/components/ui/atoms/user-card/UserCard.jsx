@@ -1,6 +1,6 @@
 import styled from 'styled-components';
+
 import { foundation } from '/src/style/theme/theme';
-import { StMessageIcon } from '../sprite-icon/spriteIcon';
 
 const gray = foundation.color.Grayscale[40];
 const white = foundation.color.Grayscale[10];
@@ -89,7 +89,6 @@ const UserCard = ({ userProfile = '/image/profile_sample.png', userName = '아�
       </div>
       <div className='count'>
         <div>
-          <StMessageIcon className='message-icon' />
           <span>받은 질문</span>
         </div>
         <span>{count}개</span>
