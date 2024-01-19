@@ -6,5 +6,13 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": "always"
   },
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"]
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+
+  "gitmoji.addCustomEmoji": [
+    {
+      "emoji": "🧹",
+      "code": ":broom:",
+      "description": "[chore] 그외 모든 자잘한 수정들"
+    }
+  ]
 }
