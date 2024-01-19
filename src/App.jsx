@@ -1,5 +1,6 @@
 import { ThemeProvider } from 'styled-components';
 
+import Button from '@components/ui/atoms/Button/Button';
 import TestComponent from '@components/ui/atoms/TestComponent';
 
 import GlobalStyle from './style/global/GlobalStyle';
@@ -10,6 +11,7 @@ function App() {
     <ThemeProvider theme={foundation}>
       <GlobalStyle />
       <TestComponent />
+      <Button>버튼 테스트 입니다.</Button>
     </ThemeProvider>
   );
 }
