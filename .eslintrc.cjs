@@ -23,6 +23,7 @@ module.exports = {
     'react-refresh/only-export-components': 'off', // todo: provider 훅을 분리하든지 옮기든지. 컴포넌트만 export 해야지 개발 과정에서 fast refresh 효과 받을 수 있음. 아니면 그냥 꺼두던지
     // 'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'react/destructuring-assignment': 'off',
+    'no-use-before-define': 'off', // styled component를 위해 규칙 off
     'padding-line-between-statements': [
       'error',
       { blankLine: 'always', prev: ['function', 'block'], next: '*' },
