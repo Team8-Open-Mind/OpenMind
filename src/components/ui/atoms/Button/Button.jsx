@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import { StArrowIcon } from '../sprite-icon/SpriteIcon';
 import { brown20Interaction, brown40Interaction } from './interaction';
+import { tabletSize } from './media-query';
 
 // default 값이 이미 들어가있음에 주의한다.
 // 특히 기본 너비는 "auto"이다.
@@ -22,13 +23,13 @@ const StButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 4px;
   color: ${({ theme }) => theme.color.Grayscale['10']};
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 400;
   width: ${(props) => props.width};
-  padding: 12px 24px;
   border-radius: 8px;
+  padding: 8px 12px;
   transition: 0.1s;
 
   &.brown20 {
@@ -44,4 +45,6 @@ const StButton = styled.button`
 
     ${brown40Interaction}
   }
+
+  ${tabletSize}
 `;
