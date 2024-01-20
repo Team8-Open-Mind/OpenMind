@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const icon = styled.div`
   width: ${(props) => props.size}px;
   height: ${(props) => props.size}px;
-  background-image: url(/image/icon/sprite_icon_${(props) => props.color}.svg);
+  background-image: url('/image/icon/sprite_icon_${(props) => props.color}.svg');
   background-size: ${(props) => props.size * 8}px ${(props) => props.size * 2}px;
   background-repeat: no-repeat;
   display: inline-block;
