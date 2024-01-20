@@ -1,11 +1,13 @@
 import path from 'path';
 
+import svgr from '@svgr/rollup';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    svgr(),
     react({
       babel: {
         plugins: [
@@ -32,6 +34,7 @@ export default defineConfig({
       { find: '@routes', replacement: path.resolve(__dirname, 'src/shared/routes') },
       { find: '@device', replacement: path.resolve(__dirname, './src/style/breakpoints') },
       { find: '@style', replacement: path.resolve(__dirname, './src/style') },
+      { find: '@assets', replacement: path.resolve(__dirname, './src/assets') },
     ],
   },
 });

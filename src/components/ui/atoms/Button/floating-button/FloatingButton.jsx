@@ -36,6 +36,9 @@ const FloatingButton = ({
   fontSizeOnResize,
   position = 'fixed',
   children,
+  onClickHandler,
+  isDisabled = false,
+  ...rest
 }) => {
   const { targetResizeInfo } = useResizeObserver();
 
@@ -45,6 +48,9 @@ const FloatingButton = ({
       $positionOffsetOnResize={positionOffsetOnResize}
       $fontSize={fontSizeOnResize}
       $boxSizeOnResize={boxSizeOnResize}
+      onClick={onClickHandler}
+      disabled={isDisabled}
+      {...rest}
     >
       {targetResizeInfo?.width >= size.tablet
         ? textContentOnResize?.onPc || children || textContentOnResize?.onMobile
