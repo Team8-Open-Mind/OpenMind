@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { foundation } from '/src/style/theme/theme';
 
 const gray = foundation.color.Grayscale[40];

@@ -1,5 +1,7 @@
 import { useState } from 'react';
+
 import styled from 'styled-components';
+
 import { foundation } from '/src/style/theme/theme';
 
 const gray = foundation.color.Grayscale[40];
@@ -25,7 +27,7 @@ const Reaction = () => {
 
   return (
     <StReaction onClick={handleReactionCount}>
-      <img src='/image/icon/thumbs_up_icon.svg' />
+      <img src='/image/icon/thumbs_up_icon.svg' alt='엄지' />
       <span>도움이 되었어요</span>
       <span>{count}</span>
     </StReaction>
