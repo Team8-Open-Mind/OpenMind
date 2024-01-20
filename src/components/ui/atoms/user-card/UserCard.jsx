@@ -2,8 +2,6 @@ import styled from 'styled-components';
 
 import { foundation } from '/src/style/theme/theme';
 
-import { StMessageIcon } from '../sprite-icon/spriteIcon';
-
 const gray = foundation.color.Grayscale[40];
 const white = foundation.color.Grayscale[10];
 

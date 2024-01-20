@@ -9,7 +9,9 @@
       "@api/*": ["./src/api/*"],
       "@layout/*": ["./src/shared/layout/*"],
       "@routes/*": ["./src/shared/routes/*"],
-      "@device/*": ["./src/style/breakpoints/*"]
+      "@device/*": ["./src/style/breakpoints/*"],
+      "@style/*": ["./src/style/*"],
+      "@assets/*": ["./src/assets/*"]
     }
   }
 }
