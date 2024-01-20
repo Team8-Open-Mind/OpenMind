@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import { foundation } from '/src/style/theme/theme';
 
+import { StMessageIcon } from '../sprite-icon/spriteIcon';
+
 const gray = foundation.color.Grayscale[40];
 const white = foundation.color.Grayscale[10];
 
@@ -84,7 +86,7 @@ const UserCard = ({ userProfile = '/image/profile_sample.png', userName = '아�
   return (
     <StUserCard>
       <div className='user'>
-        <img src={userProfile} />
+        <img src={userProfile} alt='유저프로필' />
         <span className='name'>{userName}</span>
       </div>
       <div className='count'>
