@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 // size와 color를 props로 내려줄 수 있습니다.
-// ex) <StDownIcon size={12} color='brown40' />
+// ex) <StHamburger size={20} color='gray40' />
 const icon = styled.div`
   width: ${(props) => props.size}px;
   height: ${(props) => props.size}px;
@@ -9,6 +9,14 @@ const icon = styled.div`
   background-size: ${(props) => props.size * 8}px ${(props) => props.size * 2}px;
   background-repeat: no-repeat;
   display: inline-block;
+`;
+
+export const StHamburger = styled(icon)`
+  background-position: 0 0;
+`;
+
+export const StThumbsDownIcon = styled(icon)`
+  background-position: ${(props) => `-${props.size}px 0`};
 `;
 
 export const StThumbsUpIcon = styled(icon)`
