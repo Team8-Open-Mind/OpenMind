@@ -8,7 +8,16 @@ export default defineConfig({
   plugins: [
     react({
       babel: {
-        plugins: ['babel-plugin-styled-components'],
+        plugins: [
+          [
+            'babel-plugin-styled-components',
+            {
+              displayName: true,
+              fileName: false,
+              ssr: false,
+            },
+          ],
+        ],
       },
     }),
   ],
@@ -22,6 +31,7 @@ export default defineConfig({
       { find: '@layout', replacement: path.resolve(__dirname, 'src/shared/layout') },
       { find: '@routes', replacement: path.resolve(__dirname, 'src/shared/routes') },
       { find: '@device', replacement: path.resolve(__dirname, './src/style/breakpoints') },
+      { find: '@style', replacement: path.resolve(__dirname, './src/style') },
     ],
   },
 });

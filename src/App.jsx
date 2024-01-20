@@ -1,5 +1,7 @@
 import { ThemeProvider } from 'styled-components';
 
+import FloatingDeleteButton from '@components/ui/atoms/Button/floating-button/floating-delete-button/FloatingDeleteButton';
+import FloatingWriteQuestionButton from '@components/ui/atoms/Button/floating-button/floating-write-question-button/FloatingWriteQuestionButton';
 import InputField from '@components/ui/atoms/input/input-field/InputField';
 import InputTextArea from '@components/ui/atoms/input/input-text-area/InputTextArea';
 
@@ -12,6 +14,8 @@ function App() {
       <GlobalStyle />
       <InputField />
       <InputTextArea />
+      <FloatingDeleteButton />
+      <FloatingWriteQuestionButton />
     </ThemeProvider>
   );
 }
