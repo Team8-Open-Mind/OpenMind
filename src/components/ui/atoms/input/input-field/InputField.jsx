@@ -13,7 +13,7 @@ const InputField = ({ value, onChangeHandler }) => {
         value={value}
         $isTyping={isTyping}
         placeholder='이름을 입력하세요'
-        onChangeHandler={onChangeHandler}
+        onChange={onChangeHandler}
         onKeyUp={stopTyping}
         onInput={startTyping}
       />
