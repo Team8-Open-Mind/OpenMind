@@ -32,9 +32,9 @@ export default defineConfig({
       { find: '@api', replacement: path.resolve(__dirname, 'src/api') },
       { find: '@layout', replacement: path.resolve(__dirname, 'src/shared/layout') },
       { find: '@routes', replacement: path.resolve(__dirname, 'src/shared/routes') },
-      { find: '@device', replacement: path.resolve(__dirname, './src/style/breakpoints') },
-      { find: '@style', replacement: path.resolve(__dirname, './src/style') },
-      { find: '@assets', replacement: path.resolve(__dirname, './src/assets') },
+      { find: '@device', replacement: path.resolve(__dirname, 'src/style/breakpoints') },
+      { find: '@style', replacement: path.resolve(__dirname, 'src/style') },
+      { find: '@assets', replacement: path.resolve(__dirname, 'src/assets') },
     ],
   },
 });

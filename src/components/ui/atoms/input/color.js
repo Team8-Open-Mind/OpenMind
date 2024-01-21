@@ -1,11 +1,11 @@
 import { css } from 'styled-components';
 
-export const colorWhenPlaceholder = css`
+export const colorOnPlaceholder = css`
   &::placeholder {
     color: ${({ theme }) => theme.color.Grayscale['40']};
   }
 `;
 
-export const colorWhenTyping = css`
+export const colorOnTyping = css`
   color: ${({ theme, $isTyping }) => ($isTyping ? theme.color.Grayscale['40'] : theme.color.Grayscale['60'])};
 `;
