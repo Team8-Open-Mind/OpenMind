@@ -3,8 +3,7 @@ import { boxShadow2pt } from '@style/box-shadow/boxShadow';
 import styled, { css } from 'styled-components';
 
 import { useResizeObserver } from '@hooks/useResizeObserver';
-
-import { getNullIfIncludePercent } from '../../../../../utils/style-utils/getNullIfIncludePercent';
+import { getPercentageOrNull } from '@utils/style-utils/getPercentageOrNull';
 
 /**
  * @typedef {{ width: number; height: number }} sizeOnMobile - 모바일 크기
@@ -69,15 +68,15 @@ const positionOffsetOnResize = css`
       bottom: ${$positionOffsetOnResize?.onMobile?.bottom};
       left: ${$positionOffsetOnResize?.onMobile?.left};
 
-      translate: ${getNullIfIncludePercent($positionOffsetOnResize?.onMobile?.right) ||
+      translate: ${getPercentageOrNull($positionOffsetOnResize?.onMobile?.right) ||
         ($positionOffsetOnResize?.onMobile?.left &&
-          getNullIfIncludePercent($positionOffsetOnResize?.onMobile?.left) &&
-          `-${getNullIfIncludePercent($positionOffsetOnResize?.onMobile?.left)}`) ||
+          getPercentageOrNull($positionOffsetOnResize?.onMobile?.left) &&
+          `-${getPercentageOrNull($positionOffsetOnResize?.onMobile?.left)}`) ||
         0}
         ${($positionOffsetOnResize?.onMobile?.top &&
-          getNullIfIncludePercent($positionOffsetOnResize?.onMobile?.top) &&
-          `-${getNullIfIncludePercent($positionOffsetOnResize?.onMobile?.top)}`) ||
-        getNullIfIncludePercent($positionOffsetOnResize?.onMobile?.bottom) ||
+          getPercentageOrNull($positionOffsetOnResize?.onMobile?.top) &&
+          `-${getPercentageOrNull($positionOffsetOnResize?.onMobile?.top)}`) ||
+        getPercentageOrNull($positionOffsetOnResize?.onMobile?.bottom) ||
         0};
 
       /* 피그마 컴포넌트 시안에서는 pc라고 되어있는데 페이지 시안은 tablet부터임 */

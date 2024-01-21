@@ -6,10 +6,10 @@ const checkIncludesPercent = (positionOffset) => {
   return null;
 };
 
-const getNullIfIncludePercent = (positionOffset) => {
+const getPercentageOrNull = (positionOffset) => {
   if (checkIncludesPercent(positionOffset)) return positionOffset;
 
   return null;
 };
 
-export { getNullIfIncludePercent };
+export { getPercentageOrNull };
