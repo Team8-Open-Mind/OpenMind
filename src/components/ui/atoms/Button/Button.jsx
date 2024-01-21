@@ -8,9 +8,14 @@ import { tabletSize } from './media-query';
 // 특히 기본 너비는 "auto"이다.
 // 버튼이 동일한 padding 안에서 children 길이에 맞게끔 커져야하기 때문임.
 
-const Button = ({ children, theme = 'brown40', disabled = false, width = 'auto', arrow = false }) => {
+const Button = ({ children, onClickHandler, theme = 'brown40', disabled = false, width = 'auto', arrow = false }) => {
   return (
-    <StButton disabled={disabled} width={width} className={theme === 'brown40' ? 'brown40' : 'brown20'}>
+    <StButton
+      onClick={onClickHandler}
+      disabled={disabled}
+      width={width}
+      className={theme === 'brown40' ? 'brown40' : 'brown20'}
+    >
       <span>{children}</span>
       {arrow ? <StArrowIcon size={18} color={theme === 'brown40' ? 'white' : 'brown40'} /> : null}
     </StButton>
