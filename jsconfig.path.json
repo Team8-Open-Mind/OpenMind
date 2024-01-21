@@ -4,12 +4,14 @@
     "paths": {
       "@components/*": ["./src/components/*"],
       "@pages/*": ["./src/pages/*"],
-      "@utils/*": ["./src/lib/utils/*"],
+      "@utils/*": ["./src/utils/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@api/*": ["./src/api/*"],
       "@layout/*": ["./src/shared/layout/*"],
       "@routes/*": ["./src/shared/routes/*"],
-      "@device/*": ["./src/style/breakpoints/*"]
+      "@device/*": ["./src/style/breakpoints/*"],
+      "@style/*": ["./src/style/*"],
+      "@assets/*": ["./src/assets/*"]
     }
   }
 }

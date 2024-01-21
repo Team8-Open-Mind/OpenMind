@@ -27,7 +27,7 @@ const Reaction = () => {
 
   return (
     <StReaction onClick={handleReactionCount}>
-      <img src='/image/icon/thumbs_up_icon.svg' alt='엄지' />
+      <img alt='좋아요 아이콘' src='/image/icon/thumbs_up_icon.svg' />
       <span>도움이 되었어요</span>
       <span>{count}</span>
     </StReaction>

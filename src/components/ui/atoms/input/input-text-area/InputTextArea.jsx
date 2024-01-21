@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { colorWhenPlaceholder, colorWhenTyping } from '../color';
+import { colorOnPlaceholder, colorOnTyping } from '../color';
 import { useAutoResize } from '../hooks/useAutoResize';
 import { useCheckIsTyping } from '../hooks/useCheckIsTyping';
 
@@ -55,8 +55,8 @@ const StTextarea = styled.textarea`
     border-color: ${({ theme }) => theme.color.Brown['40']};
   }
 
-  ${colorWhenTyping};
-  ${colorWhenPlaceholder};
+  ${colorOnTyping};
+  ${colorOnPlaceholder};
 
   scrollbar-width: none;
   &::-webkit-scrollbar {
