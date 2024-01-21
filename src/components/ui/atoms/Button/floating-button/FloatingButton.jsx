@@ -11,12 +11,13 @@ import { getPercentageOrNull } from '@utils/style-utils/getPercentageOrNull';
  *
  * @typedef {Object} TFloatingButtonProps
  * @property {{ onPc?: string; onMobile?: string } | undefined } textContentOnResize
- * - 모바일 화면에서 텍스트 크기(onPc 없으면 onMobile이 기본값).
  * - children 컴포넌트가 있으면 children 컴포넌트가 textOnMobile을 대체함.
  * @property {{ onMobile: sizeOnMobile; onPc: sizeOnPC }} boxSizeOnResize - 모바일 크기
  * @property {{ onMobile: { top?: string; right?: string; bottom?: string; left?: string }; onPc?: { top?: string; right?: string; bottom?: string; left?: string }}} positionOffsetOnResize - 위치 오프셋
  * @property {{ onMobile: string; onPc?: string }} fontSizeOnResize - 폰트 크기
  * @property { 'fixed' | 'absolute' | 'static' | 'sticky' | 'relative' } position 기본값 'fixed'
+ * @property { VoidFunction } onClickHandler
+ * @property { boolean } isDisabled
  *
  * @description
  * - 모바일 우선 개발 버튼 입니다. onMobile 프로퍼티는 전부 필수입니다.

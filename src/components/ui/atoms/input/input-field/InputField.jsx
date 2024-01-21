@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { colorWhenPlaceholder, colorWhenTyping } from '../color';
+import { colorOnPlaceholder, colorOnTyping } from '../color';
 import { useCheckIsTyping } from '../hooks/useCheckIsTyping';
 
 const InputField = ({ value, onChangeHandler }) => {
@@ -72,6 +72,6 @@ const StInput = styled.input.attrs({
   outline: none;
   resize: none;
 
-  ${colorWhenTyping};
-  ${colorWhenPlaceholder};
+  ${colorOnTyping};
+  ${colorOnPlaceholder};
 `;
