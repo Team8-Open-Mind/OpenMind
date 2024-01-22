@@ -5,6 +5,7 @@ import ListPage from '@pages/list-page/ListPage';
 import MainPage from '@pages/main-page/MainPage';
 import NotFoundPage from '@pages/not-found-page/NotFoundPage';
 import QuestFeedPage from '@pages/question-feed-page/QuestFeedPage';
+import TestPage from '@pages/test-page/TestPage';
 
 const PrimaryRoute = (
   <Route path='/'>
@@ -12,6 +13,7 @@ const PrimaryRoute = (
     <Route path='list' element={<ListPage />} />
     <Route path='post/:id/answer' element={<AnswerPage />} />
     <Route path='post/:id' element={<QuestFeedPage />} />
+    <Route path='test' element={<TestPage />} />
     <Route path='*' element={<NotFoundPage />} />
   </Route>
 );
