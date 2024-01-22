@@ -3,6 +3,8 @@ import { css } from 'styled-components';
 const resetCss = css`
   * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
   html,
