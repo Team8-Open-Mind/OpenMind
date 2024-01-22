@@ -6,5 +6,6 @@ export const tabletSize = css`
     padding: 12px 24px;
     gap: 8px;
     font-size: 1.6rem;
+    line-height: 22px;
   }
 `;

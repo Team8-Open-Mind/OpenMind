@@ -36,6 +36,7 @@ const StButton = styled.button`
   border-radius: 8px;
   padding: 8px 12px;
   transition: 0.1s;
+  line-height: 18px;
 
   &.brown20 {
     background: ${({ theme }) => theme.color.Brown['10']};
