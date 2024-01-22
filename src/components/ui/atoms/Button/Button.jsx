@@ -13,11 +13,11 @@ const Button = ({ children, onClickHandler, theme = 'brown40', disabled = false,
     <StButton
       onClick={onClickHandler}
       disabled={disabled}
-      width={width}
+      $width={width}
       className={theme === 'brown40' ? 'brown40' : 'brown20'}
     >
       <span>{children}</span>
-      {arrow ? <StArrowIcon size={18} color={theme === 'brown40' ? 'white' : 'brown40'} /> : null}
+      {arrow ? <StArrowIcon $size={18} $color={theme === 'brown40' ? 'gray10' : 'brown40'} /> : null}
     </StButton>
   );
 };
@@ -32,7 +32,7 @@ const StButton = styled.button`
   color: ${({ theme }) => theme.color.Grayscale['10']};
   font-size: 1.4rem;
   font-weight: 400;
-  width: ${(props) => props.width};
+  width: ${(props) => props.$width};
   border-radius: 8px;
   padding: 8px 12px;
   transition: 0.1s;

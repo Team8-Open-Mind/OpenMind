@@ -7,13 +7,14 @@ import { useCheckIsTyping } from '../hooks/useCheckIsTyping';
 /**
  * * 다른 div로 감싸고 padding 주셔서 활용하면 됩니다.
  */
-const InputTextArea = ({ onChangeHandler, value, children = '이름을 입력하세요' }) => {
+const InputTextArea = ({ onChangeHandler, value, children = '이름을 입력하세요', isOverflowScroll = true }) => {
   const { isTyping, startTyping, stopTyping } = useCheckIsTyping();
   const { textBoxRef, handleResizeHeight } = useAutoResize();
 
   const handleOnInput = () => {
     startTyping();
-    handleResizeHeight();
+
+    if (!isOverflowScroll) handleResizeHeight();
   };
 
   return (
@@ -34,7 +35,7 @@ export default InputTextArea;
 
 const StTextarea = styled.textarea`
   width: 100%;
-  height: auto;
+  height: 100%;
   min-height: 14rem;
   padding: 1.6rem;
 
