@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 // 로딩과 에러 메시지를 적을 상태 저장
 // getAsyncFunction에 원하는 api 호출 함수가 들어가야한다.
-// 특정 이벤트 발생 없을때도 바로 받아 올 수 있다.
+// 특정 이벤트 발생했을 때 사용할 수 있는 커스텀 훅이다.
 
 export const useAsync = (getAsyncFunction) => {
   const [loading, setLoading] = useState(false);
@@ -15,11 +15,8 @@ export const useAsync = (getAsyncFunction) => {
         setError(null);
         setLoading(true);
 
-        const data = await getAsyncFunction(...args);
-
-        setResult(data);
-
-        return data;
+        const res = await getAsyncFunction(...args);
+        setResult(res);
       } catch (error) {
         setError(error);
 
@@ -31,10 +28,5 @@ export const useAsync = (getAsyncFunction) => {
     [getAsyncFunction],
   );
 
-  useEffect(() => {
-    // 렌더링되자마자 호출되도록
-    setAsyncFunction();
-  }, [setAsyncFunction]);
-
-  return [loading, error, result];
+  return [loading, error, result, setAsyncFunction];
 };
