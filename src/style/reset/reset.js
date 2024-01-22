@@ -14,7 +14,8 @@ const resetCss = css`
 
     font-size: 62.5%; /* 1rem = 10px */
 
-    min-height: 100vh;
+    width: 100%;
+    height: 100%;
 
     input,
     select,

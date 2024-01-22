@@ -21,6 +21,8 @@ const DropdownProvider = ({ children }) => {
       <div
         css={css`
           position: relative;
+          display: flex;
+          align-items: center;
         `}
       >
         {children}

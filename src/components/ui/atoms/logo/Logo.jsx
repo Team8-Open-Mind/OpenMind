@@ -38,6 +38,8 @@ const Logo = ({
 export default Logo;
 
 const StLogoWrapper = styled.div`
+  cursor: pointer;
+
   width: ${({ $width }) => $width};
   height: ${({ $height }) => $height};
 

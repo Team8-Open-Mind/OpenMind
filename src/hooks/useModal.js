@@ -21,6 +21,7 @@ const useModal = () => {
    * # 모달에 대한 정보를 받아온다.
    * * `ModalComponent` 프롭은 필수. 어떤 모달을 띄울 것인지 모달 컴포넌트를 넣어준다.(필수)
    * 해당 ModalComponent는 modalRef를 prop으로 받을 수 있고 ref에 modalRef를 주입하는 모달이어야 한다.
+   * 해당 ModalComponent는 closeModal이라는 prop으로 모달을 닫는 함수를 전달 받을 수 있어야 한다.
    * * `closeModalCallback`은 모달을 닫을 때 수행할 콜백 함수다.(옵션)
    * * `나머지`는 모달에 전달하고자 하는 프롭을 자유롭게 넣으면 된다.
    *
