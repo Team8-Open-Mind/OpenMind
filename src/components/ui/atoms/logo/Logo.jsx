@@ -2,10 +2,10 @@ import { device } from '@device/mediaBreakpoints';
 import styled from 'styled-components';
 /**
  * @typedef {{ width?: string; height?: string; }} LogoSize
+ * @typedef {{ $tabletWidth?: string; $tabletHeight?: string }} TabletSize
+ * @typedef {{ $pcWidth?: string; $pcHeight?: string; }} PcSize
  * @typedef {{ onClickHandler?: VoidFunction }} OnClickHandler
- * @typedef {{ $tabletWidth?: string; $tabletHeight?: string }} TabletWidth
- * @typedef {{ $pcWidth?: string; $pcHeight?: string; }} PcHeight
- * @param {LogoSize & OnClickHandler & TabletWidth & PcHeight } LogoProps
+ * @param {LogoSize & TabletSize & PcSize & OnClickHandler  } LogoProps
  * @description
  * * 기본 크기는 list 페이지에 맞춰져 있습니다.
  * * 기본 width, height는 모바일 크기 기준입니다.
@@ -15,20 +15,20 @@ const Logo = ({
   width = '14.6rem',
   height = '5.7rem',
   onClickHandler,
-  $tabletWidth,
-  $tabletHeight,
-  $pcWidth,
-  $pcHeight,
+  tabletWidth,
+  tabletHeight,
+  pcWidth,
+  pcHeight,
 }) => {
   return (
     <StLogoWrapper
       onClick={onClickHandler}
       $width={width}
       $height={height}
-      $tabletWidth={$tabletWidth}
-      $tabletHeight={$tabletHeight}
-      $pcWidth={$pcWidth}
-      $pcHeight={$pcHeight}
+      $tabletWidth={tabletWidth}
+      $tabletHeight={tabletHeight}
+      $pcWidth={pcWidth}
+      $pcHeight={pcHeight}
     >
       <StLogoImg />
     </StLogoWrapper>
