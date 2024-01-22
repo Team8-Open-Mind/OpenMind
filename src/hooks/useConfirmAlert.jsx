@@ -37,7 +37,7 @@ const useConfirmAlert = () => {
   // 알럿이 현재 보여지는지 여부를 반환
   const isConfirmOpen = () => isConfirmVisible;
 
-  // 컴포넌트에서 사용할 수 있는 JSX를 반환
+  // title과 content 줄바꿈하고 싶을 때는 \n을 사용한다.
   const ConfirmAlertComponent = ({ title, content, cancelText = '취소', ConfirmText = '삭제' }) => (
     <StConfirmAlertModal style={{ display: isConfirmVisible ? 'block' : 'none' }}>
       <div>
