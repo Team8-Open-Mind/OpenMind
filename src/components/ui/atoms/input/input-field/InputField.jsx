@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { colorOnPlaceholder, colorOnTyping } from '../color';
 import { useCheckIsTyping } from '../hooks/useCheckIsTyping';
 
+/**
+ * * 다른 div로 감싸고 padding 주셔서 활용하면 됩니다.
+ */
 const InputField = ({ value, onChangeHandler }) => {
   const { isTyping, startTyping, stopTyping } = useCheckIsTyping();
 

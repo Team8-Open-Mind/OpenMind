@@ -4,6 +4,9 @@ import { colorOnPlaceholder, colorOnTyping } from '../color';
 import { useAutoResize } from '../hooks/useAutoResize';
 import { useCheckIsTyping } from '../hooks/useCheckIsTyping';
 
+/**
+ * * 다른 div로 감싸고 padding 주셔서 활용하면 됩니다.
+ */
 const InputTextArea = ({ onChangeHandler, value }) => {
   const { isTyping, startTyping, stopTyping } = useCheckIsTyping();
   const { textBoxRef, handleResizeHeight } = useAutoResize();
