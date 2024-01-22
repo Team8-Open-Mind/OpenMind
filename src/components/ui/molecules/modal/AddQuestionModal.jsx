@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import styled from 'styled-components';
 
 import Button from '@components/ui/atoms/Button/Button';
@@ -6,14 +8,20 @@ import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 import { StCloseIcon, StMessageIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
 
 const AddQuestionModal = ({ userProfile = PROFILE_SAMPLE, userName = '닉네임' }) => {
+  const [questionValue, setQuestionValue] = useState('');
+
+  const handleQuestionValue = (event) => {
+    setQuestionValue(event.target.value);
+  };
+
   return (
     <StAddQuestionModal>
       <div className='close'>
         <div className='title'>
-          <StMessageIcon size={28} color='black' />
+          <StMessageIcon size={28} color='gray60' />
           <h2>질문을 작성하세요</h2>
         </div>
-        <StCloseIcon size={28} color='black' />
+        <StCloseIcon size={28} color='gray60' />
       </div>
       <StExceptTitle>
         <StQuestionTo>
@@ -21,10 +29,8 @@ const AddQuestionModal = ({ userProfile = PROFILE_SAMPLE, userName = '닉네임'
           <img src={userProfile} alt='프로필' />
           <span>{userName}</span>
         </StQuestionTo>
-        <InputTextArea />
-        <Button disabled='true' width='100%'>
-          질문 보내기
-        </Button>
+        <InputTextArea onChangeHandler={handleQuestionValue}>질문을 입력해주세요</InputTextArea>
+        <Button disabled={questionValue.length === 0}>질문 보내기</Button>
       </StExceptTitle>
     </StAddQuestionModal>
   );
@@ -45,6 +51,13 @@ const StAddQuestionModal = styled.div`
 
   box-shadow: ${({ theme }) => theme.shadow['3pt']};
 
+  @media (max-width: 660px) {
+    width: 100%;
+    height: 100%;
+    max-height: 568px;
+    margin: 24px auto;
+  }
+
   & h2 {
     color: ${({ theme }) => theme.color.Grayscale['60']};
     font-family: Actor;
@@ -52,6 +65,9 @@ const StAddQuestionModal = styled.div`
     font-weight: 400;
     line-height: 30px;
     margin: 0;
+    @media (max-width: 375px) {
+      font-size: 2rem;
+    }
   }
 
   & .title {
@@ -85,6 +101,10 @@ const StQuestionTo = styled.div`
     height: 28px;
     justify-content: center;
     align-items: center;
+    @media (max-width: 375px) {
+      width: 22px;
+      height: 22px;
+    }
   }
 `;
 
