@@ -1,6 +1,27 @@
 import styled from 'styled-components';
 
+import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
+
 import { foundation } from '/src/style/theme/theme';
+
+const UserCard = ({ userProfile = PROFILE_SAMPLE, userName = '아초는고양이', count = '0' }) => {
+  return (
+    <StUserCard>
+      <div className='user'>
+        <img src={userProfile} alt='유저프로필' />
+        <span className='name'>{userName}</span>
+      </div>
+      <div className='count'>
+        <div>
+          <span>받은 질문</span>
+        </div>
+        <span>{count}개</span>
+      </div>
+    </StUserCard>
+  );
+};
+
+export default UserCard;
 
 const gray = foundation.color.Grayscale[40];
 const white = foundation.color.Grayscale[10];
@@ -79,22 +100,3 @@ const StUserCard = styled.div`
     }
   }
 `;
-
-const UserCard = ({ userProfile = '/image/profile_sample.png', userName = '아초는고양이', count = '9' }) => {
-  return (
-    <StUserCard>
-      <div className='user'>
-        <img src={userProfile} alt='유저프로필' />
-        <span className='name'>{userName}</span>
-      </div>
-      <div className='count'>
-        <div>
-          <span>받은 질문</span>
-        </div>
-        <span>{count}개</span>
-      </div>
-    </StUserCard>
-  );
-};
-
-export default UserCard;
