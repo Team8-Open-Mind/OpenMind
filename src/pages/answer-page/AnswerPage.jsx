@@ -1,4 +1,6 @@
 import Button from '@components/ui/atoms/Button/Button';
+import FeedCard from '@components/ui/molecules/feed-card/FeedCard';
+import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 
 import { useConfirmAlert } from '@hooks/useConfirmAlert';
 
@@ -15,6 +17,9 @@ const AnswerPage = () => {
 
   return (
     <div>
+      <FeedCardContainer>
+        <FeedCard />
+      </FeedCardContainer>
       <Button onClickHandler={() => showConfirm(handleConfirm, handleCancel)}>전체 피드 삭제</Button>
       <ConfirmAlertComponent
         title='전체 피드가 삭제됩니다'

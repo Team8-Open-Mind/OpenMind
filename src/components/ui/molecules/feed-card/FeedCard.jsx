@@ -28,7 +28,7 @@ export default FeedCard;
 
 const StFeedCard = styled.div`
   display: flex;
-  width: 684px;
+  width: 100%;
   padding: 32px;
   flex-direction: column;
   align-items: flex-start;
