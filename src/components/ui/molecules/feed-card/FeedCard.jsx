@@ -7,7 +7,15 @@ import AnswerBox from '@components/ui/atoms/question-box/AnswerBox';
 import QuestionBox from '@components/ui/atoms/question-box/QuestionBox';
 import Reaction from '@components/ui/atoms/Reaction/Reaction';
 
-const FeedCard = ({ edit = true }) => {
+import { useToggle } from '@hooks/useToggle';
+
+const FeedCard = ({ type }) => {
+  const [isEdit, setIsEdit] = useToggle();
+
+  const handleEditToggle = () => {
+    setIsEdit();
+  };
+
   return (
     <StFeedCard>
       <Badge value='true' />
@@ -17,7 +25,7 @@ const FeedCard = ({ edit = true }) => {
         <StLine />
         <StReactionAndEdit>
           <Reaction />
-          {edit ? <EditButton /> : null}
+          {type === 'edit' ? <EditButton onClickEdit={handleEditToggle} isEdit={isEdit} /> : null}
         </StReactionAndEdit>
       </StBottom>
     </StFeedCard>
@@ -33,6 +41,8 @@ const StFeedCard = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 32px;
+
+  margin-top: 16px;
 
   border-radius: 16px;
   background: ${({ theme }) => theme.color.Grayscale[10]};
