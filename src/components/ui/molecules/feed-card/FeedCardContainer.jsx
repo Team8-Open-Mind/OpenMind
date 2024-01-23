@@ -16,11 +16,13 @@ const FeedCardContainer = () => {
 export default FeedCardContainer;
 
 const StFeedCardContainer = styled.div`
-  display: inline-flex;
+  display: flex;
   padding: 16px;
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  max-width: 716px;
+  margin: 0px auto;
 
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.color.Brown['30']};
