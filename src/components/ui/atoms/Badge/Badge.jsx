@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { foundation } from '/src/style/theme/theme';
 
 const Badge = ({ value }) => {
-  return <StBadge value={value}>{value ? '답변 완료' : '미답변'}</StBadge>;
+  return <StBadge $value={value}>{value ? '답변 완료' : '미답변'}</StBadge>;
 };
 
 export default Badge;
