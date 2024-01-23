@@ -7,7 +7,7 @@ import AnswerBox from '@components/ui/atoms/question-box/AnswerBox';
 import QuestionBox from '@components/ui/atoms/question-box/QuestionBox';
 import Reaction from '@components/ui/atoms/Reaction/Reaction';
 
-const FeedCard = () => {
+const FeedCard = ({ edit = true }) => {
   return (
     <StFeedCard>
       <Badge value='true' />
@@ -17,7 +17,7 @@ const FeedCard = () => {
         <StLine />
         <StReactionAndEdit>
           <Reaction />
-          <EditButton />
+          {edit ? <EditButton /> : null}
         </StReactionAndEdit>
       </StBottom>
     </StFeedCard>
