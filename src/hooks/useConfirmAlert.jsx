@@ -44,10 +44,10 @@ const useConfirmAlert = () => {
         <StTitle>{title}</StTitle>
         <StContent>{content}</StContent>
         <StButtonGroup>
-          <Button type='button' width='100%' theme='brown40' onClickHandler={handleCancel}>
+          <Button type='button' width='100%' theme='brown40' onClickHandler={handleConfirm}>
             {ConfirmText}
           </Button>
-          <Button type='button' width='100%' theme='brown20' onClickHandler={handleConfirm}>
+          <Button type='button' width='100%' theme='brown20' onClickHandler={handleCancel}>
             {cancelText}
           </Button>
         </StButtonGroup>
