@@ -1,12 +1,11 @@
-import UserCard from '@components/ui/atoms/user-card/UserCard';
-import AddQuestionModal from '@components/ui/molecules/modal/AddQuestionModal';
+import FeedCard from '@components/ui/molecules/feed-card/FeedCard';
+import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 
 const TestPage = () => {
   return (
-    <>
-      <AddQuestionModal />
-      <UserCard />
-    </>
+    <div>
+      <FeedCardContainer />
+    </div>
   );
 };
 
