@@ -16,7 +16,8 @@ const FeedCardContainer = () => {
 export default FeedCardContainer;
 
 const StFeedCardContainer = styled.div`
-  display: inline-flex;
+  max-width: 716px;
+  display: flex;
   padding: 16px;
   flex-direction: column;
   align-items: center;
