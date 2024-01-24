@@ -6,6 +6,7 @@ import MainPage from '@pages/main-page/MainPage';
 import NotFoundPage from '@pages/not-found-page/NotFoundPage';
 import QuestFeedPage from '@pages/question-feed-page/QuestFeedPage';
 import TestPage from '@pages/test-page/TestPage';
+import TestPage2 from '@pages/test2-page/TestPage2';
 
 const PrimaryRoute = (
   <Route path='/'>
@@ -14,6 +15,7 @@ const PrimaryRoute = (
     <Route path='post/:id/answer' element={<AnswerPage />} />
     <Route path='post/:id' element={<QuestFeedPage />} />
     <Route path='test' element={<TestPage />} />
+    <Route path='test2' element={<TestPage2 />} />
     <Route path='*' element={<NotFoundPage />} />
   </Route>
 );
