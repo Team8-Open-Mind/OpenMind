@@ -2,12 +2,20 @@ import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
+import { useToggle } from '@hooks/useToggle';
+
 import Button from '../Button/Button';
 import InputTextArea from '../input/input-text-area/InputTextArea';
+import RejectReplyButton from '../reject-reply/RejectReplyButton';
 
 const ReplyBox = () => {
+  const [isReject, setIsReject] = useToggle();
   const [replyValue, setReplyValue] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
+
+  const handleRejectClick = () => {
+    setIsReject();
+  };
 
   useEffect(() => {
     if (replyValue !== '') {
@@ -27,17 +35,9 @@ const ReplyBox = () => {
       <Button theme='brown40' width='100%' disabled={isDisabled}>
         답변 완료
       </Button>
-      <StRejectButton>답변 거절하기</StRejectButton>
+      <RejectReplyButton onClickHandler={handleRejectClick} isReject={isReject} />
     </>
   );
 };
 
 export default ReplyBox;
-
-const StRejectButton = styled.button`
-  font-size: 1.6rem;
-  font-weight: 400;
-  line-height: 45px;
-  color: ${({ theme }) => theme.color.Grayscale['40']};
-  text-decoration: underline;
-`;

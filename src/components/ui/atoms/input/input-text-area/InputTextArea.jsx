@@ -7,7 +7,13 @@ import { useCheckIsTyping } from '../hooks/useCheckIsTyping';
 /**
  * * 다른 div로 감싸고 padding 주셔서 활용하면 됩니다.
  */
-const InputTextArea = ({ onChangeHandler, value, children = '이름을 입력하세요', isOverflowScroll = true }) => {
+const InputTextArea = ({
+  onChangeHandler,
+  value,
+  children = '이름을 입력하세요',
+  isOverflowScroll = true,
+  readOnly = false,
+}) => {
   const { isTyping, startTyping, stopTyping } = useCheckIsTyping();
   const { textBoxRef, handleResizeHeight } = useAutoResize();
 
@@ -27,6 +33,7 @@ const InputTextArea = ({ onChangeHandler, value, children = '이름을 입력하
       onInput={handleOnInput}
       onKeyUp={stopTyping}
       rows={1}
+      readOnly={readOnly}
     />
   );
 };
