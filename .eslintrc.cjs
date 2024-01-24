@@ -24,6 +24,7 @@ module.exports = {
     // 'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'react/destructuring-assignment': 'off',
     'no-use-before-define': 'off', // styled component를 위해 규칙 off
+    'no-unsafe-optional-chaining': 'off',
     'padding-line-between-statements': [
       'error',
       { blankLine: 'always', prev: ['function', 'block'], next: '*' },

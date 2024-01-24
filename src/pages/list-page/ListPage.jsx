@@ -8,22 +8,19 @@ import { ReactComponent as RightArrow } from '@assets/right-arrow.svg';
 import Button from '@components/ui/atoms/Button/Button';
 import ArrowDropdown from '@components/ui/atoms/dropdown/arrow-dropdown/ArrowDropdown';
 import Logo from '@components/ui/atoms/logo/Logo';
-import { StLeftIcon, StRightIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
-import GridItem from '@components/ui/atoms/user-card/GridItem';
-import GridContainer from '@components/ui/molecules/grid/GridContainer';
+import Grid from '@components/ui/molecules/grid';
 
-import { getQuestionList } from '@api/question/getQuestionList';
+import { getQuestionLists } from '@api/questions/getQuestionLists';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 
 const ListPage = () => {
   const navigate = useNavigate();
 
-  // eslint-disable-next-line no-unused-vars
-  const [_loading, _error, result] = useAsyncOnMount(getQuestionList);
+  const [, , result] = useAsyncOnMount(getQuestionLists);
   console.log(result);
 
   return (
-    <>
+    <StWrap>
       <StNavWrapper>
         <StNav>
           <Logo onClickHandler={() => navigate('/')} />
@@ -32,65 +29,51 @@ const ListPage = () => {
           </Button>
         </StNav>
       </StNavWrapper>
-      <StSortControllerWrapper>
-        <StH1>누구에게 질문할까요?</StH1>
-        <ArrowDropdown />
-      </StSortControllerWrapper>
-      <GridContainer>
-        {result?.results?.map((id) => (
-          <GridItem key={id} />
-        ))}
-      </GridContainer>
-      <div
-        css={css`
-          display: flex;
-          align-items: center;
-          margin-inline: auto;
-          text-align: center;
-        `}
-      >
-        {/* Todo svg 컴포넌트로 불러와야 함 */}
-        {/* <StPaginationArrowBox>
-          <StLeftIcon $size={20} $color='gray40' />
-        </StPaginationArrowBox> */}
-        <StIconBox>
-          {/* <LeftArrow
-            css={css`
-              cursor: pointer;
-              fill: ${({ theme }) => theme.color.Grayscale[40]};
+      <StContentsWrapper>
+        <StSortControllerWrapper>
+          <StH1>누구에게 질문할까요?</StH1>
+          <ArrowDropdown />
+        </StSortControllerWrapper>
+        <Grid.Container>
+          {result?.results.map((questionList) => {
+            return <Grid.Item key={questionList.id} />;
+          })}
+        </Grid.Container>
+        <StPageTurnner
+          css={css`
+            display: flex;
+            align-items: center;
+            margin-inline: auto;
+            text-align: center;
+            width: fit-content;
+            margin-inline: auto;
+          `}
+        >
+          <StIconAlignBox>
+            <StLeftArrow width={8} height={9} />
+          </StIconAlignBox>
+          {Array.from({ length: Math.min(5, Math.ceil(result?.results.length / 8)) }, (_, i) => i + 1).map((v) => {
+            console.log(v);
 
-              &:hover {
-                fill: ${({ theme }) => theme.color.Brown[40]};
-              }
-            `}
-          /> */}
-          <StLeftArrow width={8} height={9} />
-        </StIconBox>
-        {Array.from({ length: Math.min(5, result?.results?.length) }, (_, i) => i + 1).map((v) => (
-          <StPaginationNumberBox key={v}>{v}</StPaginationNumberBox>
-        ))}
-        <StIconBox>
-          {/* <RightArrow
-            css={css`
-              cursor: pointer;
-              fill: ${({ theme }) => theme.color.Grayscale[40]};
-
-              &:hover {
-                fill: ${({ theme }) => theme.color.Brown[40]};
-              }
-            `}
-          /> */}
-          <StRightArrow width={8} height={9} />
-        </StIconBox>
-        {/* <StPaginationArrowBox>
-          <StRightIcon $size={20} $color='gray40' />
-        </StPaginationArrowBox> */}
-      </div>
-    </>
+            return <StPaginationNumberBox key={v}>{v}</StPaginationNumberBox>;
+          })}
+          <StIconAlignBox>
+            <StRightArrow width={8} height={9} />
+          </StIconAlignBox>
+        </StPageTurnner>
+      </StContentsWrapper>
+    </StWrap>
   );
 };
 
 export default ListPage;
+
+const StWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+`;
 
 const StNavWrapper = styled.div`
   padding: 4rem 5rem;
@@ -98,19 +81,33 @@ const StNavWrapper = styled.div`
 
 const StNav = styled.nav`
   max-width: 94rem;
-  height: 5.7rem;
+  /* height: 5.7rem; */
+  height: auto;
   margin-inline: auto;
 
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+
+  gap: 2rem;
+
+  @media ${device.tablet} {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 0;
+  }
 `;
 
 const StSortControllerWrapper = styled.div`
+  width: 100%;
+
   display: flex;
   padding-inline: 2.4rem;
   justify-content: space-between;
+  align-items: center;
   flex-direction: row;
 
   @media ${device.tablet} {
@@ -119,6 +116,17 @@ const StSortControllerWrapper = styled.div`
     align-items: center;
     row-gap: 1.2rem;
   }
+`;
+
+const StContentsWrapper = styled.div`
+  /* justify-items: stretch; */
+  flex-grow: 1;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StH1 = styled.h1`
@@ -139,7 +147,7 @@ const StH1 = styled.h1`
   }
 `;
 
-const StIconBox = styled.div`
+const StIconAlignBox = styled.div`
   width: 4rem;
   height: 4rem;
 
@@ -190,29 +198,26 @@ const StRightArrow = styled(RightArrow)`
   ${arrowIconTheme}
 `;
 
-// const StPaginationNumberBox = styled.span`
-//   @import url('/custom-font/actor/actor.css');
+const StPageTurnner = styled.div`
+  display: flex;
+  align-items: center;
+  margin-inline: auto;
+  text-align: center;
+  width: fit-content;
+  margin-inline: auto;
 
-//   display: flex;
-//   width: 4rem;
-//   height: 4rem;
-//   justify-content: center;
-//   align-items: center;
-//   cursor: pointer;
+  padding-bottom: 3.9rem;
 
-//   & span {
-//     color: ${({ theme }) => theme.color.Grayscale[40]};
-//     text-align: center;
-//     font-feature-settings:
-//       'clig' off,
-//       'liga' off;
-//     font-family: 'Actor', sans-serif;
-//     font-size: 2rem;
-//     font-style: normal;
-//     font-weight: 400;
-//     line-height: 2.5rem; /* 125% */
-//     &:hover {
-//       color: ${({ theme }) => theme.color.Brown[40]};
-//     }
-//   }
-// `;
+  @media ${device.tablet} {
+    padding-bottom: 7.6rem;
+  }
+
+  /* 18.6rem(width) * 4 + 3.2rem(padding) * 2 + 2rem(gap) * 3 = 86.8rem */
+  @media screen and (min-width: 868px) {
+    padding-bottom: 9.1rem;
+  }
+
+  @media ${device.pc} {
+    padding-bottom: 9.7rem;
+  }
+`;
