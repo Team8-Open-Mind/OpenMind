@@ -22,6 +22,8 @@ const StFeedCardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  max-width: 716px;
+  margin: 0px auto;
 
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.color.Brown['30']};
