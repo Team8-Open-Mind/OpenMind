@@ -15,10 +15,14 @@ const AnswerPage = () => {
     console.log('Cancelled!');
   };
 
+  // feedcard type default가 null이다.
+  // id 값이 주소에 있는 페이지라면? edit/reply
   return (
     <div>
-      <FeedCardContainer>
-        <FeedCard />
+      <FeedCardContainer cardLength={3}>
+        <FeedCard type='edit' />
+        <FeedCard type='read' />
+        <FeedCard type='reply' />
       </FeedCardContainer>
       <Button onClickHandler={() => showConfirm(handleConfirm, handleCancel)}>전체 피드 삭제</Button>
       <ConfirmAlertComponent
