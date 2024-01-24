@@ -1,22 +1,30 @@
 import styled from 'styled-components';
 
-import Button from '@components/ui/atoms/Button/Button';
+import FloatingWriteQuestionButton from '@components/ui/atoms/Button/floating-button/floating-write-question-button/FloatingWriteQuestionButton';
+import ShareButton from '@components/ui/atoms/Button/share-button/ShareButton';
 import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 
+import { useSNSShare } from '@hooks/useSNSShare';
+
 const QuestFeedPage = ({ userProfile = PROFILE_SAMPLE, userName = '닉네임' }) => {
+  const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
+
   return (
     <StBackground>
       <NavBar />
       <StQuestFeedPageWrapper>
-        <img src={userProfile} alt='프로필' />
+        <img className='user-profile' src={userProfile} alt='프로필' />
         <span className='pageName'>{userName}</span>
-        <StSnsContainer />
+        <StSnsWrapper>
+          <ShareButton iconName='clipboard' onClickHandler={copyUrl} />
+          <ShareButton iconName='kakao' onClickHandler={shareToKakaotalk} />
+          <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
+        </StSnsWrapper>
       </StQuestFeedPageWrapper>
       <FeedCardContainer />
-
-      <Button>질문 작성하기</Button>
+      <FloatingWriteQuestionButton />
     </StBackground>
   );
 };
@@ -30,6 +38,7 @@ const StBackground = styled.div`
   background-repeat: no-repeat;
   background-position: bottom;
   background-attachment: fixed;
+  padding-bottom: 142px;
 `;
 
 const StQuestFeedPageWrapper = styled.div`
@@ -37,8 +46,10 @@ const StQuestFeedPageWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 12px;
+  margin: 54px;
 
-  & img {
+  & .user-profile {
     display: flex;
     width: 136px;
     height: 136px;
@@ -56,6 +67,7 @@ const StQuestFeedPageWrapper = styled.div`
   }
 `;
 
-const StSnsContainer = styled.div`
+const StSnsWrapper = styled.div`
   display: flex;
+  gap: 12px;
 `;
