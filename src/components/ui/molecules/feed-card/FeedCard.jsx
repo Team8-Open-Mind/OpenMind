@@ -18,7 +18,7 @@ const FeedCard = ({ type }) => {
 
   return (
     <StFeedCard>
-      <Badge value='true' />
+      <Badge value='null' isRejected />
       <QuestionBox question='질문이 들어갑니다' elapsedTime='?' />
       <AnswerBox userProfile={PROFILE_SAMPLE} userName='닉네임' />
       <StBottom>
