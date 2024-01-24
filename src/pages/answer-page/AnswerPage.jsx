@@ -2,10 +2,13 @@ import Button from '@components/ui/atoms/Button/Button';
 import FeedCard from '@components/ui/molecules/feed-card/FeedCard';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 
+import { getAnswerLists } from '@api/answer/getAnswerLists';
+import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 import { useConfirmAlert } from '@hooks/useConfirmAlert';
 
 const AnswerPage = () => {
   const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
+  const [, , result] = useAsyncOnMount(getAnswerLists);
 
   const handleConfirm = () => {
     console.log('Confirmed!');

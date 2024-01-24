@@ -1,9 +1,12 @@
-import axios from 'axios';
-
-const API_TEST_URL = import.meta.env.VITE_TEST_API_URL;
+import axiosInstance from '@api/instance/axiosInstance';
 
 export const getAnswerLists = async () => {
-  const response = await axios.get(`${API_TEST_URL}/subjects/2756/questions/`);
+  const response = await axiosInstance.get(`/subjects/2756/questions/`, {
+    params: {
+      limit: 8,
+      offset: 0,
+    },
+  });
 
   if (response.status !== 200) {
     throw new Error(`질문 리스트를 불러오는데 실패하였어요!`);
