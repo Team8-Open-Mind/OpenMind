@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useCloseModal } from './useCloseModal';
 
-const useModal = () => {
+const useModalComponent = () => {
   const [Modal, setModal] = useState(null);
 
   const [ModalInfo, setModalInfo] = useState({
@@ -93,4 +93,4 @@ const useModal = () => {
   return { isModalOpen, toggleAndSetModal, ModalInfo, ModalComponent };
 };
 
-export { useModal };
+export { useModalComponent };

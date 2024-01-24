@@ -3,7 +3,7 @@ import { createContext, useContext } from 'react';
 const GridContext = createContext();
 
 const GridProvider = ({ children }) => {
-  return <GridContext.Provider>{children}</GridContext.Provider>;
+  return <GridContext.Provider value=''>{children}</GridContext.Provider>;
 };
 
 export default GridProvider;

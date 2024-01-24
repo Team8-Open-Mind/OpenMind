@@ -1,17 +1,15 @@
 import { device } from '@device/mediaBreakpoints';
 import styled from 'styled-components';
 
-import PROFILE_SAMPLE from '../../atoms/profile-sample';
-
-const GridItem = () => {
+const GridItem = ({ questionList: { name, imageSource, questionCount } }) => {
   return (
     <StGridItemWrapper>
       {/*  */}
       <StGridItemProfileBox>
         <StGridItemImgDiv>
-          <StGridProfileImg src={PROFILE_SAMPLE} />
+          <StGridProfileImg src={imageSource} />
         </StGridItemImgDiv>
-        <StGridProfileName>아초는 고양이</StGridProfileName>
+        <StGridProfileName>{name}</StGridProfileName>
       </StGridItemProfileBox>
       {/*  */}
       <StGridItemFooter>
@@ -19,7 +17,7 @@ const GridItem = () => {
           <StGridMessageIcon $color='gray40' />
           받은 질문
         </StGridItemFooterLeftSideBox>
-        9개
+        {questionCount}개
       </StGridItemFooter>
     </StGridItemWrapper>
   );

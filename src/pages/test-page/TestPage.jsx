@@ -2,10 +2,10 @@ import PortalContainer from '@components/portal/Portal';
 import Toast from '@components/ui/atoms/toast/Toast';
 import FeedCard from '@components/ui/molecules/feed-card/FeedCard';
 
-import { useModal } from '@hooks/useModal';
+import { useModalComponent } from '@hooks/useModalComponent';
 
 const TestPage = () => {
-  const { ModalComponent, isModalOpen, toggleAndSetModal } = useModal();
+  const { ModalComponent, isModalOpen, toggleAndSetModal } = useModalComponent();
 
   return (
     <div>
