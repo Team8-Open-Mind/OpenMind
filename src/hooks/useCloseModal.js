@@ -3,8 +3,14 @@ import { useEffect, useRef } from 'react';
 import { useToggle } from './useToggle';
 
 /**
+ * * modalRef (옵션)
  * modalRef가 걸려있는 드롭다운, 모달 이외의 영역을 클릭했을 때 닫는 용도
  * 자기자신이 아닌 다른 드롭다운, 모달을 클릭했을 때도 닫는다.
+ * ```jsx
+ * <div ref={modalRef}>
+ *  ...
+ * </div>
+ * ```
  */
 const useCloseModal = () => {
   const [isModalOpen, toggleModal] = useToggle();

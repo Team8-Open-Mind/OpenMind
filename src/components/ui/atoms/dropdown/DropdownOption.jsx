@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-import { useDropDownProvider } from './context/DropdownProvider';
+import { useDropdownProvider } from './context/DropdownProvider';
 
 const DropdownOption = ({ children, callbackFn }) => {
-  const { changeSelectedOption } = useDropDownProvider();
+  const { changeSelectedOption } = useDropdownProvider();
 
   const onClickHandler = (e) => {
     changeSelectedOption(e);
@@ -18,7 +18,6 @@ export default DropdownOption;
 
 const StDropdownOption = styled.li`
   display: flex;
-  /* justify-content: flex-start; */
   justify-content: flex-start;
   align-self: stretch;
   align-items: center;
