@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`${css`
     height: 100%;
     min-height: 100vh;
 
+    position: relative;
     z-index: var(--root-z-index, 1);
 
     background-color: ${({ theme }) => theme.color.Grayscale[20]};

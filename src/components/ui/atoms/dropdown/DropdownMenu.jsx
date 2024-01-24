@@ -1,10 +1,10 @@
 import { boxShadow1pt } from '@style/box-shadow/boxShadow';
 import styled from 'styled-components';
 
-import { useDropDownProvider } from './context/DropdownProvider';
+import { useDropdownProvider } from './context/DropdownProvider';
 
 const DropdownMenu = ({ children, positionTop = '38', positionRight, width }) => {
-  const { isOpen } = useDropDownProvider();
+  const { isOpen } = useDropdownProvider();
 
   return (
     <>
