@@ -6,8 +6,8 @@ import { useAsync } from './useAsync';
 // getAsyncFunction에 원하는 api 호출 함수가 들어가야한다.
 // 특정 이벤트 발생 없을때도 바로 받아 올 수 있다.
 
-export const useAsyncOnMount = (getAsyncFunction) => {
-  const [loading, error, result, setAsyncFunction] = useAsync(getAsyncFunction);
+export const useAsyncOnMount = (getAsyncFunction, deps = []) => {
+  const [loading, error, result, setAsyncFunction] = useAsync(getAsyncFunction, deps);
 
   useEffect(() => {
     // 렌더링되자마자 호출되도록
