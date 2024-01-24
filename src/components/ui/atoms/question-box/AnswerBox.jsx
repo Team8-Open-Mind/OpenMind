@@ -4,6 +4,8 @@ import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 
 import ReplyBox from '../reply-box/ReplyBox';
 
+// read, edit, reply type에 맞게 component 불러온다.
+
 const AnswerBox = ({ type, userProfile = PROFILE_SAMPLE, userName = '당신', elapsedTime = '?' }) => {
   return (
     <StAnswerBox>
@@ -13,6 +15,7 @@ const AnswerBox = ({ type, userProfile = PROFILE_SAMPLE, userName = '당신', el
           <span className='name'>{userName}</span>
           <span className='time'>{elapsedTime}</span>
         </StUser>
+        // ! 컴포넌트 새로 만들어서 switch 문으로 타입값 마다 컴포넌트 return해 주기
         {type === 'read' || type === 'edit' ? (
           <p>
             그들을 불러 귀는 이상의 오직 피고, 가슴이 이상, 못할 봄바람이다. 찾아다녀도, 전인 방황하였으며, 대한 바이며,
