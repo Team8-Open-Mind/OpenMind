@@ -8,7 +8,7 @@ const DropdownOption = ({ children, callbackFn }) => {
   const onClickHandler = (e) => {
     changeSelectedOption(e);
 
-    if (typeof callbackFn === 'function') callbackFn();
+    if (typeof callbackFn === 'function') callbackFn(e);
   };
 
   return <StDropdownOption onClick={onClickHandler}>{children}</StDropdownOption>;
