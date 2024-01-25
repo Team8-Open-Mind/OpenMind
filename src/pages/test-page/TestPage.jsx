@@ -5,7 +5,6 @@ import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 import Toast from '@components/ui/atoms/toast/Toast';
 import FeedCard from '@components/ui/molecules/feed-card/FeedCard';
 
-
 import { useCloseModal } from '@hooks/useCloseModal';
 
 const TestPage = () => {

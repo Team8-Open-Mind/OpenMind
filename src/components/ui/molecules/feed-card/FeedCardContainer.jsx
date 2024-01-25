@@ -24,6 +24,7 @@ const FeedCardContainer = ({ cardLength, userName, userProfile, answerResults })
   };
 
   return (
+
     <>
       <StFeedCardContainer>
         <StSubBox>
