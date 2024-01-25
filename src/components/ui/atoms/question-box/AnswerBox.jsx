@@ -34,7 +34,7 @@ const AnswerBox = ({ answer, userProfile = PROFILE_SAMPLE, userName }) => {
             {answer !== null ? <span className='time'>{timeStamp(answer?.createdAt)}</span> : null}
           </StUser>
           <ReplyTypeSwitch
-            type={feedCardType(answer)}
+            type={isEdit ? 'edit' : feedCardType(answer)}
             value={answer?.content}
             editTypeState={editTypeState}
             isRejected={answer?.isRejected}
