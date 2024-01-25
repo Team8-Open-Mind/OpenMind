@@ -1,10 +1,23 @@
 import styled from 'styled-components';
 
+import FloatingButton from '@components/ui/atoms/Button/floating-button/FloatingButton';
 import { StMessageIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
+
+import { useConfirmAlert } from '@hooks/useConfirmAlert';
 
 import FeedCard from './FeedCard';
 
 const FeedCardContainer = ({ cardLength, userName, userProfile, answerResults }) => {
+  const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
+
+  const handleConfirm = () => {
+    console.log('Confirmed!');
+  };
+
+  const handleCancel = () => {
+    console.log('Cancelled!');
+  };
+
   return (
     <StFeedCardContainer>
       <StSubBox>
@@ -12,12 +25,24 @@ const FeedCardContainer = ({ cardLength, userName, userProfile, answerResults })
           <StMessageIcon $size={24} $color='brown40' />
           {cardLength}개의 질문이 있습니다
         </StLengthText>
+        <FloatingButton
+          position='static'
+          boxSizeOnResize={{ onMobile: { width: 10.3, height: 2.5 }, onPc: { width: 13, height: 3.5 } }}
+          onClickHandler={() => showConfirm(handleConfirm, handleCancel)}
+          hasBoxShadow={false}
+        >
+          전체 피드 삭제
+        </FloatingButton>
       </StSubBox>
       {answerResults?.map((answerResult) => {
         return (
           <FeedCard key={answerResult.id} answerResult={answerResult} userName={userName} userProfile={userProfile} />
         );
       })}
+      <ConfirmAlertComponent
+        title='전체 피드가 삭제됩니다'
+        content={`피드를 모두 삭제하시겠어요? \n 삭제된 피드는 복구할 수 없습니다.`}
+      />
     </StFeedCardContainer>
   );
 };
