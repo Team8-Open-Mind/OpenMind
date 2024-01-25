@@ -51,5 +51,16 @@ const StBadge = styled.div`
   }};
 
   border-radius: 0.8rem;
-  border: 0.1rem solid ${({ value }) => (value ? brown : gray)};
+  border: 0.1rem solid
+    ${(props) => {
+      if (props.value === 'reply') {
+        return gray;
+      }
+
+      if (props.value === 'rejected') {
+        return red;
+      }
+
+      return brown;
+    }};
 `;

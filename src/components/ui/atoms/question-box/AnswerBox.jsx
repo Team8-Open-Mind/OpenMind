@@ -58,9 +58,9 @@ const StAnswer = styled.div`
   align-items: flex-start;
   gap: 4px;
   flex: 1 0 0;
+  color: ${({ theme }) => theme.color.Grayscale[60]};
 
   & p {
-    color: ${({ theme }) => theme.color.Grayscale[60]};
     font-size: 16px;
     font-weight: 400;
     line-height: 22px; /* 137.5% */

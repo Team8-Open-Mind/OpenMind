@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 import Badge from '@components/ui/atoms/Badge/Badge';
 import EditButton from '@components/ui/atoms/Button/edit-button/EditButton';
-import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 import AnswerBox from '@components/ui/atoms/question-box/AnswerBox';
 import QuestionBox from '@components/ui/atoms/question-box/QuestionBox';
 import Reaction from '@components/ui/atoms/Reaction/Reaction';
