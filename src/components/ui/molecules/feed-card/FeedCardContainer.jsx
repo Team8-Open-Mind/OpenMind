@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import PortalContainer from '@components/portal/Portal';
 import FloatingButton from '@components/ui/atoms/Button/floating-button/FloatingButton';
 import { StMessageIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
 
@@ -45,10 +46,12 @@ const FeedCardContainer = ({ cardLength, userName, userProfile, answerResults })
           );
         })}
       </StFeedCardContainer>
-      <ConfirmAlertComponent
-        title='전체 피드가 삭제됩니다'
-        content={`피드를 모두 삭제하시겠어요? \n 삭제된 피드는 복구할 수 없습니다.`}
-      />
+      <PortalContainer>
+        <ConfirmAlertComponent
+          title='전체 피드가 삭제됩니다'
+          content={`피드를 모두 삭제하시겠어요? \n 삭제된 피드는 복구할 수 없습니다.`}
+        />
+      </PortalContainer>
     </>
   );
 };

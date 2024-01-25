@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import PortalContainer from '@components/portal/Portal';
+
 import { useConfirmAlert } from '@hooks/useConfirmAlert';
 
 import { StCloseIcon } from '../sprite-icon/SpriteIcon';
@@ -28,7 +30,9 @@ const BadgeBox = ({ value }) => {
           <StCloseIcon $size={20} $color='gray60' />
         </button>
       </StBadgeBox>
-      <ConfirmAlertComponent title='선택하신 질문 카드가 삭제됩니다' content='삭제된 피드는 복구할 수 없습니다.' />
+      <PortalContainer>
+        <ConfirmAlertComponent title='선택하신 질문 카드가 삭제됩니다' content='삭제된 피드는 복구할 수 없습니다.' />
+      </PortalContainer>
     </>
   );
 };
