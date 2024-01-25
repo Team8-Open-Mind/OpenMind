@@ -35,8 +35,12 @@ const AnswerPage = () => {
           <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
         </StSnsWrapper>
       </StQuestFeedPageWrapper>
-      <FeedCardContainer cardLength={questionCount} answerResults={answerResults?.results} />
-      {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
+      {questionCount === 0 ? null : (
+        <>
+          <FeedCardContainer cardLength={questionCount} answerResults={answerResults?.results} />
+          {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
+        </>
+      )}
     </StBackground>
   );
 };
@@ -51,6 +55,7 @@ const StBackground = styled.div`
   background-position: bottom;
   background-attachment: fixed;
   padding-bottom: 142px;
+  min-height: 100%;
 `;
 
 const StQuestFeedPageWrapper = styled.div`
