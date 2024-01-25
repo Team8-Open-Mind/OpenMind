@@ -19,7 +19,7 @@ const useSNSShare = () => {
     const kakao = window.Kakao;
 
     if (!kakao.isInitialized()) {
-      kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY);
+      kakao.init(import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY);
     }
 
     kakao.Share.sendDefault({
