@@ -1,14 +1,17 @@
 import Button from '@components/ui/atoms/Button/Button';
-import FeedCard from '@components/ui/molecules/feed-card/FeedCard';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 
 import { getAnswerLists } from '@api/answer/getAnswerLists';
+import { getQuestionLists } from '@api/questions/getQuestionLists';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 import { useConfirmAlert } from '@hooks/useConfirmAlert';
 
 const AnswerPage = () => {
   const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
-  const [, , result] = useAsyncOnMount(getAnswerLists);
+  // const [, , questionResults] = useAsyncOnMount(getQuestionLists);
+  const [, , answerResults] = useAsyncOnMount(getAnswerLists);
+
+  console.log(answerResults);
 
   const handleConfirm = () => {
     console.log('Confirmed!');
@@ -22,11 +25,7 @@ const AnswerPage = () => {
   // id 값이 주소에 있는 페이지라면? edit/reply
   return (
     <div>
-      <FeedCardContainer cardLength={3}>
-        <FeedCard type='edit' />
-        <FeedCard type='read' />
-        <FeedCard type='reply' />
-      </FeedCardContainer>
+      <FeedCardContainer cardLength={3} answerResults={answerResults?.results} />
       <Button onClickHandler={() => showConfirm(handleConfirm, handleCancel)}>전체 피드 삭제</Button>
       <ConfirmAlertComponent
         title='전체 피드가 삭제됩니다'
