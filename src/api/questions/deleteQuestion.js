@@ -1,10 +1,13 @@
 import axiosInstance from '@api/instance/axiosInstance';
 
 const deleteQuestion = async (id) => {
-  console.log(id);
-  const res = await axiosInstance.delete(`/questions/${id}/`);
+  const response = await axiosInstance.delete(`/questions/${id}/`);
 
-  return res;
+  if (response.status !== 200) {
+    throw new Error(`답변을 삭제하는데 실패하였어요!`);
+  }
+
+  return response;
 };
 
 export { deleteQuestion };
