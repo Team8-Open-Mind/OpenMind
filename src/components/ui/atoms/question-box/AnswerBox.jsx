@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 
-import { feedCardType } from '@utils/feedCardType';
-import { timeStamp } from '@utils/timeStamp';
+import { feedCardType } from '@utils/card-type/feedCardType';
+import { timeStamp } from '@utils/time/timeStamp';
 
 import ReplyTypeSwitch from '../ReplyTypeSwitch.jsx/ReplyTypeSwitch';
 

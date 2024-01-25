@@ -8,8 +8,8 @@ import QuestionBox from '@components/ui/atoms/question-box/QuestionBox';
 import Reaction from '@components/ui/atoms/Reaction/Reaction';
 
 import { useToggle } from '@hooks/useToggle';
-import { feedCardType } from '@utils/feedCardType';
-import { timeStamp } from '@utils/timeStamp';
+import { feedCardType } from '@utils/card-type/feedCardType';
+import { timeStamp } from '@utils/time/timeStamp';
 
 const FeedCard = ({ answerResult }) => {
   const [isEdit, setIsEdit] = useToggle();
