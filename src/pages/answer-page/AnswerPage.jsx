@@ -4,6 +4,7 @@ import Button from '@components/ui/atoms/Button/Button';
 import ShareButton from '@components/ui/atoms/Button/share-button/ShareButton';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
+import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 
 import { getAnswerLists } from '@api/answer/getAnswerLists';
 import getUserData from '@api/getUserData';
@@ -23,7 +24,8 @@ const AnswerPage = () => {
   // feedcard type default가 null이다.
   // id 값이 주소에 있는 페이지라면? edit/reply
   return (
-    <div>
+    <StBackground>
+      <NavBar />
       <StQuestFeedPageWrapper>
         <img className='user-profile' src={userProfile} alt='프로필' />
         <span className='pageName'>{userName}</span>
@@ -35,11 +37,21 @@ const AnswerPage = () => {
       </StQuestFeedPageWrapper>
       <FeedCardContainer cardLength={questionCount} answerResults={answerResults?.results} />
       {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
-    </div>
+    </StBackground>
   );
 };
 
 export default AnswerPage;
+
+const StBackground = styled.div`
+  background-color: ${({ theme }) => theme.color.Grayscale['20']};
+  background-image: url('/image/background-image.png');
+  background-size: 120%;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-attachment: fixed;
+  padding-bottom: 142px;
+`;
 
 const StQuestFeedPageWrapper = styled.div`
   display: flex;
