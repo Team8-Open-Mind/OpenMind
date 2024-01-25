@@ -18,6 +18,7 @@ import { getPercentageOrNull } from '@utils/style-utils/getPercentageOrNull';
  * @property { 'fixed' | 'absolute' | 'static' | 'sticky' | 'relative' } position 기본값 'fixed'
  * @property { VoidFunction } onClickHandler
  * @property { boolean } isDisabled
+ * @property { boolean } hasBoxShadow
  *
  * @description
  * - 모바일 우선 개발 버튼 입니다. onMobile 프로퍼티는 전부 필수입니다.
@@ -38,6 +39,7 @@ const FloatingButton = ({
   children,
   onClickHandler,
   isDisabled = false,
+  hasBoxShadow = true,
   ...rest
 }) => {
   const { targetResizeInfo } = useResizeObserver();
@@ -48,6 +50,7 @@ const FloatingButton = ({
       $positionOffsetOnResize={positionOffsetOnResize}
       $fontSize={fontSizeOnResize}
       $boxSizeOnResize={boxSizeOnResize}
+      $hasBoxShadow={hasBoxShadow}
       onClick={onClickHandler}
       disabled={isDisabled}
       {...rest}
@@ -144,5 +147,5 @@ const StFloatingButton = styled.button.attrs({
   color: ${({ theme }) => theme.color.Grayscale[10]};
   ${fontSizeOnResize}
 
-  ${boxShadow2pt}
+  ${({ $hasBoxShadow }) => $hasBoxShadow && boxShadow2pt}
 `;
