@@ -20,7 +20,7 @@ const FeedCard = ({ answerResult }) => {
 
   return (
     <StFeedCard>
-      <Badge value='null' isRejected={answerResult?.answer?.isRejected} />
+      <Badge value={feedCardType(answerResult?.answer)} />
       <QuestionBox question={answerResult?.content} elapsedTime={timeStamp(answerResult?.createdAt)} />
       <AnswerBox answer={answerResult?.answer} userName='이름 유저 정보에서' />
       <StBottom>
