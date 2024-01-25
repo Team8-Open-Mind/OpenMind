@@ -10,7 +10,7 @@ import { timeStamp } from '@utils/time/timeStamp';
 const FeedCard = ({ answerResult, userName, userProfile }) => {
   return (
     <StFeedCard>
-      <BadgeBox value={feedCardType(answerResult?.answer)} />
+      <BadgeBox value={feedCardType(answerResult?.answer)} questionId={answerResult?.id} />
       <QuestionBox question={answerResult?.content} elapsedTime={timeStamp(answerResult?.createdAt)} />
       <AnswerBox answer={answerResult?.answer} userProfile={userProfile} userName={userName} />
     </StFeedCard>

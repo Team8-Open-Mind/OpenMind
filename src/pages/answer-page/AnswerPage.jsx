@@ -20,7 +20,7 @@ const AnswerPage = () => {
   const [, , answerResults] = useAsyncOnMount(getAnswerLists);
   const [isVisible, handleScrollToTop] = useScrollToTop();
 
-  console.log(answerResults);
+  // console.log(answerResults);
 
   // feedcard type default가 null이다.
   // id 값이 주소에 있는 페이지라면? edit/reply

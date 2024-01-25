@@ -1,17 +1,29 @@
+import { useEffect, useState } from 'react';
+
 import styled from 'styled-components';
 
 import PortalContainer from '@components/portal/Portal';
 
+import { getAnswerLists } from '@api/answers/getAnswerLists';
+import { deleteQuestion } from '@api/questions/deleteQuestion';
+import { useAsync } from '@hooks/useAsync';
 import { useConfirmAlert } from '@hooks/useConfirmAlert';
 
 import { StCloseIcon } from '../sprite-icon/SpriteIcon';
 import Badge from './Badge';
 
-const BadgeBox = ({ value }) => {
+const BadgeBox = ({ value, questionId }) => {
   const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
+  const [, , , deleteQuestionFunc] = useAsync(deleteQuestion, []);
+
+  const setDeleteQuestion = async () => {
+    const res = await deleteQuestionFunc(questionId);
+
+    return res;
+  };
 
   const handleDeleteCardClick = () => {
-    console.log('Confirmed!');
+    setDeleteQuestion();
   };
 
   const handleCancelDeleteCardClick = () => {
