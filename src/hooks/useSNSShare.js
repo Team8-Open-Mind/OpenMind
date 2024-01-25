@@ -24,8 +24,7 @@ const useSNSShare = () => {
 
     kakao.Share.sendDefault({
       objectType: 'text',
-      // TODO: title 정하기 ⭐
-      text: 'title',
+      text: 'Openmind',
       link: {
         mobileWebUrl: urlAfterMount,
         webUrl: urlAfterMount,
@@ -55,8 +54,7 @@ const useSNSShare = () => {
 
     const script = document.createElement('script');
     script.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js';
-    // Todo: 어플리케이션 kakao sdk 발급받기, integrity 채우기 ⭐
-    script.integrity = '';
+    script.integrity = 'sha384-6MFdIr0zOira1CHQkedUqJVql0YtcZA1P0nbPrQYJXVJZUkTk/oX4U9GhUIs3/z8';
     script.crossOrigin = 'anonymous';
     script.async = true;
 

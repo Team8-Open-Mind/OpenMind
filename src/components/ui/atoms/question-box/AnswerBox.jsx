@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 
-const AnswerBox = ({ userProfile = PROFILE_SAMPLE, userName = '당신', elapsedTime = '?' }) => {
+const AnswerBox = ({ type, userProfile = PROFILE_SAMPLE, userName = '당신', elapsedTime = '?' }) => {
   return (
     <StAnswerBox>
       <img src={userProfile} alt='프로필' />
@@ -50,7 +50,6 @@ const StAnswer = styled.div`
 
   & p {
     color: ${({ theme }) => theme.color.Grayscale[60]};
-    font-family: Pretendard;
     font-size: 16px;
     font-weight: 400;
     line-height: 22px; /* 137.5% */
@@ -74,7 +73,6 @@ const StUser = styled.div`
 
   & .time {
     color: ${({ theme }) => theme.color.Grayscale[40]};
-    font-family: Pretendard;
     font-size: 14px;
     font-weight: 500;
     line-height: 18px; /* 128.571% */

@@ -7,7 +7,7 @@ import { defineConfig } from 'vite';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    svgr(),
+    svgr({ icon: true }),
     react({
       babel: {
         plugins: [

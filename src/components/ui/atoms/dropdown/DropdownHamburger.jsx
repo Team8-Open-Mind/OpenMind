@@ -1,10 +1,10 @@
 import { css } from 'styled-components';
 
 import { StHamburger } from '../sprite-icon/SpriteIcon';
-import { useDropDownProvider } from './context/DropdownProvider';
+import { useDropdownProvider } from './context/DropdownProvider';
 
 const DropdownHamburger = () => {
-  const { toggleIsOpen } = useDropDownProvider();
+  const { toggleIsOpen } = useDropdownProvider();
 
   return (
     <button

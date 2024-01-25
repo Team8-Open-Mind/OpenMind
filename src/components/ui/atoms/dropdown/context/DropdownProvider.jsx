@@ -33,7 +33,7 @@ const DropdownProvider = ({ children }) => {
 
 export default DropdownProvider;
 
-export const useDropDownProvider = () => {
+export const useDropdownProvider = () => {
   const context = useContext(DropdownContext);
 
   if (context === undefined) throw new Error('useDropdownProvider는 DropdownProvider 내부에서만 사용할 수 있습니다.');
