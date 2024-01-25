@@ -8,15 +8,18 @@ const questionListSort = {
 };
 
 /**
- *
- * @param {'time' | 'name'} sortOrder
+ * @typedef {Object} GetQuestionListParams
+ * @property {number} offset
+ * @property {number} limit
+ * @property {'time' | 'name'} sortOrder
+ * @param {GetQuestionListParams} getQuestionListsParams
  * @returns
  */
-const getQuestionLists = async (sortOrder = 'time') => {
+const getQuestionLists = async ({ offset, sortOrder = 'time', limit = 8 }) => {
   const res = await axiosInstance.get('/subjects/', {
     params: {
-      limit: 8,
-      offset: 0,
+      offset,
+      limit,
       sort: sortOrder, // "time" | "name"
     },
   });
