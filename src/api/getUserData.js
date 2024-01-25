@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const USER_API = import.meta.env.SUBJECTS_API;
+const USER_API = import.meta.env.VITE_SUBJECTS_API;
+console.log(USER_API);
 
 export const getUserData = async () => {
   const response = await axios.get(`${USER_API}`);

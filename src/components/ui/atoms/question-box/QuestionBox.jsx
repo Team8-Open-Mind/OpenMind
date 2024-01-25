@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const QuestionBox = ({ question = '좋아하는 동물은?', elapsedTime = '?' }) => {
+const QuestionBox = ({ question, elapsedTime = '?' }) => {
   return (
     <StQuestion>
       <span>질문 · {elapsedTime}</span>

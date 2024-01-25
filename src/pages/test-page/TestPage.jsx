@@ -5,11 +5,11 @@ import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 import Toast from '@components/ui/atoms/toast/Toast';
 import FeedCard from '@components/ui/molecules/feed-card/FeedCard';
 
-import getUserData from '@api/getUserData';
-import { useModalComponent } from '@hooks/useModalComponent';
+import { useCloseModal } from '@hooks/useCloseModal';
 
-const TestPage = ({ selectedId = 2756 }) => {
-  const { ModalComponent, isModalOpen, toggleAndSetModal } = useModalComponent();
+const TestPage = () => {
+  const { isModalOpen, toggleModal } = useCloseModal();
+  // const {  ModalComponent, ModalInfo, isModalOpen, toggleAndSetModal } = useModalComponent();
 
   const [userName, setUserName] = useState('');
   const [userProfile, setUserProfile] = useState(PROFILE_SAMPLE);
@@ -35,14 +35,15 @@ const TestPage = ({ selectedId = 2756 }) => {
 
   return (
     <div>
-      <button
-        onClick={() => toggleAndSetModal({ ModalComponent: Toast, toastMessage: 'URL이 복사되었습니다' })}
-        type='button'
-      >
+      <button onClick={toggleModal} type='button'>
         버튼
       </button>
-      <PortalContainer>{isModalOpen && <ModalComponent />}</PortalContainer>
-      <FeedCard userName={userName} userProfile={userProfile} createdAt={createdAt} />
+
+      {/* <button onClick={() => toggleAndSetModal({ ModalComponent: Toast, toastMessage: "URL이 복사되었습니다."})} type='button'>
+        버튼
+      </button> */}
+      <PortalContainer>{isModalOpen && <Toast closeModal={toggleModal}>URL이 복사되었습니다.</Toast>}</PortalContainer>
+      <FeedCard />
     </div>
   );
 };
