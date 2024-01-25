@@ -2,13 +2,10 @@ import styled from 'styled-components';
 
 import FeedCard from './FeedCard';
 
-const FeedCardContainer = () => {
+const FeedCardContainer = ({ userName, userProfile, createdAt, edit = false }) => {
   return (
     <StFeedCardContainer>
-      <FeedCard />
-      <FeedCard />
-      <FeedCard />
-      <FeedCard />
+      <FeedCard userName={userName} userProfile={userProfile} createdAt={createdAt} edit={edit} />
     </StFeedCardContainer>
   );
 };
