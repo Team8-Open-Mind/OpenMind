@@ -5,6 +5,7 @@ import ShareButton from '@components/ui/atoms/Button/share-button/ShareButton';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
+import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
 
 import { getAnswerLists } from '@api/answer/getAnswerLists';
 import getUserData from '@api/getUserData';
@@ -35,7 +36,9 @@ const AnswerPage = () => {
           <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
         </StSnsWrapper>
       </StQuestFeedPageWrapper>
-      {questionCount === 0 ? null : (
+      {questionCount === 0 ? (
+        <NoLists>아직 질문이 없습니다</NoLists>
+      ) : (
         <>
           <FeedCardContainer cardLength={questionCount} answerResults={answerResults?.results} />
           {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
