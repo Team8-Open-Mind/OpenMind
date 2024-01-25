@@ -7,10 +7,11 @@ import AnswerBox from '@components/ui/atoms/question-box/AnswerBox';
 import QuestionBox from '@components/ui/atoms/question-box/QuestionBox';
 import Reaction from '@components/ui/atoms/Reaction/Reaction';
 
-
 import { useToggle } from '@hooks/useToggle';
+import { feedCardType } from '@utils/card-type/feedCardType';
+import { timeStamp } from '@utils/time/timeStamp';
 
-const FeedCard = ({ type, userName, userProfile, createdAt, questionCount}) => {
+const FeedCard = ({ answerResult, userName, userProfile }) => {
   const [isEdit, setIsEdit] = useToggle();
 
   const handleEditToggle = () => {
@@ -19,14 +20,16 @@ const FeedCard = ({ type, userName, userProfile, createdAt, questionCount}) => {
 
   return (
     <StFeedCard>
-      <Badge value='null' isRejected />
-      <QuestionBox question='질문이 들어갑니다' elapsedTime='?' />
-      <AnswerBox userProfile={userProfile} userName={userName} />
+      <Badge value={feedCardType(answerResult?.answer)} />
+      <QuestionBox question={answerResult?.content} elapsedTime={timeStamp(answerResult?.createdAt)} />
+      <AnswerBox answer={answerResult?.answer} userProfile={userProfile} userName={userName} />
       <StBottom>
         <StLine />
         <StReactionAndEdit>
-          <Reaction />
-          {type === 'edit' ? <EditButton onClickEdit={handleEditToggle} isEdit={isEdit} /> : null}
+          <Reaction likeCount={answerResult?.like} />
+          {feedCardType(answerResult?.answer) === 'edit' ? (
+            <EditButton onClickEdit={handleEditToggle} isEdit={isEdit} />
+          ) : null}
         </StReactionAndEdit>
       </StBottom>
     </StFeedCard>

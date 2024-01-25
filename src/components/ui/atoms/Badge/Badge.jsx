@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import styled from 'styled-components';
 
 import { foundation } from '/src/style/theme/theme';
@@ -6,14 +8,25 @@ import { foundation } from '/src/style/theme/theme';
 // answer의 경우 boolean이 아니라 null이 기본임.
 // 답변 거절 상태가 추가되었음. isRejected로 boolean 값을 받아와 처리함.
 
-const Badge = ({ isRejected, value }) => {
-  return <StBadge>{value ? '답변 완료' : '미답변'}</StBadge>;
+const gray = foundation.color.Grayscale[40];
+const brown = foundation.color.Brown[40];
+const red = foundation.color.Red[50];
+
+const Badge = ({ value }) => {
+  if (value === 'read') {
+    return <StBadge value={value}>답변 완료</StBadge>;
+  }
+
+  if (value === 'reply') {
+    return <StBadge value={value}>미답변</StBadge>;
+  }
+
+  if (value === 'rejected') {
+    return <StBadge value={value}>답변 거절</StBadge>;
+  }
 };
 
 export default Badge;
-
-const gray = foundation.color.Grayscale[40];
-const brown = foundation.color.Brown[40];
 
 const StBadge = styled.div`
   display: inline-flex;
@@ -25,7 +38,17 @@ const StBadge = styled.div`
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1.8rem;
-  color: ${({ value }) => (value ? brown : gray)};
+  color: ${(props) => {
+    if (props.value === 'reply') {
+      return gray;
+    }
+
+    if (props.value === 'rejected') {
+      return red;
+    }
+
+    return brown;
+  }};
 
   border-radius: 0.8rem;
   border: 0.1rem solid ${({ value }) => (value ? brown : gray)};

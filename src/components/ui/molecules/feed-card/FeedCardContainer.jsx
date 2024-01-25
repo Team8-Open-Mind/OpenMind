@@ -4,8 +4,7 @@ import { StMessageIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
 
 import FeedCard from './FeedCard';
 
-
-const FeedCardContainer = ({ userName, userProfile, createdAt,cardLength }) => {
+const FeedCardContainer = ({ cardLength, userName, userProfile, answerResults }) => {
   return (
     <StFeedCardContainer>
       <StSubBox>
@@ -14,11 +13,11 @@ const FeedCardContainer = ({ userName, userProfile, createdAt,cardLength }) => {
           {cardLength}개의 질문이 있습니다
         </StLengthText>
       </StSubBox>
-      <FeedCard type='read' />
-      <FeedCard type='reply' userName={userName} userProfile={userProfile} createdAt={createdAt}/>
-      <FeedCard type='edit' />
-      <FeedCard />
-
+      {answerResults?.map((answerResult) => {
+        return (
+          <FeedCard key={answerResult.id} answerResult={answerResult} userName={userName} userProfile={userProfile} />
+        );
+      })}
     </StFeedCardContainer>
   );
 };
