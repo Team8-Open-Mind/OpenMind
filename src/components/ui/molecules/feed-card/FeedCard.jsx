@@ -7,9 +7,10 @@ import AnswerBox from '@components/ui/atoms/question-box/AnswerBox';
 import QuestionBox from '@components/ui/atoms/question-box/QuestionBox';
 import Reaction from '@components/ui/atoms/Reaction/Reaction';
 
+
 import { useToggle } from '@hooks/useToggle';
 
-const FeedCard = ({ type }) => {
+const FeedCard = ({ type, userName, userProfile, createdAt, questionCount}) => {
   const [isEdit, setIsEdit] = useToggle();
 
   const handleEditToggle = () => {
@@ -20,7 +21,7 @@ const FeedCard = ({ type }) => {
     <StFeedCard>
       <Badge value='null' isRejected />
       <QuestionBox question='질문이 들어갑니다' elapsedTime='?' />
-      <AnswerBox userProfile={PROFILE_SAMPLE} userName='닉네임' />
+      <AnswerBox userProfile={userProfile} userName={userName} />
       <StBottom>
         <StLine />
         <StReactionAndEdit>
