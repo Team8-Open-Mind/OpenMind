@@ -7,7 +7,7 @@ import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContai
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
 
-import { getAnswerLists } from '@api/answer/getAnswerLists';
+import { getAnswerLists } from '@api/answers/getAnswerLists';
 import getUserData from '@api/getUserData';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 import useScrollToTop from '@hooks/useScrollToTop';
@@ -36,14 +36,15 @@ const AnswerPage = () => {
           <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
         </StSnsWrapper>
       </StQuestFeedPageWrapper>
-      {questionCount === 0 ? (
+      <>
+        <FeedCardContainer cardLength={questionCount} answerResults={answerResults?.results} />
+        {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
+      </>
+      {/* {questionCount === 0 ? (
         <NoLists>아직 질문이 없습니다</NoLists>
       ) : (
-        <>
-          <FeedCardContainer cardLength={questionCount} answerResults={answerResults?.results} />
-          {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
-        </>
-      )}
+
+      )} */}
     </StBackground>
   );
 };
