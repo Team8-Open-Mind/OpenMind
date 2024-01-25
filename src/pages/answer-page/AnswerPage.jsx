@@ -2,11 +2,13 @@ import styled from 'styled-components';
 
 import Button from '@components/ui/atoms/Button/Button';
 import ShareButton from '@components/ui/atoms/Button/share-button/ShareButton';
+import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 
 import { getAnswerLists } from '@api/answer/getAnswerLists';
 import getUserData from '@api/getUserData';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
+import useScrollToTop from '@hooks/useScrollToTop';
 import useSetUser from '@hooks/useSetUser';
 import { useSNSShare } from '@hooks/useSNSShare';
 
@@ -14,6 +16,7 @@ const AnswerPage = () => {
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const { userName, userProfile, createdAt, questionCount } = useSetUser(getUserData);
   const [, , answerResults] = useAsyncOnMount(getAnswerLists);
+  const [isVisible, handleScrollToTop] = useScrollToTop();
 
   console.log(answerResults);
 
@@ -31,6 +34,7 @@ const AnswerPage = () => {
         </StSnsWrapper>
       </StQuestFeedPageWrapper>
       <FeedCardContainer cardLength={questionCount} answerResults={answerResults?.results} />
+      {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
     </div>
   );
 };
