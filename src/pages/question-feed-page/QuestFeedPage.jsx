@@ -38,7 +38,7 @@ const QuestFeedPage = (getUserData) => {
 
 export default QuestFeedPage;
 
-const StBackground = styled.div`
+export const StBackground = styled.div`
   background-color: ${({ theme }) => theme.color.Grayscale['20']};
   background-image: url('/image/background-image.png');
   background-size: 120%;

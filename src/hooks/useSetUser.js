@@ -4,7 +4,7 @@ import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 
 import getUserData from '@api/getUserData';
 
-const useSetUser = ({ selectedId = 2756 }) => {
+const useSetUser = ({ selectedId = 2750 }) => {
   const [userName, setUserName] = useState('');
   const [userProfile, setUserProfile] = useState(PROFILE_SAMPLE);
   const [createdAt, setCreatedAt] = useState('');
