@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import axios from 'axios';
 import styled from 'styled-components';
 
 import Button from '@components/ui/atoms/Button/Button';
@@ -9,9 +8,12 @@ import InputField from '@components/ui/atoms/input/input-field/InputField';
 import Logo from '@components/ui/atoms/logo/Logo';
 import { StBackground } from '@pages/question-feed-page/QuestFeedPage';
 
+import { postNewFeedId } from '@api/subjects/postNewFeedId';
+import { useAsync } from '@hooks/useAsync';
+
 const MainPage = () => {
   const [userName, setUserName] = useState(null);
-  const USER_API = import.meta.env.VITE_SUBJECTS_API;
+  // const USER_API = import.meta.env.VITE_SUBJECTS_API;
   const navigate = useNavigate();
 
   const navigateToList = () => {
@@ -22,9 +24,20 @@ const MainPage = () => {
     setUserName(e.target.value);
   };
 
-  const handlePost = async () => {
-    await axios.post(`${USER_API}`, { name: userName });
-    navigate('/list');
+  // const handlePost = async () => {
+  //   const response = await axios.post(`${USER_API}`, { name: userName });
+  //   console.log(response.data.id);
+  //   // navigate('/list');
+  // };
+
+  const [, , result, setAsyncFunction] = useAsync(postNewFeedId, [userName]);
+
+  const handlePost = async (userName) => {
+    if (!userName) return;
+
+    await setAsyncFunction(userName);
+    localStorage.setItem('userId', result?.id);
+    navigate(`/post/${result?.id}/answer`);
   };
 
   return (
@@ -38,7 +51,7 @@ const MainPage = () => {
         <Logo width='462px' height='180px' />
         <StInputName>
           <InputField onChangeHandler={handleInputChange} />
-          <Button width='336px' onClickHandler={handlePost}>
+          <Button width='336px' onClickHandler={() => handlePost(userName)}>
             질문 받기
           </Button>
         </StInputName>
