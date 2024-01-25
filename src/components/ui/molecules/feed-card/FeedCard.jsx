@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Badge from '@components/ui/atoms/Badge/Badge';
+import BadgeBox from '@components/ui/atoms/Badge/BadgeBox';
 import AnswerBox from '@components/ui/atoms/question-box/AnswerBox';
 import QuestionBox from '@components/ui/atoms/question-box/QuestionBox';
 
@@ -10,7 +10,7 @@ import { timeStamp } from '@utils/time/timeStamp';
 const FeedCard = ({ answerResult, userName, userProfile }) => {
   return (
     <StFeedCard>
-      <Badge value={feedCardType(answerResult?.answer)} />
+      <BadgeBox value={feedCardType(answerResult?.answer)} />
       <QuestionBox question={answerResult?.content} elapsedTime={timeStamp(answerResult?.createdAt)} />
       <AnswerBox answer={answerResult?.answer} userProfile={userProfile} userName={userName} />
     </StFeedCard>
