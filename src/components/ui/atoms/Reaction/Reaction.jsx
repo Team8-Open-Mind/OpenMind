@@ -17,7 +17,7 @@ const Reaction = ({ likeCount }) => {
 
   return (
     <StReaction onClick={handleReactionCount} className={isLiked ? 'active' : null}>
-      <StThumbsUp className='thumbs-up-icon' />
+      <StThumbsUp />
       <span>도움이 되었어요</span>
       <span>{count}</span>
     </StReaction>
