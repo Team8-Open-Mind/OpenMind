@@ -12,7 +12,12 @@ const FeedCard = ({ answerResult, userName, userProfile }) => {
     <StFeedCard>
       <BadgeBox value={feedCardType(answerResult?.answer)} questionId={answerResult?.id} />
       <QuestionBox question={answerResult?.content} elapsedTime={timeStamp(answerResult?.createdAt)} />
-      <AnswerBox answer={answerResult?.answer} userProfile={userProfile} userName={userName} />
+      <AnswerBox
+        questionId={answerResult?.id}
+        answer={answerResult?.answer}
+        userProfile={userProfile}
+        userName={userName}
+      />
     </StFeedCard>
   );
 };
