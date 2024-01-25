@@ -9,6 +9,10 @@ export const feedCardType = (answer) => {
     // answer값이 있는 상태
     // read 가능 상태
     type = 'read';
+
+    if (answer.isRejected) {
+      type = 'rejected';
+    }
   }
 
   return type;

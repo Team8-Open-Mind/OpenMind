@@ -37,8 +37,16 @@ const StReaction = styled.button`
     color: ${({ theme }) => theme.color.Blue[50]};
   }
 
+  &.active ${StThumbsUp} {
+    fill: ${({ theme }) => theme.color.Blue[50]};
+  }
+
   &:hover {
     color: ${({ theme }) => theme.color.Blue[50]};
+  }
+
+  &:hover ${StThumbsUp} {
+    fill: ${({ theme }) => theme.color.Blue[50]};
   }
 `;
 
