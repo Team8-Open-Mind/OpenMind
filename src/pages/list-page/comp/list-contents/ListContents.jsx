@@ -35,7 +35,7 @@ const ListContents = () => {
         </>
       ) : (
         <>
-          <NoLists />
+          <NoLists>아직 마음을 열고있는 사람이 없습니다</NoLists>
           <StMindOpenButton>내 마음 열러가기</StMindOpenButton>
         </>
       )}

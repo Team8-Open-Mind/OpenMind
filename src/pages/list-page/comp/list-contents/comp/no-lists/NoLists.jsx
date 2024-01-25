@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { ReactComponent as NoMessageBox } from '@assets/message-box.svg';
 import { StMessageIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
 
-const NoLists = () => {
+const NoLists = ({ children }) => {
   return (
     <StNoListWrapper>
       <StBoxWrapper>
         <StMessageTextBox>
           <StMessageIcon $size={24} $color='brown40' />
-          <StNoListText>아직 마음을 열고있는 사람이 없습니다.</StNoListText>
+          <StNoListText>{children}</StNoListText>
         </StMessageTextBox>
         <NoMessageBox width='15rem' height='15.4rem' />
       </StBoxWrapper>
