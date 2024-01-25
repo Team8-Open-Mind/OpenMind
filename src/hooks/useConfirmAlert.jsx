@@ -38,27 +38,40 @@ const useConfirmAlert = () => {
   const isConfirmOpen = () => isConfirmVisible;
 
   // title과 content 줄바꿈하고 싶을 때는 \n을 사용한다.
-  const ConfirmAlertComponent = ({ title, content, cancelText = '취소', ConfirmText = '삭제' }) => (
-    <StConfirmAlertModal style={{ display: isConfirmVisible ? 'block' : 'none' }}>
-      <div>
-        <StTitle>{title}</StTitle>
-        <StContent>{content}</StContent>
-        <StButtonGroup>
-          <Button type='button' width='100%' theme='brown40' onClickHandler={handleConfirm}>
-            {ConfirmText}
-          </Button>
-          <Button type='button' width='100%' theme='brown20' onClickHandler={handleCancel}>
-            {cancelText}
-          </Button>
-        </StButtonGroup>
-      </div>
-    </StConfirmAlertModal>
+  const ConfirmAlertComponent = ({ title, content, cancelText = '취소', ConfirmText = '삭제', hasDim = true }) => (
+    <>
+      {hasDim ? <StDim onClick={handleCancel} style={{ display: isConfirmVisible ? 'block' : 'none' }} /> : null}
+
+      <StConfirmAlertModal style={{ display: isConfirmVisible ? 'block' : 'none' }}>
+        <div>
+          <StTitle>{title}</StTitle>
+          <StContent>{content}</StContent>
+          <StButtonGroup>
+            <Button type='button' width='100%' theme='brown40' onClickHandler={handleConfirm}>
+              {ConfirmText}
+            </Button>
+            <Button type='button' width='100%' theme='brown20' onClickHandler={handleCancel}>
+              {cancelText}
+            </Button>
+          </StButtonGroup>
+        </div>
+      </StConfirmAlertModal>
+    </>
   );
 
   return { showConfirm, hideConfirm, isConfirmOpen, ConfirmAlertComponent };
 };
 
 export { useConfirmAlert };
+
+const StDim = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: ${({ theme }) => theme.dim};
+`;
 
 const StConfirmAlertModal = styled.div`
   max-width: 400px;
