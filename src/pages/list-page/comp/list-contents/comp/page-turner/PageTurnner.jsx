@@ -4,25 +4,47 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as LeftArrow } from '@assets/left-arrow.svg';
 import { ReactComponent as RightArrow } from '@assets/right-arrow.svg';
 
-const PageTurnner = ({ result }) => {
+const PageTurnner = ({
+  currentPagesList,
+  changePage,
+  jumpToPreviousPages,
+  jumpToNextPages,
+  currentPage,
+  pagesPerScreen,
+  itemsPerPage,
+  listCount,
+}) => {
   return (
     <StPageTurnner>
-      <StIconAlignBox>
-        <StLeftArrow width={8} height={9} />
-      </StIconAlignBox>
-      {Array.from({ length: Math.min(5, Math.ceil(result?.count / 8)) }, (_, i) => i + 1).map((v) => (
-        <StPaginationNumberBox key={v}>{v}</StPaginationNumberBox>
+      {Math.ceil(currentPage / pagesPerScreen) !== 1 && (
+        <StIconAlignButton onClick={jumpToPreviousPages}>
+          <StLeftArrow width={8} height={9} />
+        </StIconAlignButton>
+      )}
+      {currentPagesList.map((v) => (
+        <StPaginationNumberButton
+          $currentPage={currentPage === v}
+          key={v}
+          value={v}
+          onClick={(e) => changePage(e.target.value)}
+        >
+          {v}
+        </StPaginationNumberButton>
       ))}
-      <StIconAlignBox>
-        <StRightArrow width={8} height={9} />
-      </StIconAlignBox>
+      {listCount > Math.ceil(currentPage / pagesPerScreen) * pagesPerScreen * itemsPerPage && (
+        <StIconAlignButton onClick={jumpToNextPages}>
+          <StRightArrow width={8} height={9} />
+        </StIconAlignButton>
+      )}
     </StPageTurnner>
   );
 };
 
 export default PageTurnner;
 
-const StIconAlignBox = styled.div`
+const StIconAlignButton = styled.button.attrs({
+  type: 'button',
+})`
   width: 4rem;
   height: 4rem;
 
@@ -31,26 +53,27 @@ const StIconAlignBox = styled.div`
   align-items: center;
 `;
 
-const StPaginationNumberBox = styled.button`
-  @import url('/custom-font/actor/actor.css');
-
-  display: flex;
-  width: 4rem;
-  height: 4rem;
-  justify-content: center;
-  align-items: center;
+const StPaginationNumberButton = styled.button.attrs({
+  type: 'button',
+})`
   cursor: pointer;
 
-  color: ${({ theme }) => theme.color.Grayscale[40]};
+  width: 4rem;
+  height: 4rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   text-align: center;
   font-feature-settings:
     'clig' off,
     'liga' off;
   font-family: 'Actor', sans-serif;
   font-size: 2rem;
-  font-style: normal;
   font-weight: 400;
   line-height: 2.5rem; /* 125% */
+  color: ${({ theme, $currentPage }) => ($currentPage ? theme.color.Brown[40] : theme.color.Grayscale[40])};
   &:hover {
     color: ${({ theme }) => theme.color.Brown[40]};
   }
