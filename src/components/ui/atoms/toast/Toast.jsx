@@ -1,19 +1,17 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { css, keyframes, styled } from 'styled-components';
 
-const Toast = ({ closeModal, toastMessage }) => {
-  const handleToastOpen = useCallback(() => {
-    setTimeout(() => {
+const Toast = ({ closeModal, children }) => {
+  useEffect(() => {
+    const timerId = setTimeout(() => {
       closeModal();
     }, 4000);
+
+    return () => clearTimeout(timerId);
   }, [closeModal]);
 
-  useEffect(() => {
-    handleToastOpen();
-  }, [handleToastOpen]);
-
-  return <StToast>{toastMessage}</StToast>;
+  return <StToast>{children}</StToast>;
 };
 
 export default Toast;
