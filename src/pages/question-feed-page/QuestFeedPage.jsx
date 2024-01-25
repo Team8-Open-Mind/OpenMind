@@ -2,14 +2,16 @@ import styled from 'styled-components';
 
 import FloatingWriteQuestionButton from '@components/ui/atoms/Button/floating-button/floating-write-question-button/FloatingWriteQuestionButton';
 import ShareButton from '@components/ui/atoms/Button/share-button/ShareButton';
-import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 
+import useSetUser from '@hooks/useSetUser';
 import { useSNSShare } from '@hooks/useSNSShare';
 
-const QuestFeedPage = ({ userProfile = PROFILE_SAMPLE, userName = '닉네임' }) => {
+const QuestFeedPage = (getUserData) => {
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
+
+  const { userName, userProfile, createdAt, questionCount } = useSetUser(getUserData);
 
   return (
     <StBackground>
@@ -23,7 +25,12 @@ const QuestFeedPage = ({ userProfile = PROFILE_SAMPLE, userName = '닉네임' })
           <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
         </StSnsWrapper>
       </StQuestFeedPageWrapper>
-      <FeedCardContainer />
+      <FeedCardContainer
+        userName={userName}
+        userProfile={userProfile}
+        createdAt={createdAt}
+        questionCount={questionCount}
+      />
       <FloatingWriteQuestionButton />
     </StBackground>
   );
@@ -55,6 +62,7 @@ const StQuestFeedPageWrapper = styled.div`
     height: 136px;
     justify-content: center;
     align-items: center;
+    border-radius: 999px;
   }
 
   & .pageName {

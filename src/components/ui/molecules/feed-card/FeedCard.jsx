@@ -11,7 +11,7 @@ import { useToggle } from '@hooks/useToggle';
 import { feedCardType } from '@utils/card-type/feedCardType';
 import { timeStamp } from '@utils/time/timeStamp';
 
-const FeedCard = ({ answerResult }) => {
+const FeedCard = ({ answerResult, userName, userProfile }) => {
   const [isEdit, setIsEdit] = useToggle();
 
   const handleEditToggle = () => {
@@ -22,7 +22,7 @@ const FeedCard = ({ answerResult }) => {
     <StFeedCard>
       <Badge value={feedCardType(answerResult?.answer)} />
       <QuestionBox question={answerResult?.content} elapsedTime={timeStamp(answerResult?.createdAt)} />
-      <AnswerBox answer={answerResult?.answer} userName='이름 유저 정보에서' />
+      <AnswerBox answer={answerResult?.answer} userProfile={userProfile} userName={userName} />
       <StBottom>
         <StLine />
         <StReactionAndEdit>
