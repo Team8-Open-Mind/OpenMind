@@ -1,15 +1,17 @@
-import { useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 
-export const useSetUser = (getUserData) => {
+import getUserData from '@api/getUserData';
+
+const useSetUser = ({ selectedId = 2756 }) => {
   const [userName, setUserName] = useState('');
   const [userProfile, setUserProfile] = useState(PROFILE_SAMPLE);
   const [createdAt, setCreatedAt] = useState('');
   const [questionCount, setQuestionCount] = useState(0);
 
-  const fetchUserData = useCallback(
-    async ({ selectedId = 2756 }) => {
+  useEffect(() => {
+    const fetchUserData = async () => {
       try {
         const userData = await getUserData();
         const selectedUser = userData.find((value) => value.id === selectedId);
@@ -23,9 +25,11 @@ export const useSetUser = (getUserData) => {
       } catch (error) {
         console.error('데이터를 가져오는 중 오류가 발생했습니다:', error);
       }
-    },
-    [getUserData],
-  );
+    };
+    fetchUserData();
+  }, [selectedId]);
 
-  return [userName, userProfile, createdAt, questionCount, fetchUserData];
+  return { userName, userProfile, createdAt, questionCount };
 };
+
+export default useSetUser;

@@ -7,12 +7,12 @@ import AnswerBox from '@components/ui/atoms/question-box/AnswerBox';
 import QuestionBox from '@components/ui/atoms/question-box/QuestionBox';
 import Reaction from '@components/ui/atoms/Reaction/Reaction';
 
-const FeedCard = ({ edit = true }) => {
+const FeedCard = ({ userName, userProfile, createdAt, questionCount, edit = true }) => {
   return (
     <StFeedCard>
       <Badge value='true' />
       <QuestionBox question='질문이 들어갑니다' elapsedTime='?' />
-      <AnswerBox userProfile={PROFILE_SAMPLE} userName='닉네임' />
+      <AnswerBox userProfile={userProfile} userName={userName} />
       <StBottom>
         <StLine />
         <StReactionAndEdit>
