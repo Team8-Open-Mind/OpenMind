@@ -26,6 +26,10 @@ const Reaction = ({ likeCount }) => {
 
 export default Reaction;
 
+const StThumbsUp = styled(ThumbsUp)`
+  fill: ${({ theme }) => theme.color.Grayscale[40]};
+`;
+
 const StReaction = styled.button`
   font-size: 1.4rem;
   color: ${({ theme }) => theme.color.Grayscale[40]};
@@ -48,8 +52,4 @@ const StReaction = styled.button`
   &:hover ${StThumbsUp} {
     fill: ${({ theme }) => theme.color.Blue[50]};
   }
-`;
-
-const StThumbsUp = styled(ThumbsUp)`
-  fill: ${({ theme }) => theme.color.Grayscale[40]};
 `;
