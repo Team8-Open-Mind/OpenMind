@@ -11,12 +11,20 @@ import ListContents from './comp/list-contents/ListContents';
 const ListPage = () => {
   const navigate = useNavigate();
 
+  const navigateToAnswerPage = () => {
+    const id = localStorage.getItem('userId');
+
+    if (!id) return navigate('/');
+
+    navigate(`/post/${id}/answer`);
+  };
+
   return (
     <StWrap>
       <StNavWrapper>
         <StNav>
           <Logo onClickHandler={() => navigate('/')} />
-          <Button theme='brown20' arrow>
+          <Button theme='brown20' arrow onClickHandler={navigateToAnswerPage}>
             답변하러 가기
           </Button>
         </StNav>
