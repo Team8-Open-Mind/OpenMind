@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import styled from 'styled-components';
 
 import PortalContainer from '@components/portal/Portal';
