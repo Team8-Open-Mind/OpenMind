@@ -12,7 +12,7 @@ const ReplyTypeSwitch = ({ toggleRerenderTrigger, questionId, type, value, editT
         <ReplyTypeBox toggleRerenderTrigger={toggleRerenderTrigger} questionId={questionId} isRejected={isRejected} />
       );
     case 'rejected':
-      return <RejectedTypeBox />;
+      return <RejectedTypeBox toggleRerenderTrigger={toggleRerenderTrigger} questionId={questionId} />;
     case 'edit':
       return (
         <EditTypeBox

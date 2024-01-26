@@ -40,7 +40,7 @@ const EditTypeBox = ({ toggleRerenderTrigger, editTextValue, editTypeState, ques
       <Button theme='brown40' width='100%' disabled={isDisabled} type='button' onClickHandler={handleEditClick}>
         수정 완료
       </Button>
-      <RejectReplyButton />
+      <RejectReplyButton questionId={questionId} toggleRerenderTrigger={toggleRerenderTrigger} />
     </>
   );
 };

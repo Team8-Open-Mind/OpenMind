@@ -46,7 +46,12 @@ const ReplyBox = ({ toggleRerenderTrigger, questionId }) => {
       <Button theme='brown40' width='100%' disabled={isDisabled} onClickHandler={handleReplySubmitClick}>
         답변 완료
       </Button>
-      <RejectReplyButton type='submit' onClickHandler={handleRejectClick} isReject={isReject} />
+      <RejectReplyButton
+        questionId={questionId}
+        toggleRerenderTrigger={toggleRerenderTrigger}
+        onClickHandler={handleRejectClick}
+        isReject={isReject}
+      />
     </>
   );
 };

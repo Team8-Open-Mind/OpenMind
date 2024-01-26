@@ -1,7 +1,26 @@
 import styled from 'styled-components';
 
-const RejectReplyButton = ({ onClickHandler }) => {
-  return <StRejectButton onClick={onClickHandler}>답변 거절하기</StRejectButton>;
+import { patchAnswer } from '@api/answers/patchAnswer';
+import { useAsync } from '@hooks/useAsync';
+
+const RejectReplyButton = ({ toggleRerenderTrigger, questionId }) => {
+  const { setAsyncFunction } = useAsync(patchAnswer);
+
+  const handleRejectClick = async () => {
+    const content = '';
+    const isRejected = true;
+    const res = await setAsyncFunction(questionId, content, isRejected);
+    console.log(res);
+    toggleRerenderTrigger();
+
+    return res;
+  };
+
+  return (
+    <StRejectButton type='button' onClick={handleRejectClick}>
+      답변 거절하기
+    </StRejectButton>
+  );
 };
 
 export default RejectReplyButton;
