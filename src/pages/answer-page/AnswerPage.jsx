@@ -28,7 +28,6 @@ const AnswerPage = () => {
   const [, , , setDeleteCard] = useAsync(deleteQuestion);
   const [isVisible, handleScrollToTop] = useScrollToTop();
 
-  // console.log(answerResults);
   const handleDeleteCard = async (id) => {
     await setDeleteCard(id);
 
