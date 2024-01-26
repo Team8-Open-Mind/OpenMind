@@ -23,8 +23,8 @@ const AnswerPage = () => {
   const [deleteRerenderTrigger, toggleDeleteRerenderTrigger] = useToggle();
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const { userName, userProfile, createdAt, questionCount } = useSetUser(getUserData);
-  const [, , answerResults] = useAsyncOnMount(getAnswerLists, [deleteRerenderTrigger]);
-  const [, , , setDeleteCard] = useAsync(deleteQuestion);
+  const { result: answerResults } = useAsyncOnMount(getAnswerLists, [deleteRerenderTrigger]);
+  const { setAsyncFunction: setDeleteCard } = useAsync(deleteQuestion);
   const [isVisible, handleScrollToTop] = useScrollToTop();
 
   const handleDeleteCard = async (id) => {

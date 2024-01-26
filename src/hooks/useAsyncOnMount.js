@@ -7,12 +7,12 @@ import { useAsync } from './useAsync';
 // 특정 이벤트 발생 없을때도 바로 받아 올 수 있다.
 
 export const useAsyncOnMount = (getAsyncFunction, deps = []) => {
-  const [loading, error, result, setAsyncFunction] = useAsync(getAsyncFunction, deps);
+  const { loading, error, result, setAsyncFunction } = useAsync(getAsyncFunction, deps);
 
   useEffect(() => {
     // 렌더링되자마자 호출되도록
     setAsyncFunction();
   }, [setAsyncFunction]);
 
-  return [loading, error, result];
+  return { loading, error, result };
 };

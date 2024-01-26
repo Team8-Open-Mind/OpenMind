@@ -21,7 +21,7 @@ const ListContents = () => {
   const itemsPerPage = 8;
   const navigate = useNavigate();
 
-  const [, , result] = useAsyncOnMount(
+  const { result } = useAsyncOnMount(
     () => getQuestionLists({ offset: (currentPage - 1) * 8, sortOrder: sort, limit: itemsPerPage }),
     [sort, currentPage],
   );

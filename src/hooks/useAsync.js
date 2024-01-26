@@ -26,5 +26,5 @@ export const useAsync = (getAsyncFunction, deps = []) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
-  return [loading, error, result, setAsyncFunction];
+  return { loading, error, result, setAsyncFunction };
 };
