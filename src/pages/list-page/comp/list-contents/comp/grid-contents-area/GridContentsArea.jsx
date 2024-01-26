@@ -1,28 +1,12 @@
-import { useCallback } from 'react';
-
-import { size } from '@device/mediaBreakpoints';
 import styled from 'styled-components';
 
 import { ReactComponent as ArrowRight } from '@assets/tablet-icon-arrow-right.svg';
 import Grid from '@components/ui/molecules/grid';
 
-import { useResizeObserver } from '@hooks/useResizeObserver';
+import { useAppendNextPageCard } from './hooks/useAppendNextPageCard';
 
-const GridContentsArea = ({ result, changePage, currentPage }) => {
-  const { targetResizeInfo } = useResizeObserver();
-
-  const appendNextPageCard = useCallback(() => {
-    if (targetResizeInfo?.width < 868 && targetResizeInfo?.width >= size.tablet) {
-      if (result?.results[result.results.length - 1]?.isNextPageCard) {
-        return;
-      }
-
-      if (result?.next) result?.results.push({ isNextPageCard: true, id: 'customCard' });
-    } else if (result?.results[result.results.length - 1]?.isNextPageCard) {
-      result?.results.pop();
-    }
-  }, [result?.results, result?.next, targetResizeInfo?.width]);
-  appendNextPageCard();
+const GridContentsArea = ({ result, setResult, changePage, currentPage }) => {
+  useAppendNextPageCard({ results: result?.results, next: result?.next, setResult });
 
   return (
     <Grid>
