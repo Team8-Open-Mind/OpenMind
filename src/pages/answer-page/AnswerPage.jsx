@@ -34,10 +34,6 @@ const AnswerPage = () => {
     toggleRerenderTrigger();
   };
 
-  useEffect(() => {
-    console.log(answerResults);
-  }, [answerResults]);
-
   return (
     <>
       <StBackground>
