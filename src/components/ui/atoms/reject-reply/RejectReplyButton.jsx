@@ -10,7 +10,6 @@ const RejectReplyButton = ({ toggleRerenderTrigger, questionId }) => {
     const content = '';
     const isRejected = true;
     const res = await setAsyncFunction(questionId, content, isRejected);
-    console.log(res);
     toggleRerenderTrigger();
 
     return res;
