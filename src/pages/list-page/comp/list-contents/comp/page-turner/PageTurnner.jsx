@@ -5,7 +5,7 @@ import { ReactComponent as LeftArrow } from '@assets/left-arrow.svg';
 import { ReactComponent as RightArrow } from '@assets/right-arrow.svg';
 
 const PageTurnner = ({
-  currentPagesList,
+  currentPageGroup,
   changePage,
   currentPage,
   jumpToPreviousPageGroup,
@@ -20,7 +20,7 @@ const PageTurnner = ({
           <StLeftArrow width={8} height={9} />
         </StIconAlignButton>
       )}
-      {currentPagesList.map((v) => (
+      {currentPageGroup.map((v) => (
         <StPaginationNumberButton
           $currentPage={currentPage === v}
           key={v}

@@ -17,23 +17,15 @@ import PageTurnner from './comp/page-turner/PageTurnner';
 const ListContents = () => {
   const [sort, setSort] = useState('time');
   const [result, setResult] = useState({});
-  const pagesPerScreen = 5;
+  const pagesPerGroup = 5;
   const itemsPerPage = 8;
   const navigate = useNavigate();
 
-  const {
-    currentPagesList,
-    currentPage,
-    canJumpToNextPageGroup,
-    canJumpToPreviousPageGroup,
-    changePage,
-    jumpToPreviousPageGroup,
-    jumpToNextPageGroup,
-  } = usePaginate({
+  const { changePage, currentPage, ...usePaginateRest } = usePaginate({
     count: result?.count,
     sort,
     itemsPerPage,
-    pagesPerScreen,
+    pagesPerGroup,
   });
 
   const [, , res] = useAsyncOnMount(
@@ -58,16 +50,8 @@ const ListContents = () => {
       </StSortControllerWrapper>
       {result?.count ? (
         <>
-          <GridContentsArea result={result} changePage={changePage} currentPage={currentPage} />
-          <PageTurnner
-            currentPagesList={currentPagesList}
-            changePage={changePage}
-            currentPage={currentPage}
-            jumpToPreviousPageGroup={jumpToPreviousPageGroup}
-            jumpToNextPageGroup={jumpToNextPageGroup}
-            canJumpToPreviousPageGroup={canJumpToPreviousPageGroup}
-            canJumpToNextPageGroup={canJumpToNextPageGroup}
-          />
+          <GridContentsArea result={result} setResult={setResult} changePage={changePage} currentPage={currentPage} />
+          <PageTurnner changePage={changePage} currentPage={currentPage} {...usePaginateRest} />
         </>
       ) : (
         <>
