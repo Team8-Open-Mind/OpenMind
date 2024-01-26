@@ -17,22 +17,22 @@ import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 import useScrollToTop from '@hooks/useScrollToTop';
 import useSetUser from '@hooks/useSetUser';
 import { useSNSShare } from '@hooks/useSNSShare';
+import { useToggle } from '@hooks/useToggle';
 
 const AnswerPage = () => {
   const [answerResults, setAnswerResults] = useState([]);
+  const [deleteRerenderTrigger, toggleDeleteRerenderTrigger] = useToggle();
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const { userName, userProfile, createdAt, questionCount } = useSetUser(getUserData);
-  const [, , answer] = useAsyncOnMount(getAnswerLists, [answerResults]);
+  const [, , answer] = useAsyncOnMount(getAnswerLists, [deleteRerenderTrigger]);
   const [, , , setDeleteCard] = useAsync(deleteQuestion);
   const [isVisible, handleScrollToTop] = useScrollToTop();
 
   // console.log(answerResults);
   const handleDeleteCard = async (id) => {
-    const delCardResult = await setDeleteCard(id);
+    await setDeleteCard(id);
 
-    if (!delCardResult) return;
-
-    setAnswerResults((prevItems) => prevItems.filter((item) => item.results.id !== id));
+    toggleDeleteRerenderTrigger();
   };
 
   useEffect(() => {
