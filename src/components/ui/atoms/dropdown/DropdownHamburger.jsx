@@ -4,7 +4,7 @@ import { StHamburger } from '../sprite-icon/SpriteIcon';
 import { useDropdownProvider } from './context/DropdownProvider';
 
 const DropdownHamburger = () => {
-  const { toggleIsOpen } = useDropdownProvider();
+  const { toggleDropdown } = useDropdownProvider();
 
   return (
     <button
@@ -13,7 +13,7 @@ const DropdownHamburger = () => {
         padding: 0;
         display: flex;
       `}
-      onClick={toggleIsOpen}
+      onClick={toggleDropdown}
     >
       <StHamburger $size={24} $color='gray60' />
     </button>

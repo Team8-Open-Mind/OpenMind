@@ -3,22 +3,23 @@ import { createContext, useContext, useState } from 'react';
 
 import { css } from 'styled-components';
 
-import { useToggle } from '@hooks/useToggle';
+import { useCloseModal } from '@hooks/useCloseModal';
 
 const DropdownContext = createContext();
 
 const DropdownProvider = ({ children }) => {
-  const [isOpen, toggleIsOpen] = useToggle();
+  const { toggleModal: toggleDropdown, isModalOpen: isDropdownOpen, modalRef: dropdownRef } = useCloseModal();
   const [selectedOption, setSelectedOption] = useState('최신순');
 
   const changeSelectedOption = (e) => {
     setSelectedOption(e.target.textContent);
-    toggleIsOpen();
+    toggleDropdown();
   };
 
   return (
-    <DropdownContext.Provider value={{ isOpen, toggleIsOpen, selectedOption, changeSelectedOption }}>
+    <DropdownContext.Provider value={{ isOpen: isDropdownOpen, toggleDropdown, selectedOption, changeSelectedOption }}>
       <div
+        ref={dropdownRef}
         css={css`
           position: relative;
           display: flex;
