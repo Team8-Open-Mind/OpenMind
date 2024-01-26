@@ -5,10 +5,12 @@ import ReplyTypeBox from '../reply-type-box/ReplyTypeBox';
 
 // reply, edit, read, rejected 상태 타입
 
-const ReplyTypeSwitch = ({ questionId, type, value, editTypeState, isRejected }) => {
+const ReplyTypeSwitch = ({ toggleRerenderTrigger, questionId, type, value, editTypeState, isRejected }) => {
   switch (type) {
     case 'reply':
-      return <ReplyTypeBox questionId={questionId} isRejected={isRejected} />;
+      return (
+        <ReplyTypeBox toggleRerenderTrigger={toggleRerenderTrigger} questionId={questionId} isRejected={isRejected} />
+      );
     case 'rejected':
       return <RejectedTypeBox />;
     case 'edit':

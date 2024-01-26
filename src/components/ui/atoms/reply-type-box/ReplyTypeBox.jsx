@@ -8,7 +8,7 @@ import Button from '../Button/Button';
 import InputTextArea from '../input/input-text-area/InputTextArea';
 import RejectReplyButton from '../reject-reply/RejectReplyButton';
 
-const ReplyBox = ({ questionId }) => {
+const ReplyBox = ({ toggleRerenderTrigger, questionId }) => {
   const [isReject, setIsReject] = useToggle();
   const [replyValue, setReplyValue] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
@@ -35,6 +35,7 @@ const ReplyBox = ({ questionId }) => {
 
   const handleReplySubmitClick = async () => {
     const res = await postAnswerAsync(questionId, replyValue, isReject);
+    toggleRerenderTrigger();
 
     return res;
   };

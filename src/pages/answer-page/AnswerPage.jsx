@@ -10,6 +10,7 @@ import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';
+import { postAnswer } from '@api/answers/postAnswer';
 import getUserData from '@api/getUserData';
 import { deleteQuestion } from '@api/questions/deleteQuestion';
 import { useAsync } from '@hooks/useAsync';
@@ -20,17 +21,17 @@ import { useSNSShare } from '@hooks/useSNSShare';
 import { useToggle } from '@hooks/useToggle';
 
 const AnswerPage = () => {
-  const [deleteRerenderTrigger, toggleDeleteRerenderTrigger] = useToggle();
+  const [rerenderTrigger, toggleRerenderTrigger] = useToggle();
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const { userName, userProfile, createdAt, questionCount } = useSetUser(getUserData);
-  const { result: answerResults } = useAsyncOnMount(getAnswerLists, [deleteRerenderTrigger]);
+  const { result: answerResults } = useAsyncOnMount(getAnswerLists, [rerenderTrigger]);
   const { setAsyncFunction: setDeleteCard } = useAsync(deleteQuestion);
   const [isVisible, handleScrollToTop] = useScrollToTop();
 
   const handleDeleteCard = async (id) => {
     await setDeleteCard(id);
 
-    toggleDeleteRerenderTrigger();
+    toggleRerenderTrigger();
   };
 
   useEffect(() => {
@@ -51,6 +52,7 @@ const AnswerPage = () => {
       </StQuestFeedPageWrapper>
       <>
         <FeedCardContainer
+          toggleRerenderTrigger={toggleRerenderTrigger}
           onDeleteCard={handleDeleteCard}
           cardLength={questionCount}
           answerResults={answerResults?.results}
