@@ -30,7 +30,7 @@ const MainPage = () => {
   //   // navigate('/list');
   // };
 
-  const [, , result, setAsyncFunction] = useAsync(postNewFeedId, [userName]);
+  const { result, setAsyncFunction } = useAsync(postNewFeedId, [userName]);
 
   const handlePost = async (userName) => {
     if (!userName) return;

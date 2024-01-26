@@ -8,7 +8,14 @@ import { useConfirmAlert } from '@hooks/useConfirmAlert';
 
 import FeedCard from './FeedCard';
 
-const FeedCardContainer = ({ onDeleteCard, cardLength, userName, userProfile, answerResults }) => {
+const FeedCardContainer = ({
+  toggleRerenderTrigger,
+  onDeleteCard,
+  cardLength,
+  userName,
+  userProfile,
+  answerResults,
+}) => {
   const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
 
   const handleDeleteAllClick = () => {
@@ -43,6 +50,7 @@ const FeedCardContainer = ({ onDeleteCard, cardLength, userName, userProfile, an
         {answerResults?.map((answerResult) => {
           return (
             <FeedCard
+              toggleRerenderTrigger={toggleRerenderTrigger}
               onDeleteCard={onDeleteCard}
               key={answerResult.id}
               answerResult={answerResult}

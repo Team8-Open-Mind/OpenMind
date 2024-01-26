@@ -1,14 +1,13 @@
 import axiosInstance from '@api/instance/axiosInstance';
 
-export const postAnswer = async (questionId, formData) => {
-  console.log(formData);
-
+export const postAnswer = async (questionId, content, isRejected) => {
   try {
-    const response = await axiosInstance.post(`/questions/${questionId}/answers/`, formData);
-
-    if (response.status !== 200) {
-      throw new Error(`답변을 보내는데 실패하였어요!`);
-    }
+    // 파라미터 값들을 잘 받아오고 있음을 확인하였음
+    // console.log(questionId, content, isRejected);
+    const response = await axiosInstance.post(`/questions/${questionId}/answers/`, {
+      content,
+      isRejected,
+    });
 
     return response;
   } catch (error) {
