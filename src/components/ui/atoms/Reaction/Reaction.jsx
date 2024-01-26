@@ -1,25 +1,25 @@
-import { useState } from 'react';
-
 import styled from 'styled-components';
 
 import { ReactComponent as ThumbsUp } from '@assets/thumbs-up.svg';
 
-import { useToggle } from '@hooks/useToggle';
+import { postReaction } from '@api/questions/postReaction';
+import { useAsync } from '@hooks/useAsync';
 
-const Reaction = ({ likeCount }) => {
-  const [isLiked, setIsLiked] = useToggle();
-  const [count, setCount] = useState(likeCount);
+const Reaction = ({ questionId, likeCount, toggleRerenderTrigger }) => {
+  const { setAsyncFunction } = useAsync(postReaction);
 
-  const handleReactionCount = () => {
-    setIsLiked();
-    // setCount(count + 1);
+  const handleReactionCount = async () => {
+    const res = await setAsyncFunction(questionId);
+    toggleRerenderTrigger();
+
+    return res;
   };
 
   return (
-    <StReaction onClick={handleReactionCount} className={isLiked ? 'active' : null}>
+    <StReaction onClick={handleReactionCount}>
       <StThumbsUp width='14px' height='14px' />
       <span>도움이 되었어요</span>
-      <span>{count}</span>
+      <span>{likeCount}</span>
     </StReaction>
   );
 };

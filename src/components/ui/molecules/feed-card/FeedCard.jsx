@@ -15,7 +15,7 @@ const FeedCard = ({ toggleRerenderTrigger, onDeleteCard, answerResult, userName,
       <AnswerBox
         toggleRerenderTrigger={toggleRerenderTrigger}
         questionId={answerResult?.id}
-        answer={answerResult?.answer}
+        answerResult={answerResult}
         userProfile={userProfile}
         userName={userName}
       />

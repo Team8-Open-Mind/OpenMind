@@ -14,7 +14,7 @@ import ReplyTypeSwitch from '../ReplyTypeSwitch.jsx/ReplyTypeSwitch';
 
 // read, edit, reply type에 맞게 component 불러온다.
 
-const AnswerBox = ({ toggleRerenderTrigger, questionId, answer, userProfile = PROFILE_SAMPLE, userName }) => {
+const AnswerBox = ({ toggleRerenderTrigger, questionId, answerResult, userProfile = PROFILE_SAMPLE, userName }) => {
   const [editTypeState, setEditTypeState] = useState({
     isEdit: false,
   });
@@ -31,23 +31,29 @@ const AnswerBox = ({ toggleRerenderTrigger, questionId, answer, userProfile = PR
         <StAnswer>
           <StUser>
             <span className='name'>{userName}</span>
-            {answer !== null ? <span className='time'>{timeStamp(answer?.createdAt)}</span> : null}
+            {answerResult?.answer !== null ? (
+              <span className='time'>{timeStamp(answerResult?.answer?.createdAt)}</span>
+            ) : null}
           </StUser>
           <ReplyTypeSwitch
             toggleRerenderTrigger={toggleRerenderTrigger}
             questionId={questionId}
-            type={isEdit ? 'edit' : feedCardType(answer)}
-            value={answer?.content}
+            type={isEdit ? 'edit' : feedCardType(answerResult?.answer)}
+            value={answerResult?.answer?.content}
             editTypeState={editTypeState}
-            isRejected={answer?.isRejected}
+            isRejected={answerResult?.isRejected}
           />
         </StAnswer>
       </StAnswerBox>
       <StBottom>
         <StLine />
-        {feedCardType(answer) !== 'reply' ? (
+        {feedCardType(answerResult?.answer) !== 'reply' ? (
           <StReactionAndEdit>
-            <Reaction likeCount={answer?.like} />
+            <Reaction
+              toggleRerenderTrigger={toggleRerenderTrigger}
+              questionId={questionId}
+              likeCount={answerResult?.like}
+            />
             <EditButton onClickEdit={handleEditToggle} isEdit={isEdit} />
           </StReactionAndEdit>
         ) : null}
