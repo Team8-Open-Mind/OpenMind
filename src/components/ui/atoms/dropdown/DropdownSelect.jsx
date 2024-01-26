@@ -4,10 +4,10 @@ import { StDownIcon, StUpIcon } from '../sprite-icon/SpriteIcon';
 import { useDropdownProvider } from './context/DropdownProvider';
 
 const DropdownSelect = () => {
-  const { toggleIsOpen, isOpen, selectedOption } = useDropdownProvider();
+  const { toggleDropdown, isOpen, selectedOption } = useDropdownProvider();
 
   return (
-    <StDropdownSelect onClick={toggleIsOpen} $isOpen={isOpen}>
+    <StDropdownSelect onClick={toggleDropdown} $isOpen={isOpen}>
       {selectedOption}
       {isOpen ? (
         <StFlex>
