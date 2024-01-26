@@ -7,12 +7,17 @@ import QuestionBox from '@components/ui/atoms/question-box/QuestionBox';
 import { feedCardType } from '@utils/card-type/feedCardType';
 import { timeStamp } from '@utils/time/timeStamp';
 
-const FeedCard = ({ answerResult, userName, userProfile }) => {
+const FeedCard = ({ onDeleteCard, answerResult, userName, userProfile }) => {
   return (
     <StFeedCard>
-      <BadgeBox value={feedCardType(answerResult?.answer)} />
+      <BadgeBox onDeleteCard={onDeleteCard} value={feedCardType(answerResult?.answer)} questionId={answerResult?.id} />
       <QuestionBox question={answerResult?.content} elapsedTime={timeStamp(answerResult?.createdAt)} />
-      <AnswerBox answer={answerResult?.answer} userProfile={userProfile} userName={userName} />
+      <AnswerBox
+        questionId={answerResult?.id}
+        answer={answerResult?.answer}
+        userProfile={userProfile}
+        userName={userName}
+      />
     </StFeedCard>
   );
 };

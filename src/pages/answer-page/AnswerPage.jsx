@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import styled from 'styled-components';
 
 import Button from '@components/ui/atoms/Button/Button';
@@ -7,23 +9,34 @@ import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContai
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
 
-import { getAnswerLists } from '@api/answer/getAnswerLists';
+import { getAnswerLists } from '@api/answers/getAnswerLists';
 import getUserData from '@api/getUserData';
+import { deleteQuestion } from '@api/questions/deleteQuestion';
+import { useAsync } from '@hooks/useAsync';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 import useScrollToTop from '@hooks/useScrollToTop';
 import useSetUser from '@hooks/useSetUser';
 import { useSNSShare } from '@hooks/useSNSShare';
+import { useToggle } from '@hooks/useToggle';
 
 const AnswerPage = () => {
+  const [deleteRerenderTrigger, toggleDeleteRerenderTrigger] = useToggle();
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const { userName, userProfile, createdAt, questionCount } = useSetUser(getUserData);
-  const [, , answerResults] = useAsyncOnMount(getAnswerLists);
+  const [, , answerResults] = useAsyncOnMount(getAnswerLists, [deleteRerenderTrigger]);
+  const [, , , setDeleteCard] = useAsync(deleteQuestion);
   const [isVisible, handleScrollToTop] = useScrollToTop();
 
-  console.log(answerResults);
+  const handleDeleteCard = async (id) => {
+    await setDeleteCard(id);
 
-  // feedcard type default가 null이다.
-  // id 값이 주소에 있는 페이지라면? edit/reply
+    toggleDeleteRerenderTrigger();
+  };
+
+  useEffect(() => {
+    console.log(answerResults);
+  }, [answerResults]);
+
   return (
     <StBackground>
       <NavBar />
@@ -36,14 +49,19 @@ const AnswerPage = () => {
           <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
         </StSnsWrapper>
       </StQuestFeedPageWrapper>
-      {questionCount === 0 ? (
+      <>
+        <FeedCardContainer
+          onDeleteCard={handleDeleteCard}
+          cardLength={questionCount}
+          answerResults={answerResults?.results}
+        />
+        {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
+      </>
+      {/* {questionCount === 0 ? (
         <NoLists>아직 질문이 없습니다</NoLists>
       ) : (
-        <>
-          <FeedCardContainer cardLength={questionCount} answerResults={answerResults?.results} />
-          {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
-        </>
-      )}
+
+      )} */}
     </StBackground>
   );
 };
