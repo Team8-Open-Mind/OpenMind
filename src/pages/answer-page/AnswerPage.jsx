@@ -20,11 +20,10 @@ import { useSNSShare } from '@hooks/useSNSShare';
 import { useToggle } from '@hooks/useToggle';
 
 const AnswerPage = () => {
-  const [answerResults, setAnswerResults] = useState([]);
   const [deleteRerenderTrigger, toggleDeleteRerenderTrigger] = useToggle();
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const { userName, userProfile, createdAt, questionCount } = useSetUser(getUserData);
-  const [, , answer] = useAsyncOnMount(getAnswerLists, [deleteRerenderTrigger]);
+  const [, , answerResults] = useAsyncOnMount(getAnswerLists, [deleteRerenderTrigger]);
   const [, , , setDeleteCard] = useAsync(deleteQuestion);
   const [isVisible, handleScrollToTop] = useScrollToTop();
 
@@ -33,10 +32,6 @@ const AnswerPage = () => {
 
     toggleDeleteRerenderTrigger();
   };
-
-  useEffect(() => {
-    setAnswerResults(answer);
-  }, [answer]);
 
   useEffect(() => {
     console.log(answerResults);
