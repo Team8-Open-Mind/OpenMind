@@ -42,6 +42,23 @@ const PageTurnner = ({
 
 export default PageTurnner;
 
+const arrowIconTheme = css`
+  cursor: pointer;
+  fill: ${({ theme }) => theme.color.Grayscale[40]};
+
+  &:hover {
+    fill: ${({ theme }) => theme.color.Brown[40]};
+  }
+`;
+
+const StLeftArrow = styled(LeftArrow)`
+  ${arrowIconTheme}
+`;
+
+const StRightArrow = styled(RightArrow)`
+  ${arrowIconTheme}
+`;
+
 const StIconAlignButton = styled.button.attrs({
   type: 'button',
 })`
@@ -51,6 +68,10 @@ const StIconAlignButton = styled.button.attrs({
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:hover :where(${StLeftArrow}, ${StRightArrow}) {
+    fill: ${({ theme }) => theme.color.Brown[40]};
+  }
 `;
 
 const StPaginationNumberButton = styled.button.attrs({
@@ -77,23 +98,6 @@ const StPaginationNumberButton = styled.button.attrs({
   &:hover {
     color: ${({ theme }) => theme.color.Brown[40]};
   }
-`;
-
-const arrowIconTheme = css`
-  cursor: pointer;
-  fill: ${({ theme }) => theme.color.Grayscale[40]};
-
-  &:hover {
-    fill: ${({ theme }) => theme.color.Brown[40]};
-  }
-`;
-
-const StLeftArrow = styled(LeftArrow)`
-  ${arrowIconTheme}
-`;
-
-const StRightArrow = styled(RightArrow)`
-  ${arrowIconTheme}
 `;
 
 const StPageTurnner = styled.div`
