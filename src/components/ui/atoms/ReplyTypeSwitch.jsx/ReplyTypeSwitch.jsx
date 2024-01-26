@@ -14,7 +14,15 @@ const ReplyTypeSwitch = ({ toggleRerenderTrigger, questionId, type, value, editT
     case 'rejected':
       return <RejectedTypeBox />;
     case 'edit':
-      return <EditTypeBox editTextValue={value} editTypeState={editTypeState} />;
+      return (
+        <EditTypeBox
+          isRejected={isRejected}
+          questionId={questionId}
+          toggleRerenderTrigger={toggleRerenderTrigger}
+          editTextValue={value}
+          editTypeState={editTypeState}
+        />
+      );
     default:
       return <ReadTypeBox readTypeValue={value} />;
   }
