@@ -46,4 +46,8 @@ export default ReplyBox;
 
 const StForm = styled.form`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
 `;
