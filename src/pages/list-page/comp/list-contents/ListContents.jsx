@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { device } from '@device/mediaBreakpoints';
 import styled from 'styled-components';
@@ -18,6 +19,7 @@ const ListContents = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const pagesPerScreen = 5;
   const itemsPerPage = 8;
+  const navigate = useNavigate();
 
   const [, , result] = useAsyncOnMount(
     () => getQuestionLists({ offset: (currentPage - 1) * 8, sortOrder: sort, limit: itemsPerPage }),
@@ -61,7 +63,7 @@ const ListContents = () => {
       ) : (
         <>
           <NoLists>아직 마음을 열고있는 사람이 없습니다</NoLists>
-          <StMindOpenButton>내 마음 열러가기</StMindOpenButton>
+          <StMindOpenButton onClick={() => navigate('/', { replace: true })}>내 마음 열러가기</StMindOpenButton>
         </>
       )}
     </StContentsWrapper>
