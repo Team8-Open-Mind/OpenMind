@@ -1,6 +1,8 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
-const usePaginate = ({ count, sort, setCurrentPage, currentPage, itemsPerPage = 8, pagesPerScreen = 5 }) => {
+const usePaginate = ({ count, sort, itemsPerPage = 8, pagesPerScreen = 5 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
   const totalPages = useMemo(() => {
     return count && Math.ceil(count / itemsPerPage);
   }, [count, itemsPerPage]);
@@ -24,7 +26,7 @@ const usePaginate = ({ count, sort, setCurrentPage, currentPage, itemsPerPage = 
     if (targetPageNumber > 0 && targetPageNumber <= totalPages) setCurrentPage(targetPageNumber);
   };
 
-  const jumpToPreviousPages = () => {
+  const jumpToPreviousPageGroup = () => {
     if (Math.floor(currentPage / pagesPerScreen) === 0) return;
 
     setCurrentPage((prevPage) => {
@@ -32,7 +34,7 @@ const usePaginate = ({ count, sort, setCurrentPage, currentPage, itemsPerPage = 
     });
   };
 
-  const jumpToNextPages = () => {
+  const jumpToNextPageGroup = () => {
     if (Math.ceil(currentPage / pagesPerScreen) * pagesPerScreen + 1 > totalPages) return;
 
     setCurrentPage((prevPage) => {
@@ -40,11 +42,23 @@ const usePaginate = ({ count, sort, setCurrentPage, currentPage, itemsPerPage = 
     });
   };
 
+  const canJumpToPreviousPageGroup = Math.ceil(currentPage / pagesPerScreen) !== 1;
+  const canJumpToNextPageGroup = Math.ceil(currentPage / pagesPerScreen) * pagesPerScreen + 1 <= totalPages;
+  // const isNextJumpAvailable = count > Math.ceil(currentPage / pagesPerScreen) * pagesPerScreen * itemsPerPage;
+
   useEffect(() => {
     setCurrentPage(1);
   }, [sort, setCurrentPage]);
 
-  return { changePage, jumpToPreviousPages, jumpToNextPages, currentPagesList };
+  return {
+    changePage,
+    jumpToPreviousPageGroup,
+    jumpToNextPageGroup,
+    currentPage,
+    currentPagesList,
+    canJumpToPreviousPageGroup,
+    canJumpToNextPageGroup,
+  };
 };
 
 export { usePaginate };

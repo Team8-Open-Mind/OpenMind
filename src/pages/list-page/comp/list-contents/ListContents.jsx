@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { device } from '@device/mediaBreakpoints';
@@ -16,24 +16,34 @@ import PageTurnner from './comp/page-turner/PageTurnner';
 
 const ListContents = () => {
   const [sort, setSort] = useState('time');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [result, setResult] = useState({});
   const pagesPerScreen = 5;
   const itemsPerPage = 8;
   const navigate = useNavigate();
 
-  const { result } = useAsyncOnMount(
+  const {
+    currentPagesList,
+    currentPage,
+    canJumpToNextPageGroup,
+    canJumpToPreviousPageGroup,
+    changePage,
+    jumpToPreviousPageGroup,
+    jumpToNextPageGroup,
+  } = usePaginate({
+    count: result?.count,
+    sort,
+    itemsPerPage,
+    pagesPerScreen,
+  });
+
+  const [, , res] = useAsyncOnMount(
     () => getQuestionLists({ offset: (currentPage - 1) * 8, sortOrder: sort, limit: itemsPerPage }),
     [sort, currentPage],
   );
 
-  const { changePage, currentPagesList, jumpToPreviousPages, jumpToNextPages } = usePaginate({
-    count: result?.count,
-    sort,
-    setCurrentPage,
-    currentPage,
-    itemsPerPage,
-    pagesPerScreen,
-  });
+  useEffect(() => {
+    setResult(res);
+  }, [res]);
 
   const changeQuestionListSortingOrder = (e) => {
     const currentSort = questionListSort[e.target.textContent];
@@ -51,13 +61,12 @@ const ListContents = () => {
           <GridContentsArea result={result} changePage={changePage} currentPage={currentPage} />
           <PageTurnner
             currentPagesList={currentPagesList}
-            jumpToPreviousPages={jumpToPreviousPages}
-            jumpToNextPages={jumpToNextPages}
             changePage={changePage}
             currentPage={currentPage}
-            pagesPerScreen={pagesPerScreen}
-            itemsPerPage={itemsPerPage}
-            listCount={result?.count}
+            jumpToPreviousPageGroup={jumpToPreviousPageGroup}
+            jumpToNextPageGroup={jumpToNextPageGroup}
+            canJumpToPreviousPageGroup={canJumpToPreviousPageGroup}
+            canJumpToNextPageGroup={canJumpToNextPageGroup}
           />
         </>
       ) : (
