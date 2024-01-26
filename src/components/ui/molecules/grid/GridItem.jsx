@@ -1,17 +1,17 @@
+import { NavLink } from 'react-router-dom';
+
 import { device } from '@device/mediaBreakpoints';
 import styled from 'styled-components';
 
-const GridItem = ({ questionList: { name, imageSource, questionCount } }) => {
+const GridItem = ({ questionList: { name, imageSource, questionCount, id } }) => {
   return (
-    <StGridItemWrapper>
-      {/*  */}
+    <StGridItemWrapper to={`/post/${id}`}>
       <StGridItemProfileBox>
         <StGridItemImgDiv>
           <StGridProfileImg src={imageSource} />
         </StGridItemImgDiv>
         <StGridProfileName>{name}</StGridProfileName>
       </StGridItemProfileBox>
-      {/*  */}
       <StGridItemFooter>
         <StGridItemFooterLeftSideBox>
           <StGridMessageIcon $color='gray40' />
@@ -25,9 +25,7 @@ const GridItem = ({ questionList: { name, imageSource, questionCount } }) => {
 
 export default GridItem;
 
-const StGridItemWrapper = styled.button.attrs({
-  type: 'button',
-})`
+const StGridItemWrapper = styled(NavLink)`
   width: 100%;
   height: 100%;
   padding: 1.6rem;

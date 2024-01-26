@@ -2,8 +2,8 @@ import { device } from '@device/mediaBreakpoints';
 import styled from 'styled-components';
 /**
  * @typedef {{ width?: string; height?: string; }} LogoSize
- * @typedef {{ $tabletWidth?: string; $tabletHeight?: string }} TabletSize
- * @typedef {{ $pcWidth?: string; $pcHeight?: string; }} PcSize
+ * @typedef {{ tabletWidth?: string; tabletHeight?: string }} TabletSize
+ * @typedef {{ pcWidth?: string; pcHeight?: string; }} PcSize
  * @typedef {{ onClickHandler?: VoidFunction }} OnClickHandler
  * @param {LogoSize & TabletSize & PcSize & OnClickHandler  } LogoProps
  * @description

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { device } from '@device/mediaBreakpoints';
 import styled from 'styled-components';
@@ -7,15 +8,32 @@ import ArrowDropdown from '@components/ui/atoms/dropdown/arrow-dropdown/ArrowDro
 
 import { getQuestionLists, questionListSort } from '@api/questions/getQuestionLists';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
+import { usePaginate } from '@hooks/usePaginate';
 
-import GridArea from './comp/grid-area/GridArea';
+import GridContentsArea from './comp/grid-contents-area/GridContentsArea';
 import NoLists from './comp/no-lists/NoLists';
 import PageTurnner from './comp/page-turner/PageTurnner';
 
 const ListContents = () => {
   const [sort, setSort] = useState('time');
-  const [, , result] = useAsyncOnMount(() => getQuestionLists(sort), [sort]);
-  // console.log(result?.count);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pagesPerScreen = 5;
+  const itemsPerPage = 8;
+  const navigate = useNavigate();
+
+  const [, , result] = useAsyncOnMount(
+    () => getQuestionLists({ offset: (currentPage - 1) * 8, sortOrder: sort, limit: itemsPerPage }),
+    [sort, currentPage],
+  );
+
+  const { changePage, currentPagesList, jumpToPreviousPages, jumpToNextPages } = usePaginate({
+    count: result?.count,
+    sort,
+    setCurrentPage,
+    currentPage,
+    itemsPerPage,
+    pagesPerScreen,
+  });
 
   const changeQuestionListSortingOrder = (e) => {
     const currentSort = questionListSort[e.target.textContent];
@@ -30,13 +48,22 @@ const ListContents = () => {
       </StSortControllerWrapper>
       {result?.count ? (
         <>
-          <GridArea result={result} />
-          <PageTurnner result={result} />
+          <GridContentsArea result={result} changePage={changePage} currentPage={currentPage} />
+          <PageTurnner
+            currentPagesList={currentPagesList}
+            jumpToPreviousPages={jumpToPreviousPages}
+            jumpToNextPages={jumpToNextPages}
+            changePage={changePage}
+            currentPage={currentPage}
+            pagesPerScreen={pagesPerScreen}
+            itemsPerPage={itemsPerPage}
+            listCount={result?.count}
+          />
         </>
       ) : (
         <>
           <NoLists>아직 마음을 열고있는 사람이 없습니다</NoLists>
-          <StMindOpenButton>내 마음 열러가기</StMindOpenButton>
+          <StMindOpenButton onClick={() => navigate('/', { replace: true })}>내 마음 열러가기</StMindOpenButton>
         </>
       )}
     </StContentsWrapper>
@@ -53,6 +80,8 @@ const StContentsWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  background-color: #f9f9f9;
 `;
 
 const StSortControllerWrapper = styled.div`
