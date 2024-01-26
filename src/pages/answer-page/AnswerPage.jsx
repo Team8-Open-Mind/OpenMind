@@ -19,12 +19,12 @@ import useSetUser from '@hooks/useSetUser';
 import { useSNSShare } from '@hooks/useSNSShare';
 
 const AnswerPage = () => {
+  const [answerResults, setAnswerResults] = useState([]);
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const { userName, userProfile, createdAt, questionCount } = useSetUser(getUserData);
-  const [, , answer] = useAsyncOnMount(getAnswerLists);
+  const [, , answer] = useAsyncOnMount(getAnswerLists, [answerResults]);
   const [, , , setDeleteCard] = useAsync(deleteQuestion);
   const [isVisible, handleScrollToTop] = useScrollToTop();
-  const [answerResults, setAnswerResults] = useState(answer);
 
   // console.log(answerResults);
   const handleDeleteCard = async (id) => {
