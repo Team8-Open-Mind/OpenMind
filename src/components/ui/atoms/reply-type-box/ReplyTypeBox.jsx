@@ -44,7 +44,6 @@ const ReplyBox = ({ toggleRerenderTrigger, questionId }) => {
     <>
       <InputTextArea onChangeHandler={handleReplyValue}>답변을 입력해주세요</InputTextArea>
       <Button theme='brown40' width='100%' disabled={isDisabled} onClickHandler={handleReplySubmitClick}>
-        {questionId}
         답변 완료
       </Button>
       <RejectReplyButton type='submit' onClickHandler={handleRejectClick} isReject={isReject} />
