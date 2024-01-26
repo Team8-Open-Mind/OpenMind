@@ -12,19 +12,11 @@ import { useConfirmAlert } from '@hooks/useConfirmAlert';
 import { StCloseIcon } from '../sprite-icon/SpriteIcon';
 import Badge from './Badge';
 
-const BadgeBox = ({ value, questionId }) => {
+const BadgeBox = ({ onDeleteCard, value, questionId }) => {
   const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
   const [, , , deleteQuestionFunc] = useAsync(deleteQuestion, []);
 
-  const setDeleteQuestion = async () => {
-    const res = await deleteQuestionFunc(questionId);
-
-    return res;
-  };
-
-  const handleDeleteCardClick = () => {
-    setDeleteQuestion();
-  };
+  const handleDeleteCardClick = () => onDeleteCard(questionId);
 
   const handleCancelDeleteCardClick = () => {
     console.log('Cancelled!');

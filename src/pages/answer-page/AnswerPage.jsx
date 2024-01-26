@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import styled from 'styled-components';
 
 import Button from '@components/ui/atoms/Button/Button';
@@ -9,6 +11,8 @@ import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';
 import getUserData from '@api/getUserData';
+import { deleteQuestion } from '@api/questions/deleteQuestion';
+import { useAsync } from '@hooks/useAsync';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 import useScrollToTop from '@hooks/useScrollToTop';
 import useSetUser from '@hooks/useSetUser';
@@ -17,13 +21,28 @@ import { useSNSShare } from '@hooks/useSNSShare';
 const AnswerPage = () => {
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const { userName, userProfile, createdAt, questionCount } = useSetUser(getUserData);
-  const [, , answerResults] = useAsyncOnMount(getAnswerLists);
+  const [, , answer] = useAsyncOnMount(getAnswerLists);
+  const [, , , setDeleteCard] = useAsync(deleteQuestion);
   const [isVisible, handleScrollToTop] = useScrollToTop();
+  const [answerResults, setAnswerResults] = useState(answer);
 
   // console.log(answerResults);
+  const handleDeleteCard = async (id) => {
+    const delCardResult = await setDeleteCard(id);
 
-  // feedcard type default가 null이다.
-  // id 값이 주소에 있는 페이지라면? edit/reply
+    if (!delCardResult) return;
+
+    setAnswerResults((prevItems) => prevItems.filter((item) => item.results.id !== id));
+  };
+
+  useEffect(() => {
+    setAnswerResults(answer);
+  }, [answer]);
+
+  useEffect(() => {
+    console.log(answerResults);
+  }, [answerResults]);
+
   return (
     <StBackground>
       <NavBar />
@@ -37,7 +56,11 @@ const AnswerPage = () => {
         </StSnsWrapper>
       </StQuestFeedPageWrapper>
       <>
-        <FeedCardContainer cardLength={questionCount} answerResults={answerResults?.results} />
+        <FeedCardContainer
+          onDeleteCard={handleDeleteCard}
+          cardLength={questionCount}
+          answerResults={answerResults?.results}
+        />
         {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
       </>
       {/* {questionCount === 0 ? (
