@@ -7,17 +7,16 @@ import { ReactComponent as RightArrow } from '@assets/right-arrow.svg';
 const PageTurnner = ({
   currentPagesList,
   changePage,
-  jumpToPreviousPages,
-  jumpToNextPages,
   currentPage,
-  pagesPerScreen,
-  itemsPerPage,
-  listCount,
+  jumpToPreviousPageGroup,
+  jumpToNextPageGroup,
+  canJumpToNextPageGroup,
+  canJumpToPreviousPageGroup,
 }) => {
   return (
     <StPageTurnner>
-      {Math.ceil(currentPage / pagesPerScreen) !== 1 && (
-        <StIconAlignButton onClick={jumpToPreviousPages}>
+      {canJumpToPreviousPageGroup && (
+        <StIconAlignButton onClick={jumpToPreviousPageGroup}>
           <StLeftArrow width={8} height={9} />
         </StIconAlignButton>
       )}
@@ -31,8 +30,8 @@ const PageTurnner = ({
           {v}
         </StPaginationNumberButton>
       ))}
-      {listCount > Math.ceil(currentPage / pagesPerScreen) * pagesPerScreen * itemsPerPage && (
-        <StIconAlignButton onClick={jumpToNextPages}>
+      {canJumpToNextPageGroup && (
+        <StIconAlignButton onClick={jumpToNextPageGroup}>
           <StRightArrow width={8} height={9} />
         </StIconAlignButton>
       )}

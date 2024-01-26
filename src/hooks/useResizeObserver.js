@@ -12,7 +12,6 @@ const useResizeObserver = () => {
   const resizeObserver = useMemo(
     () =>
       new ResizeObserver((entries) => {
-        // eslint-disable-next-line no-restricted-syntax
         if (entries[0] && entries[0].target.getBoundingClientRect) {
           setTargetResizeInfo(entries[0].target.getBoundingClientRect());
         }

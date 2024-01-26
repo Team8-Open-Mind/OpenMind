@@ -80,6 +80,7 @@ const StGridProfileImg = styled.img.attrs({
 
 const StGridProfileName = styled.p`
   margin: 0;
+  max-width: 100%;
 
   color: ${({ theme }) => theme.color.Grayscale[60]};
   font-feature-settings:
