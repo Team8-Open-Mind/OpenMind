@@ -34,7 +34,7 @@ const AnswerBox = ({
   return (
     <>
       <StAnswerBox>
-        <img src={userProfile} alt='프로필' />
+        <StImg src={userProfile} alt='프로필 이미지' />
         <StAnswer>
           <StUser>
             <span className='name'>{userName}</span>
@@ -72,6 +72,10 @@ const AnswerBox = ({
 };
 
 export default AnswerBox;
+
+const StImg = styled.img`
+  border-radius: 50px;
+`;
 
 const StAnswerBox = styled.div`
   display: flex;
