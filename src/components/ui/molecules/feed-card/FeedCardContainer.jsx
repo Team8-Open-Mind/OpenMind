@@ -25,6 +25,7 @@ const FeedCardContainer = ({
   userId,
 }) => {
   const { isModalOpen, toggleModal } = useCloseModal();
+  const { isDeleteOpen, toggleDeleteCard } = useCloseModal();
   const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
   const { setAsyncFunction } = useAsync(deleteSubject);
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ const FeedCardContainer = ({
     toggleModal();
   };
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = async () => {
     showConfirm(handleDeleteAllClick, handleCancelDeleteAllClick);
   };
 
@@ -84,6 +85,7 @@ const FeedCardContainer = ({
           content={`정말로 마음을 닫으시겠어요? \n 삭제된 계정 정보와 피드는 복구할 수 없습니다.`}
         />
         {isModalOpen && <Toast closeModal={toggleModal}>취소 되었습니다.</Toast>}
+        {isDeleteOpen && <Toast closeModal={toggleDeleteCard}>삭제 되었습니다.</Toast>}
       </PortalContainer>
     </>
   );
