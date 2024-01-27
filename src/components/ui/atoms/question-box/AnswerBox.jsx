@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 
-import { useCheckAnswerPath } from '@hooks/useCheckAnswerPath';
 import { useToggle } from '@hooks/useToggle';
 import { feedCardType } from '@utils/card-type/feedCardType';
 import { timeStamp } from '@utils/time/timeStamp';
