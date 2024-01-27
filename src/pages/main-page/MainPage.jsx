@@ -11,6 +11,8 @@ import { StBackground } from '@pages/question-feed-page/QuestFeedPage';
 import { postNewFeedId } from '@api/subjects/postNewFeedId';
 import { useAsync } from '@hooks/useAsync';
 
+import { useNavigateToAnswer } from './hooks/useNavigateAnswer';
+
 const MainPage = () => {
   const [userName, setUserName] = useState(null);
   // const USER_API = import.meta.env.VITE_SUBJECTS_API;
@@ -36,9 +38,9 @@ const MainPage = () => {
     if (!userName) return;
 
     await setAsyncFunction(userName);
-    localStorage.setItem('userId', result?.id);
-    navigate(`/post/${result?.id}/answer`);
   };
+
+  useNavigateToAnswer(result, navigate);
 
   return (
     <StBackground>
