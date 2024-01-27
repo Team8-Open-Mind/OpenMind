@@ -1,16 +1,25 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import styled from 'styled-components';
 
 import Logo from '@components/ui/atoms/logo/Logo';
 
 const NavBar = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  const handleRedirectMainClick = () => {
+    navigate('/');
+  };
+
+  // const { result: userInfo } = useAsyncOnMount(() => getUserData(id), [id]);
+
   return (
     <StNavBar>
-      <Logo />
+      <Logo onClickHandler={handleRedirectMainClick} />
       <StCategory>
-        <Link to='post/:id/answer'>받은 질문</Link>
-        <Link to='post/:id'>질문하기</Link>
+        <Link to={`/post/${id}/answer`}>받은 질문</Link>
+        <Link to='/'>질문하기</Link>
       </StCategory>
     </StNavBar>
   );
