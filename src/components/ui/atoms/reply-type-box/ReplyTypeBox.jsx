@@ -14,10 +14,6 @@ const ReplyBox = ({ toggleRerenderTrigger, questionId }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const { setAsyncFunction: postAnswerAsync } = useAsync(postAnswer);
 
-  const handleRejectClick = () => {
-    setIsReject();
-  };
-
   // const handleReplySubmitClick = async () => {
   //   const res = await postAnswerAsync();
   // };
@@ -46,12 +42,7 @@ const ReplyBox = ({ toggleRerenderTrigger, questionId }) => {
       <Button theme='brown40' width='100%' disabled={isDisabled} onClickHandler={handleReplySubmitClick}>
         답변 완료
       </Button>
-      <RejectReplyButton
-        questionId={questionId}
-        toggleRerenderTrigger={toggleRerenderTrigger}
-        onClickHandler={handleRejectClick}
-        isReject={isReject}
-      />
+      <RejectReplyButton questionId={questionId} toggleRerenderTrigger={toggleRerenderTrigger} isReject={isReject} />
     </>
   );
 };
