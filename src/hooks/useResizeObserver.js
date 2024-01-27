@@ -11,9 +11,9 @@ const useResizeObserver = () => {
 
   const resizeObserver = useMemo(
     () =>
-      new ResizeObserver((entries) => {
-        if (entries[0] && entries[0].target.getBoundingClientRect) {
-          setTargetResizeInfo(entries[0].target.getBoundingClientRect());
+      new ResizeObserver(([entry]) => {
+        if (entry && entry.target.getBoundingClientRect) {
+          setTargetResizeInfo(entry.target.getBoundingClientRect());
         }
       }),
     [],
