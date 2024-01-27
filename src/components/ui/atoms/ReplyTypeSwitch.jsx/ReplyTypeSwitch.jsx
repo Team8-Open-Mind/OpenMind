@@ -18,7 +18,12 @@ const ReplyTypeSwitch = ({
   switch (type) {
     case 'reply':
       return (
-        <ReplyTypeBox toggleRerenderTrigger={toggleRerenderTrigger} questionId={questionId} isRejected={isRejected} />
+        <ReplyTypeBox
+          toggleRerenderTrigger={toggleRerenderTrigger}
+          questionId={questionId}
+          answerId={answerId}
+          isRejected={isRejected}
+        />
       );
     case 'rejected':
       return <RejectedTypeBox toggleRerenderTrigger={toggleRerenderTrigger} questionId={questionId} />;
