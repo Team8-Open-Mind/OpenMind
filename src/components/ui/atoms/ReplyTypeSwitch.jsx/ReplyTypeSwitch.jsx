@@ -13,6 +13,7 @@ const ReplyTypeSwitch = ({
   value,
   setEditTypeState,
   isRejected,
+  setIsEdit,
 }) => {
   switch (type) {
     case 'reply':
@@ -24,6 +25,7 @@ const ReplyTypeSwitch = ({
     case 'edit':
       return (
         <EditTypeBox
+          setIsEdit={setIsEdit}
           type={type}
           isRejected={isRejected}
           answerId={answerId}
