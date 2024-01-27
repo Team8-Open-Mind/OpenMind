@@ -35,11 +35,13 @@ const AnswerBox = ({
 
   return (
     <>
-      <StAnswerBox>
-        {path === 'question' ? (
+      {path === 'question' ? (
+        <StAnswerBox>
           <ReadTypeSwitch value={answerResult?.answer?.content} />
-        ) : (
-          <>
+        </StAnswerBox>
+      ) : (
+        <>
+          <StAnswerBox>
             <StImg src={userProfile} alt='프로필 이미지' />
             <StAnswer>
               <StUser>
@@ -48,20 +50,20 @@ const AnswerBox = ({
                   <span className='time'>{timeStamp(answerResult?.answer?.createdAt)}</span>
                 ) : null}
               </StUser>
+              <ReplyTypeSwitch
+                setIsEdit={setIsEdit}
+                toggleRerenderTrigger={toggleRerenderTrigger}
+                answerId={answerId}
+                questionId={questionId}
+                type={isEdit ? 'edit' : feedCardType(answerResult?.answer)}
+                value={answerResult?.answer?.content}
+                setEditTypeState={setEditTypeState}
+                isRejected={answerResult?.isRejected}
+              />
             </StAnswer>
-            <ReplyTypeSwitch
-              setIsEdit={setIsEdit}
-              toggleRerenderTrigger={toggleRerenderTrigger}
-              answerId={answerId}
-              questionId={questionId}
-              type={isEdit ? 'edit' : feedCardType(answerResult?.answer)}
-              value={answerResult?.answer?.content}
-              setEditTypeState={setEditTypeState}
-              isRejected={answerResult?.isRejected}
-            />
-          </>
-        )}
-      </StAnswerBox>
+          </StAnswerBox>
+        </>
+      )}
       <StBottom>
         <StLine />
         {/* answer가 null이 아니면 === 답변이 있으면 */}
@@ -104,6 +106,7 @@ const StAnswerBox = styled.div`
 const StAnswer = styled.div`
   display: flex;
   flex-direction: column;
+
   align-items: flex-start;
   gap: 4px;
   flex: 1 0 0;
