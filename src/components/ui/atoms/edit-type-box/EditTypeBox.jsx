@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 
+import { patchAnswer } from '@api/answers/patchAnswer';
+import { useAsync } from '@hooks/useAsync';
+import { feedCardType } from '@utils/card-type/feedCardType';
+
 import Button from '../Button/Button';
 import InputTextArea from '../input/input-text-area/InputTextArea';
 import RejectReplyButton from '../reject-reply/RejectReplyButton';
 
-const EditTypeBox = ({ editTextValue, editTypeState }) => {
-  const { isEdit } = editTypeState;
+const EditTypeBox = ({ toggleRerenderTrigger, editTextValue, answerId, questionId, setEditTypeState }) => {
   const [editValue, setEditValue] = useState(editTextValue);
   const [isDisabled, setIsDisabled] = useState(true);
+  const { setAsyncFunction } = useAsync(patchAnswer);
 
   useEffect(() => {
     if (editValue !== '') {
@@ -21,16 +25,23 @@ const EditTypeBox = ({ editTextValue, editTypeState }) => {
     setEditValue(event.target.value);
   };
 
+  const handleEditClick = async () => {
+    const res = await setAsyncFunction(answerId, editValue);
+    toggleRerenderTrigger();
+    feedCardType('read');
+
+    return res;
+  };
+
   return (
     <>
-      {isEdit}
       <InputTextArea onChangeHandler={handleReplyValue} value={editValue}>
         답변을 수정해 보세요.
       </InputTextArea>
-      <Button 소듣='brown40' width='100%' disabled={isDisabled}>
+      <Button theme='brown40' width='100%' disabled={isDisabled} type='button' onClickHandler={handleEditClick}>
         수정 완료
       </Button>
-      <RejectReplyButton />
+      <RejectReplyButton questionId={questionId} toggleRerenderTrigger={toggleRerenderTrigger} />
     </>
   );
 };

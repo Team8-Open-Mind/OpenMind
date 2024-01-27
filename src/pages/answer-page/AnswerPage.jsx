@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
+import PortalContainer from '@components/portal/Portal';
 import Button from '@components/ui/atoms/Button/Button';
 import ShareButton from '@components/ui/atoms/Button/share-button/ShareButton';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
@@ -10,7 +11,6 @@ import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';
-import { postAnswer } from '@api/answers/postAnswer';
 import getUserData from '@api/getUserData';
 import { deleteQuestion } from '@api/questions/deleteQuestion';
 import { useAsync } from '@hooks/useAsync';
@@ -34,37 +34,35 @@ const AnswerPage = () => {
     toggleRerenderTrigger();
   };
 
-  useEffect(() => {
-    console.log(answerResults);
-  }, [answerResults]);
-
   return (
-    <StBackground>
-      <NavBar />
-      <StQuestFeedPageWrapper>
-        <img className='user-profile' src={userProfile} alt='프로필' />
-        <span className='pageName'>{userName}</span>
-        <StSnsWrapper>
-          <ShareButton iconName='clipboard' onClickHandler={copyUrl} />
-          <ShareButton iconName='kakao' onClickHandler={shareToKakaotalk} />
-          <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
-        </StSnsWrapper>
-      </StQuestFeedPageWrapper>
-      <>
-        <FeedCardContainer
-          toggleRerenderTrigger={toggleRerenderTrigger}
-          onDeleteCard={handleDeleteCard}
-          cardLength={questionCount}
-          answerResults={answerResults?.results}
-        />
-        {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
-      </>
-      {/* {questionCount === 0 ? (
+    <>
+      <StBackground>
+        <NavBar />
+        <StQuestFeedPageWrapper>
+          <img className='user-profile' src={userProfile} alt='프로필' />
+          <span className='pageName'>{userName}</span>
+          <StSnsWrapper>
+            <ShareButton iconName='clipboard' onClickHandler={copyUrl} />
+            <ShareButton iconName='kakao' onClickHandler={shareToKakaotalk} />
+            <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
+          </StSnsWrapper>
+        </StQuestFeedPageWrapper>
+        <>
+          <FeedCardContainer
+            toggleRerenderTrigger={toggleRerenderTrigger}
+            onDeleteCard={handleDeleteCard}
+            cardLength={questionCount}
+            answerResults={answerResults?.results}
+          />
+          {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
+        </>
+        {/* {questionCount === 0 ? (
         <NoLists>아직 질문이 없습니다</NoLists>
       ) : (
 
       )} */}
-    </StBackground>
+      </StBackground>
+    </>
   );
 };
 

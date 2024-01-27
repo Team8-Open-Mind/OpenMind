@@ -10,6 +10,10 @@ export const feedCardType = (answer) => {
     // read 가능 상태
     type = 'read';
 
+    if (answer === 'edit') {
+      type = 'edit';
+    }
+
     if (answer.isRejected) {
       type = 'rejected';
     }
