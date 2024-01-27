@@ -14,6 +14,7 @@ const FeedCard = ({ toggleRerenderTrigger, onDeleteCard, answerResult, userName,
       <QuestionBox question={answerResult?.content} elapsedTime={timeStamp(answerResult?.createdAt)} />
       <AnswerBox
         toggleRerenderTrigger={toggleRerenderTrigger}
+        answerId={answerResult?.answer?.id}
         questionId={answerResult?.id}
         answerResult={answerResult}
         userProfile={userProfile}

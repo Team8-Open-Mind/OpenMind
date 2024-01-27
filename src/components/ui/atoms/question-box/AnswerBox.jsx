@@ -14,7 +14,14 @@ import ReplyTypeSwitch from '../ReplyTypeSwitch.jsx/ReplyTypeSwitch';
 
 // read, edit, reply type에 맞게 component 불러온다.
 
-const AnswerBox = ({ toggleRerenderTrigger, questionId, answerResult, userProfile = PROFILE_SAMPLE, userName }) => {
+const AnswerBox = ({
+  toggleRerenderTrigger,
+  answerId,
+  questionId,
+  answerResult,
+  userProfile = PROFILE_SAMPLE,
+  userName,
+}) => {
   const [editTypeState, setEditTypeState] = useState({
     isEdit: false,
   });
@@ -37,10 +44,11 @@ const AnswerBox = ({ toggleRerenderTrigger, questionId, answerResult, userProfil
           </StUser>
           <ReplyTypeSwitch
             toggleRerenderTrigger={toggleRerenderTrigger}
+            answerId={answerId}
             questionId={questionId}
             type={isEdit ? 'edit' : feedCardType(answerResult?.answer)}
             value={answerResult?.answer?.content}
-            editTypeState={editTypeState}
+            setEditTypeState={setEditTypeState}
             isRejected={answerResult?.isRejected}
           />
         </StAnswer>

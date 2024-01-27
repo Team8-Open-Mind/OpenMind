@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-import { patchAnswer } from '@api/answers/patchAnswer';
+import { postAnswer } from '@api/answers/postAnswer';
 import { useAsync } from '@hooks/useAsync';
 
 const RejectReplyButton = ({ toggleRerenderTrigger, questionId }) => {
-  const { setAsyncFunction } = useAsync(patchAnswer);
+  const { setAsyncFunction } = useAsync(postAnswer);
 
   const handleRejectClick = async () => {
-    const content = '';
+    const content = '거절된 질문입니다.';
     const isRejected = true;
     const res = await setAsyncFunction(questionId, content, isRejected);
     toggleRerenderTrigger();

@@ -1,13 +1,12 @@
 import axiosInstance from '@api/instance/axiosInstance';
 
-const patchAnswer = async (questionId, content, isRejected = false) => {
+const patchAnswer = async (answerId, content, isRejected = false) => {
   try {
-    console.log(questionId, content, isRejected);
-    const response = await axiosInstance.patch(`/answers/${questionId}/`, {
+    console.log(answerId, content, isRejected);
+    const response = await axiosInstance.patch(`/answers/${answerId}/`, {
       content,
       isRejected,
     });
-    console.log(response);
 
     return response;
   } catch (error) {

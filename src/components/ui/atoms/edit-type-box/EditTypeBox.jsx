@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 
 import { patchAnswer } from '@api/answers/patchAnswer';
 import { useAsync } from '@hooks/useAsync';
+import { feedCardType } from '@utils/card-type/feedCardType';
 
 import Button from '../Button/Button';
 import InputTextArea from '../input/input-text-area/InputTextArea';
 import RejectReplyButton from '../reject-reply/RejectReplyButton';
 
-const EditTypeBox = ({ toggleRerenderTrigger, editTextValue, editTypeState, questionId }) => {
-  const { isEdit } = editTypeState;
+const EditTypeBox = ({ toggleRerenderTrigger, editTextValue, answerId, questionId, setEditTypeState }) => {
   const [editValue, setEditValue] = useState(editTextValue);
   const [isDisabled, setIsDisabled] = useState(true);
   const { setAsyncFunction } = useAsync(patchAnswer);
@@ -26,8 +26,9 @@ const EditTypeBox = ({ toggleRerenderTrigger, editTextValue, editTypeState, ques
   };
 
   const handleEditClick = async () => {
-    const res = await setAsyncFunction(questionId, editValue);
+    const res = await setAsyncFunction(answerId, editValue);
     toggleRerenderTrigger();
+    feedCardType('read');
 
     return res;
   };
