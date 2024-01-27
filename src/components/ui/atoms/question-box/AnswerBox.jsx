@@ -43,6 +43,7 @@ const AnswerBox = ({
             ) : null}
           </StUser>
           <ReplyTypeSwitch
+            setIsEdit={setIsEdit}
             toggleRerenderTrigger={toggleRerenderTrigger}
             answerId={answerId}
             questionId={questionId}

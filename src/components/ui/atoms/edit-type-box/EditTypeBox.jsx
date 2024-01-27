@@ -8,7 +8,7 @@ import Button from '../Button/Button';
 import InputTextArea from '../input/input-text-area/InputTextArea';
 import RejectReplyButton from '../reject-reply/RejectReplyButton';
 
-const EditTypeBox = ({ toggleRerenderTrigger, editTextValue, answerId, questionId, setEditTypeState }) => {
+const EditTypeBox = ({ toggleRerenderTrigger, editTextValue, answerId, questionId, setIsEdit }) => {
   const [editValue, setEditValue] = useState(editTextValue);
   const [isDisabled, setIsDisabled] = useState(true);
   const { setAsyncFunction } = useAsync(patchAnswer);
@@ -28,7 +28,7 @@ const EditTypeBox = ({ toggleRerenderTrigger, editTextValue, answerId, questionI
   const handleEditClick = async () => {
     const res = await setAsyncFunction(answerId, editValue);
     toggleRerenderTrigger();
-    feedCardType('read');
+    setIsEdit(false);
 
     return res;
   };
