@@ -2,7 +2,6 @@ import axiosInstance from '@api/instance/axiosInstance';
 
 const patchAnswer = async (answerId, content, isRejected = false) => {
   try {
-    console.log(answerId, content, isRejected);
     const response = await axiosInstance.patch(`/answers/${answerId}/`, {
       content,
       isRejected,
