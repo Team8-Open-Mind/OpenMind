@@ -4,17 +4,20 @@ import styled from 'styled-components';
 
 import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 
+import { useCheckAnswerPath } from '@hooks/useCheckAnswerPath';
 import { useToggle } from '@hooks/useToggle';
 import { feedCardType } from '@utils/card-type/feedCardType';
 import { timeStamp } from '@utils/time/timeStamp';
 
 import EditButton from '../Button/edit-button/EditButton';
 import Reaction from '../Reaction/Reaction';
+import ReadTypeSwitch from '../read-type-switch/ReadTypeSwitch';
 import ReplyTypeSwitch from '../ReplyTypeSwitch.jsx/ReplyTypeSwitch';
 
 // read, edit, reply type에 맞게 component 불러온다.
 
 const AnswerBox = ({
+  path,
   toggleRerenderTrigger,
   answerId,
   questionId,
@@ -34,25 +37,31 @@ const AnswerBox = ({
   return (
     <>
       <StAnswerBox>
-        <StImg src={userProfile} alt='프로필 이미지' />
-        <StAnswer>
-          <StUser>
-            <span className='name'>{userName}</span>
-            {answerResult?.answer !== null ? (
-              <span className='time'>{timeStamp(answerResult?.answer?.createdAt)}</span>
-            ) : null}
-          </StUser>
-          <ReplyTypeSwitch
-            setIsEdit={setIsEdit}
-            toggleRerenderTrigger={toggleRerenderTrigger}
-            answerId={answerId}
-            questionId={questionId}
-            type={isEdit ? 'edit' : feedCardType(answerResult?.answer)}
-            value={answerResult?.answer?.content}
-            setEditTypeState={setEditTypeState}
-            isRejected={answerResult?.isRejected}
-          />
-        </StAnswer>
+        {path === 'question' ? (
+          <ReadTypeSwitch value={answerResult?.answer?.content} />
+        ) : (
+          <>
+            <StImg src={userProfile} alt='프로필 이미지' />
+            <StAnswer>
+              <StUser>
+                <span className='name'>{userName}</span>
+                {answerResult?.answer !== null ? (
+                  <span className='time'>{timeStamp(answerResult?.answer?.createdAt)}</span>
+                ) : null}
+              </StUser>
+            </StAnswer>
+            <ReplyTypeSwitch
+              setIsEdit={setIsEdit}
+              toggleRerenderTrigger={toggleRerenderTrigger}
+              answerId={answerId}
+              questionId={questionId}
+              type={isEdit ? 'edit' : feedCardType(answerResult?.answer)}
+              value={answerResult?.answer?.content}
+              setEditTypeState={setEditTypeState}
+              isRejected={answerResult?.isRejected}
+            />
+          </>
+        )}
       </StAnswerBox>
       <StBottom>
         <StLine />
@@ -63,7 +72,7 @@ const AnswerBox = ({
             questionId={questionId}
             likeCount={answerResult?.like}
           />
-          {feedCardType(answerResult?.answer) !== 'reply' ? (
+          {path === 'answer' && feedCardType(answerResult?.answer) !== 'reply' ? (
             <EditButton onClickEdit={handleEditToggle} isEdit={isEdit} />
           ) : null}
         </StReactionAndEdit>

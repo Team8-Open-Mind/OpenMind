@@ -8,6 +8,7 @@ import { StMessageIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
 
 import { deleteSubject } from '@api/subjects/deleteSubject';
 import { useAsync } from '@hooks/useAsync';
+import { useCheckAnswerPath } from '@hooks/useCheckAnswerPath';
 import { useConfirmAlert } from '@hooks/useConfirmAlert';
 
 import FeedCard from './FeedCard';
@@ -24,6 +25,7 @@ const FeedCardContainer = ({
   const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
   const { setAsyncFunction } = useAsync(deleteSubject);
   const navigate = useNavigate();
+  const { path } = useCheckAnswerPath();
 
   const handleDeleteAllClick = async () => {
     await setAsyncFunction(userId);
@@ -66,6 +68,7 @@ const FeedCardContainer = ({
               answerResult={answerResult}
               userName={userName}
               userProfile={userProfile}
+              path={path}
             />
           );
         })}
