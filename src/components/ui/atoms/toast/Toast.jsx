@@ -1,29 +1,31 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { css, keyframes, styled } from 'styled-components';
 
 const Toast = ({ closeModal, children }) => {
+  const [show, setShow] = useState(true);
   useEffect(() => {
     const timerId = setTimeout(() => {
+      setShow(false);
       closeModal();
     }, 4000);
 
     return () => clearTimeout(timerId);
   }, [closeModal]);
 
-  return <StToast>{children}</StToast>;
+  return <StToast show={show}>{children}</StToast>;
 };
 
 export default Toast;
 
 const fadein = keyframes`
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translate(-50%, 30px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
 `;
 
 const fadeout = keyframes`
-  0% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(30px); }
+  from { opacity: 1; transform: translate(-50%, 0); }
+  to { opacity: 0; transform: translate(-50%, 30px); }
 `;
 
 const StToast = styled.div`
@@ -38,20 +40,19 @@ const StToast = styled.div`
   box-shadow: ${({ theme }) => theme.shadow['2pt']};
 
   color: ${({ theme }) => theme.color.Grayscale['10']};
-  font-family: Pretendard;
   font-size: 1.4rem;
   font-weight: 500;
-  line-height: 18px; /* 128.571% */
+  line-height: 18px;
 
   position: fixed;
   bottom: 60px;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translateX(-50%);
 
   animation: ${(props) =>
     props.show
       ? css`
-          ${fadein} 0.5s, ${fadeout} 0.5s 2.5s
+          ${fadein} 0.5s, ${fadeout} 0.5s 3.5s
         `
       : 'none'};
 
