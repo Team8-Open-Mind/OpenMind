@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
-const usePaginate = ({ count, sort, itemsPerPage = 8, pagesPerGroup = 5 }) => {
+const usePaginate = ({ count, itemsPerPage = 8, pagesPerGroup = 5 }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = useMemo(() => {
@@ -47,14 +47,11 @@ const usePaginate = ({ count, sort, itemsPerPage = 8, pagesPerGroup = 5 }) => {
   const canJumpToNextPageGroup = Math.ceil(currentPage / pagesPerGroup) * pagesPerGroup + 1 <= totalPages;
   // const canJumpToNextPageGroup = count > Math.ceil(currentPage / pagesPerGroup) * pagesPerGroup * itemsPerPage;
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [sort, setCurrentPage]);
-
   return {
     changePage,
     jumpToPreviousPageGroup,
     jumpToNextPageGroup,
+    setCurrentPage,
     currentPage,
     currentPageGroup,
     canJumpToPreviousPageGroup,
