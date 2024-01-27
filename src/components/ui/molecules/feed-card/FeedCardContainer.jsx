@@ -5,10 +5,12 @@ import styled from 'styled-components';
 import PortalContainer from '@components/portal/Portal';
 import FloatingButton from '@components/ui/atoms/Button/floating-button/FloatingButton';
 import { StMessageIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
+import Toast from '@components/ui/atoms/toast/Toast';
 
 import { deleteSubject } from '@api/subjects/deleteSubject';
 import { useAsync } from '@hooks/useAsync';
 import { useCheckAnswerPath } from '@hooks/useCheckAnswerPath';
+import { useCloseModal } from '@hooks/useCloseModal';
 import { useConfirmAlert } from '@hooks/useConfirmAlert';
 
 import FeedCard from './FeedCard';
@@ -22,6 +24,7 @@ const FeedCardContainer = ({
   answerResults,
   userId,
 }) => {
+  const { isModalOpen, toggleModal } = useCloseModal();
   const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
   const { setAsyncFunction } = useAsync(deleteSubject);
   const navigate = useNavigate();
@@ -35,7 +38,7 @@ const FeedCardContainer = ({
   };
 
   const handleCancelDeleteAllClick = () => {
-    console.log('Cancelled!');
+    toggleModal();
   };
 
   const handleDeleteClick = () => {
@@ -50,14 +53,16 @@ const FeedCardContainer = ({
             <StMessageIcon $size={24} $color='brown40' />
             {cardLength}개의 질문이 있습니다
           </StLengthText>
-          <FloatingButton
-            position='static'
-            boxSizeOnResize={{ onMobile: { width: 10.3, height: 2.5 }, onPc: { width: 13, height: 3.5 } }}
-            onClickHandler={handleDeleteClick}
-            hasBoxShadow={false}
-          >
-            내 마음 닫기
-          </FloatingButton>
+          {path === 'answer' ? (
+            <FloatingButton
+              position='static'
+              boxSizeOnResize={{ onMobile: { width: 10.3, height: 2.5 }, onPc: { width: 13, height: 3.5 } }}
+              onClickHandler={handleDeleteClick}
+              hasBoxShadow={false}
+            >
+              내 마음 닫기
+            </FloatingButton>
+          ) : null}
         </StSubBox>
         {answerResults?.map((answerResult) => {
           return (
@@ -78,6 +83,7 @@ const FeedCardContainer = ({
           title='내 계정 정보가 모두 삭제됩니다'
           content={`정말로 마음을 닫으시겠어요? \n 삭제된 계정 정보와 피드는 복구할 수 없습니다.`}
         />
+        {isModalOpen && <Toast closeModal={toggleModal}>취소 되었습니다.</Toast>}
       </PortalContainer>
     </>
   );
