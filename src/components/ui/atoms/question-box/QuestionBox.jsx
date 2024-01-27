@@ -20,14 +20,12 @@ const StQuestion = styled.div`
 
   color: ${({ theme }) => theme.color.Grayscale[40]};
   font-size: 1.4rem;
-  font-family: Pretendard;
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
 
   & div {
     color: ${({ theme }) => theme.color.Grayscale[60]};
-    font-family: Actor;
     font-size: 18px;
     font-weight: 400;
     line-height: 24px;
