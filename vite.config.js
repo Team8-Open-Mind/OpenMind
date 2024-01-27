@@ -2,7 +2,7 @@ import path from 'path';
 
 import svgr from '@svgr/rollup';
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import { defineConfig, splitVendorChunkPlugin } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -22,6 +22,7 @@ export default defineConfig({
         ],
       },
     }),
+    splitVendorChunkPlugin(),
   ],
   resolve: {
     alias: [
@@ -36,5 +37,16 @@ export default defineConfig({
       { find: '@style', replacement: path.resolve(__dirname, 'src/style') },
       { find: '@assets', replacement: path.resolve(__dirname, 'src/assets') },
     ],
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('react-router-dom') || id.includes('@remix-run') || id.includes('react-router')) {
+            return '@react-router';
+          }
+        },
+      },
+    },
   },
 });
