@@ -19,7 +19,6 @@ const AnswerPage = () => {
   const [rerenderTrigger, toggleRerenderTrigger] = useToggle();
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const userId = localStorage.getItem('userId');
-  // const { userInfo } = useSetUser({ userId });
   const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, rerenderTrigger]);
   const { result: answerResults } = useAsyncOnMount(() => getAnswerLists({ userId }), [userId, rerenderTrigger]);
   const { setAsyncFunction: setDeleteCard } = useAsync(deleteQuestion);
