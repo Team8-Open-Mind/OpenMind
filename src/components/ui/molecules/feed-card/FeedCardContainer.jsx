@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import styled from 'styled-components';
 
 import PortalContainer from '@components/portal/Portal';
@@ -23,12 +21,9 @@ const FeedCardContainer = ({
 }) => {
   const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
   const { setAsyncFunction } = useAsync(deleteSubject);
-  const navigate = useNavigate();
 
   const handleDeleteAllClick = async () => {
     const res = await setAsyncFunction(userId);
-    localStorage.removeItem('userId', '');
-    navigate(`/`);
 
     return res;
   };
