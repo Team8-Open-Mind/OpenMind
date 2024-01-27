@@ -128,7 +128,6 @@ const StUser = styled.div`
 
   & .name {
     color: ${({ theme }) => theme.color.Grayscale[60]};
-    font-family: Actor;
     font-size: 18px;
     font-weight: 400;
     line-height: 24px; /* 133.333% */
