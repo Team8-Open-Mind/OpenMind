@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
 
 import PortalContainer from '@components/portal/Portal';
@@ -21,11 +23,13 @@ const FeedCardContainer = ({
 }) => {
   const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
   const { setAsyncFunction } = useAsync(deleteSubject);
+  const navigate = useNavigate();
 
   const handleDeleteAllClick = async () => {
-    const res = await setAsyncFunction(userId);
-
-    return res;
+    await setAsyncFunction(userId);
+    toggleRerenderTrigger();
+    localStorage.removeItem('userId', null);
+    navigate('/');
   };
 
   const handleCancelDeleteAllClick = () => {
@@ -50,7 +54,7 @@ const FeedCardContainer = ({
             onClickHandler={handleDeleteClick}
             hasBoxShadow={false}
           >
-            전체 피드 삭제
+            내 마음 닫기
           </FloatingButton>
         </StSubBox>
         {answerResults?.map((answerResult) => {
@@ -68,8 +72,8 @@ const FeedCardContainer = ({
       </StFeedCardContainer>
       <PortalContainer>
         <ConfirmAlertComponent
-          title='전체 피드가 삭제됩니다'
-          content={`피드를 모두 삭제하시겠어요? \n 삭제된 피드는 복구할 수 없습니다.`}
+          title='내 계정 정보가 모두 삭제됩니다'
+          content={`정말로 마음을 닫으시겠어요? \n 삭제된 계정 정보와 피드는 복구할 수 없습니다.`}
         />
       </PortalContainer>
     </>
