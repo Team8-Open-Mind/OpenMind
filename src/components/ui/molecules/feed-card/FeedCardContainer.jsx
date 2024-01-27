@@ -1,9 +1,13 @@
+import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
 
 import PortalContainer from '@components/portal/Portal';
 import FloatingButton from '@components/ui/atoms/Button/floating-button/FloatingButton';
 import { StMessageIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
 
+import { deleteSubject } from '@api/subjects/deleteSubject';
+import { useAsync } from '@hooks/useAsync';
 import { useConfirmAlert } from '@hooks/useConfirmAlert';
 
 import FeedCard from './FeedCard';
@@ -15,11 +19,18 @@ const FeedCardContainer = ({
   userName,
   userProfile,
   answerResults,
+  userId,
 }) => {
   const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
+  const { setAsyncFunction } = useAsync(deleteSubject);
+  const navigate = useNavigate();
 
-  const handleDeleteAllClick = () => {
-    console.log('Confirmed!');
+  const handleDeleteAllClick = async () => {
+    const res = await setAsyncFunction(userId);
+    localStorage.removeItem('userId', '');
+    navigate(`/`);
+
+    return res;
   };
 
   const handleCancelDeleteAllClick = () => {

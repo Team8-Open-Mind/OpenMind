@@ -50,6 +50,7 @@ const AnswerPage = () => {
             toggleRerenderTrigger={toggleRerenderTrigger}
             onDeleteCard={handleDeleteCard}
             cardLength={userInfo?.questionCount}
+            userId={userId}
             userName={userInfo?.name}
             userProfile={userInfo?.imageSource}
             answerResults={answerResults?.results}
