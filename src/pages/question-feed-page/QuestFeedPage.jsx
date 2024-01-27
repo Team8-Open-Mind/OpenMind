@@ -5,20 +5,23 @@ import ShareButton from '@components/ui/atoms/Button/share-button/ShareButton';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 
-import useSetUser from '@hooks/useSetUser';
+import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 import { useSNSShare } from '@hooks/useSNSShare';
+import { useToggle } from '@hooks/useToggle';
 
 const QuestFeedPage = (getUserData) => {
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
-
-  const { userName, userProfile, createdAt, questionCount } = useSetUser(getUserData);
+  const [rerenderTrigger, toggleRerenderTrigger] = useToggle();
+  const userId = localStorage.getItem('userId');
+  // const { userName, userProfile, createdAt, questionCount } = useSetUser(getUserData);
+  const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, rerenderTrigger]);
 
   return (
     <StBackground>
       <NavBar />
       <StQuestFeedPageWrapper>
-        <img className='user-profile' src={userProfile} alt='프로필' />
-        <span className='pageName'>{userName}</span>
+        <img className='user-profile' src={userInfo?.imageSource} alt='프로필' />
+        <span className='pageName'>{userInfo?.name}</span>
         <StSnsWrapper>
           <ShareButton iconName='clipboard' onClickHandler={copyUrl} />
           <ShareButton iconName='kakao' onClickHandler={shareToKakaotalk} />
@@ -26,10 +29,10 @@ const QuestFeedPage = (getUserData) => {
         </StSnsWrapper>
       </StQuestFeedPageWrapper>
       <FeedCardContainer
-        userName={userName}
-        userProfile={userProfile}
-        createdAt={createdAt}
-        questionCount={questionCount}
+        toggleRerenderTrigger={toggleRerenderTrigger}
+        userName={userInfo?.name}
+        userProfile={userInfo?.imageSource}
+        questionCount={userInfo?.questionCount}
       />
       <FloatingWriteQuestionButton />
     </StBackground>

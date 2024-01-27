@@ -1,9 +1,5 @@
-import { useEffect, useState } from 'react';
-
 import styled from 'styled-components';
 
-import PortalContainer from '@components/portal/Portal';
-import Button from '@components/ui/atoms/Button/Button';
 import ShareButton from '@components/ui/atoms/Button/share-button/ShareButton';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
@@ -11,20 +7,21 @@ import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';
-import getUserData from '@api/getUserData';
 import { deleteQuestion } from '@api/questions/deleteQuestion';
+import getUserData from '@api/subjects/getUserData';
 import { useAsync } from '@hooks/useAsync';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 import useScrollToTop from '@hooks/useScrollToTop';
-import useSetUser from '@hooks/useSetUser';
 import { useSNSShare } from '@hooks/useSNSShare';
 import { useToggle } from '@hooks/useToggle';
 
 const AnswerPage = () => {
   const [rerenderTrigger, toggleRerenderTrigger] = useToggle();
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
-  const { userName, userProfile, createdAt, questionCount } = useSetUser(getUserData);
-  const { result: answerResults } = useAsyncOnMount(getAnswerLists, [rerenderTrigger]);
+  const userId = localStorage.getItem('userId');
+  // const { userInfo } = useSetUser({ userId });
+  const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, rerenderTrigger]);
+  const { result: answerResults } = useAsyncOnMount(() => getAnswerLists({ userId }), [userId, rerenderTrigger]);
   const { setAsyncFunction: setDeleteCard } = useAsync(deleteQuestion);
   const [isVisible, handleScrollToTop] = useScrollToTop();
 
@@ -35,34 +32,33 @@ const AnswerPage = () => {
   };
 
   return (
-    <>
-      <StBackground>
-        <NavBar />
-        <StQuestFeedPageWrapper>
-          <img className='user-profile' src={userProfile} alt='프로필' />
-          <span className='pageName'>{userName}</span>
-          <StSnsWrapper>
-            <ShareButton iconName='clipboard' onClickHandler={copyUrl} />
-            <ShareButton iconName='kakao' onClickHandler={shareToKakaotalk} />
-            <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
-          </StSnsWrapper>
-        </StQuestFeedPageWrapper>
+    <StBackground>
+      <NavBar />
+      <StQuestFeedPageWrapper>
+        <img className='user-profile' src={userInfo?.imageSource} alt='프로필' />
+        <span className='pageName'>{userInfo?.name}</span>
+        <StSnsWrapper>
+          <ShareButton iconName='clipboard' onClickHandler={copyUrl} />
+          <ShareButton iconName='kakao' onClickHandler={shareToKakaotalk} />
+          <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
+        </StSnsWrapper>
+      </StQuestFeedPageWrapper>
+      {userInfo?.questionCount === 0 ? (
+        <NoLists>아직 질문이 없습니다</NoLists>
+      ) : (
         <>
           <FeedCardContainer
             toggleRerenderTrigger={toggleRerenderTrigger}
             onDeleteCard={handleDeleteCard}
-            cardLength={questionCount}
+            cardLength={userInfo?.questionCount}
+            userName={userInfo?.name}
+            userProfile={userInfo?.imageSource}
             answerResults={answerResults?.results}
           />
           {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
         </>
-        {/* {questionCount === 0 ? (
-        <NoLists>아직 질문이 없습니다</NoLists>
-      ) : (
-
-      )} */}
-      </StBackground>
-    </>
+      )}
+    </StBackground>
   );
 };
 

@@ -55,16 +55,17 @@ const AnswerBox = ({
       </StAnswerBox>
       <StBottom>
         <StLine />
-        {feedCardType(answerResult?.answer) !== 'reply' ? (
-          <StReactionAndEdit>
-            <Reaction
-              toggleRerenderTrigger={toggleRerenderTrigger}
-              questionId={questionId}
-              likeCount={answerResult?.like}
-            />
+        {/* answer가 null이 아니면 === 답변이 있으면 */}
+        <StReactionAndEdit>
+          <Reaction
+            toggleRerenderTrigger={toggleRerenderTrigger}
+            questionId={questionId}
+            likeCount={answerResult?.like}
+          />
+          {feedCardType(answerResult?.answer) !== 'reply' ? (
             <EditButton onClickEdit={handleEditToggle} isEdit={isEdit} />
-          </StReactionAndEdit>
-        ) : null}
+          ) : null}
+        </StReactionAndEdit>
       </StBottom>
     </>
   );

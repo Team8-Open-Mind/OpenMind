@@ -44,6 +44,7 @@ module.exports = {
         next: ['multiline-const', 'multiline-let', 'multiline-var'],
       },
     ],
+    'no-unused-vars': 'error',
     'no-console': 'off',
     'react/function-component-definition': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
