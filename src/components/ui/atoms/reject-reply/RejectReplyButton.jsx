@@ -1,22 +1,8 @@
 import styled from 'styled-components';
 
-import { postAnswer } from '@api/answers/postAnswer';
-import { useAsync } from '@hooks/useAsync';
-
-const RejectReplyButton = ({ toggleRerenderTrigger, questionId }) => {
-  const { setAsyncFunction } = useAsync(postAnswer);
-
-  const handleRejectClick = async () => {
-    const content = '거절된 질문입니다.';
-    const isRejected = true;
-    const res = await setAsyncFunction(questionId, content, isRejected);
-    toggleRerenderTrigger();
-
-    return res;
-  };
-
+const RejectReplyButton = ({ onClickHandle }) => {
   return (
-    <StRejectButton type='button' onClick={handleRejectClick}>
+    <StRejectButton type='button' onClick={onClickHandle}>
       답변 거절하기
     </StRejectButton>
   );

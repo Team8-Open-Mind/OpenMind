@@ -2,16 +2,18 @@ import { useEffect, useState } from 'react';
 
 import { patchAnswer } from '@api/answers/patchAnswer';
 import { useAsync } from '@hooks/useAsync';
-import { feedCardType } from '@utils/card-type/feedCardType';
 
 import Button from '../Button/Button';
 import InputTextArea from '../input/input-text-area/InputTextArea';
 import RejectReplyButton from '../reject-reply/RejectReplyButton';
 
-const EditTypeBox = ({ toggleRerenderTrigger, editTextValue, answerId, questionId, setIsEdit }) => {
+
+const EditTypeBox = ({ toggleRerenderTrigger, editTextValue, answerId, setIsEdit }) => {
+
   const [editValue, setEditValue] = useState(editTextValue);
   const [isDisabled, setIsDisabled] = useState(true);
   const { setAsyncFunction } = useAsync(patchAnswer);
+  const { setAsyncFunction: setAsyncEditRejectFunction } = useAsync(patchAnswer);
 
   useEffect(() => {
     if (editValue !== '') {
@@ -30,6 +32,18 @@ const EditTypeBox = ({ toggleRerenderTrigger, editTextValue, answerId, questionI
     toggleRerenderTrigger();
     setIsEdit(false);
 
+
+    return res;
+  };
+
+  const handleEditRejectClick = async () => {
+    const content = '거절된 질문입니다.';
+    const isRejected = true;
+    const res = await setAsyncEditRejectFunction(answerId, content, isRejected);
+    toggleRerenderTrigger();
+    setIsEdit(false);
+
+
     return res;
   };
 
@@ -41,7 +55,7 @@ const EditTypeBox = ({ toggleRerenderTrigger, editTextValue, answerId, questionI
       <Button theme='brown40' width='100%' disabled={isDisabled} type='button' onClickHandler={handleEditClick}>
         수정 완료
       </Button>
-      <RejectReplyButton questionId={questionId} toggleRerenderTrigger={toggleRerenderTrigger} />
+      <RejectReplyButton onClickHandle={handleEditRejectClick} />
     </>
   );
 };
