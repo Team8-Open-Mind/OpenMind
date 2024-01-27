@@ -1,3 +1,5 @@
+import { useParams } from 'react-router-dom';
+
 import styled from 'styled-components';
 
 import FloatingWriteQuestionButton from '@components/ui/atoms/Button/floating-button/floating-write-question-button/FloatingWriteQuestionButton';
@@ -5,16 +7,18 @@ import ShareButton from '@components/ui/atoms/Button/share-button/ShareButton';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 
+import getUserData from '@api/subjects/getUserData';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 import { useSNSShare } from '@hooks/useSNSShare';
 import { useToggle } from '@hooks/useToggle';
 
-const QuestFeedPage = (getUserData) => {
+const QuestFeedPage = () => {
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const [rerenderTrigger, toggleRerenderTrigger] = useToggle();
-  const userId = localStorage.getItem('userId');
+  const { id } = useParams();
+
   // const { userName, userProfile, createdAt, questionCount } = useSetUser(getUserData);
-  const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, rerenderTrigger]);
+  const { result: userInfo } = useAsyncOnMount(() => getUserData(id), [id, rerenderTrigger]);
 
   return (
     <StBackground>
