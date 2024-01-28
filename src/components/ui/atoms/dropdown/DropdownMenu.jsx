@@ -18,14 +18,11 @@ const DropdownMenu = ({ children, positionTop = '38', positionRight, width }) =>
 export default DropdownMenu;
 
 const StDropdownMenu = styled.ul`
-  /* display: flex; */
   display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')}; */
 
-  /* width: 100%; */
   width: ${({ $width }) => $width};
   padding: 0.4rem 0;
 
