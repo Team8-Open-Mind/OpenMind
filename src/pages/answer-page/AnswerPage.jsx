@@ -112,7 +112,7 @@ const AnswerPage = () => {
           <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
         </StSnsWrapper>
       </StQuestFeedPageWrapper>
-      {userInfo?.questionCount === 0 ? (
+      {userInfo?.questionCount === 0 || userInfo?.questionCount === null ? (
         <NoLists>아직 질문이 없습니다</NoLists>
       ) : (
         <>
@@ -123,7 +123,6 @@ const AnswerPage = () => {
             userId={userId}
             userName={userInfo?.name}
             userProfile={userInfo?.imageSource}
-            // answerResults={answerResult?.results}
             answerResults={answerLists}
             intersectionObserveTargetRef={intersectionObserveTargetRef}
           />
