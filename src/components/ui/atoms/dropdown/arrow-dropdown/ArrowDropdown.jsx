@@ -6,7 +6,9 @@ const ArrowDropdown = ({ callbackFn }) => {
       <Dropdown.Select />
       <Dropdown.Menu width='7.9rem'>
         <Dropdown.Option callbackFn={callbackFn}>이름순</Dropdown.Option>
-        <Dropdown.Option callbackFn={callbackFn}>최신순</Dropdown.Option>
+        <Dropdown.Option selected callbackFn={callbackFn}>
+          최신순
+        </Dropdown.Option>
       </Dropdown.Menu>
     </Dropdown>
   );

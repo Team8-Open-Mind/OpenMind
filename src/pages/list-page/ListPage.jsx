@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import Button from '@components/ui/atoms/Button/Button';
 import Logo from '@components/ui/atoms/logo/Logo';
+import DocumentTitle from '@layout/document-title/DocumentTitle';
 
 import ListContents from './comp/list-contents/ListContents';
 
@@ -21,6 +22,7 @@ const ListPage = () => {
 
   return (
     <StWrap>
+      <DocumentTitle>오픈마인드 질문대상 선택 페이지</DocumentTitle>
       <StNavWrapper>
         <StNav>
           <Logo onClickHandler={() => navigate('/')} />

@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import { createContext, useContext, useState } from 'react';
+import { createContext, useCallback, useContext, useState } from 'react';
 
 import { css } from 'styled-components';
 
@@ -9,12 +9,15 @@ const DropdownContext = createContext();
 
 const DropdownProvider = ({ children }) => {
   const { toggleModal: toggleDropdown, isModalOpen: isDropdownOpen, modalRef: dropdownRef } = useCloseModal();
-  const [selectedOption, setSelectedOption] = useState('최신순');
+  const [selectedOption, setSelectedOption] = useState();
 
-  const changeSelectedOption = (e) => {
-    setSelectedOption(e.target.textContent);
-    toggleDropdown();
-  };
+  const changeSelectedOption = useCallback(
+    (selectedOptionText) => {
+      setSelectedOption(selectedOptionText);
+      toggleDropdown();
+    },
+    [toggleDropdown],
+  );
 
   return (
     <DropdownContext.Provider value={{ isOpen: isDropdownOpen, toggleDropdown, selectedOption, changeSelectedOption }}>
