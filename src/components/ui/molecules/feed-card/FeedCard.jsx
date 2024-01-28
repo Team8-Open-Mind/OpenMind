@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import BadgeBox from '@components/ui/atoms/Badge/BadgeBox';
+import BadgeBox from '@components/ui/atoms/badge/BadgeBox';
 import AnswerBox from '@components/ui/atoms/question-box/AnswerBox';
 import QuestionBox from '@components/ui/atoms/question-box/QuestionBox';
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { css, styled } from 'styled-components';
 
-import ShareButton from '@components/ui/atoms/Button/share-button/ShareButton';
+import ShareButton from '@components/ui/atoms/button/share-button/ShareButton';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';

@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import PortalContainer from '@components/portal/Portal';
-import FloatingWriteQuestionButton from '@components/ui/atoms/Button/floating-button/floating-write-question-button/FloatingWriteQuestionButton';
-import ShareButton from '@components/ui/atoms/Button/share-button/ShareButton';
+import FloatingWriteQuestionButton from '@components/ui/atoms/button/floating-button/floating-write-question-button/FloatingWriteQuestionButton';
+import ShareButton from '@components/ui/atoms/button/share-button/ShareButton';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 import AddQuestionModal from '@components/ui/molecules/modal/AddQuestionModal';

@@ -8,10 +8,10 @@ import { useToggle } from '@hooks/useToggle';
 import { feedCardType } from '@utils/card-type/feedCardType';
 import { timeStamp } from '@utils/time/timeStamp';
 
-import EditButton from '../Button/edit-button/EditButton';
+import EditButton from '../button/edit-button/EditButton';
 import Reaction from '../Reaction/Reaction';
 import ReadTypeSwitch from '../read-type-switch/ReadTypeSwitch';
-import ReplyTypeSwitch from '../ReplyTypeSwitch.jsx/ReplyTypeSwitch';
+import ReplyTypeSwitch from '../replyTypeSwitch.jsx/ReplyTypeSwitch';
 
 // read, edit, reply type에 맞게 component 불러온다.
 

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { device } from '@device/mediaBreakpoints';
 import styled from 'styled-components';
 
-import Button from '@components/ui/atoms/Button/Button';
+import Button from '@components/ui/atoms/button/Button';
 import Logo from '@components/ui/atoms/logo/Logo';
 import { StBackground } from '@pages/question-feed-page/QuestFeedPage';
 
