@@ -27,8 +27,6 @@ const AddQuestionModal = ({ userProfile = PROFILE_SAMPLE, userName = '닉네임'
     window.location.reload();
   };
 
-  console.log(questionValue);
-
   return (
     <StModalWrapper>
       <StAddQuestionModal ref={modalRef}>

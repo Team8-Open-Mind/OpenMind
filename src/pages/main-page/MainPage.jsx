@@ -25,13 +25,6 @@ const MainPage = () => {
   const handleInputChange = (e) => {
     setUserName(e.target.value);
   };
-
-  // const handlePost = async () => {
-  //   const response = await axios.post(`${USER_API}`, { name: userName });
-  //   console.log(response.data.id);
-  //   // navigate('/list');
-  // };
-
   const { result, setAsyncFunction } = useAsync(postNewFeedId, [userName]);
 
   const handlePost = async (userName) => {

@@ -36,21 +36,15 @@ const AnswerPage = () => {
   // 고정: 맨 mount 시에만 실행
   const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, isIntersecting, requestType]);
 
-  console.log(userInfo);
-
   // mount랑 interset 때 실행
   useAsync_V2({
     deps: [isIntersecting, nextLimit, nextOffset, userId],
     asyncFn: () => {
       if (isIntersecting) {
-        // console.log('executed asyncFn');
-
         return getAnswerLists({ userId, limit: nextLimit, offset: nextOffset });
       }
     },
     onSuccess: (result) => {
-      // console.log(result);
-
       if (!result || result?.results?.length === 0) return;
 
       setAnswerLists((prev) => [...prev, ...result?.results]);
@@ -78,8 +72,6 @@ const AnswerPage = () => {
       return getAnswerLists({ userId });
     },
     onSuccess: (result) => {
-      console.log(result);
-
       if (!result || result?.results?.length === 0) return;
 
       setAnswerLists(result?.results);

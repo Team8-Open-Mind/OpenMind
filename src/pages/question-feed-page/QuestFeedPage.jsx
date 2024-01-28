@@ -49,14 +49,10 @@ const QuestFeedPage = () => {
     deps: [isIntersecting, nextLimit, nextOffset, userId],
     asyncFn: () => {
       if (isIntersecting) {
-        // console.log('executed asyncFn');
-
         return getAnswerLists({ userId, limit: nextLimit, offset: nextOffset });
       }
     },
     onSuccess: (result) => {
-      // console.log(result);
-
       if (!result || result?.results?.length === 0) return;
 
       setAnswerLists((prev) => [...prev, ...result?.results]);
@@ -79,8 +75,6 @@ const QuestFeedPage = () => {
       return getAnswerLists({ userId });
     },
     onSuccess: (result) => {
-      console.log(result);
-
       if (!result || result?.results?.length === 0) return;
 
       setAnswerLists(result?.results);

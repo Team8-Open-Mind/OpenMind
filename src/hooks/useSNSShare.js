@@ -35,7 +35,6 @@ const useSNSShare = () => {
   const copyUrl = async () => {
     try {
       await navigator.clipboard.writeText(urlAfterMount);
-      console.log('Content copied to clipboard');
     } catch (e) {
       console.error('Failed to copy');
     }
