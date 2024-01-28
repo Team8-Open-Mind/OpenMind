@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -6,20 +6,31 @@ import Logo from '@components/ui/atoms/logo/Logo';
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
 
-  const handleRedirectMainClick = () => {
+  const myId = localStorage.getItem('userId');
+
+  const handleToAnswer = () => {
+    navigate(`/post/${myId}/answer/`);
+  };
+
+  const handleToMain = () => {
     navigate('/');
   };
 
-  // const { result: userInfo } = useAsyncOnMount(() => getUserData(id), [id]);
+  const handleToQuest = () => {
+    navigate('/list');
+  };
 
   return (
     <StNavBar>
-      <Logo onClickHandler={handleRedirectMainClick} />
+      <Logo onClickHandler={handleToMain} />
       <StCategory>
-        <Link to={`/post/${id}/answer`}>받은 질문</Link>
-        <Link to='/'>질문하기</Link>
+        <button type='button' onClick={handleToAnswer}>
+          받은 질문
+        </button>
+        <button type='button' onClick={handleToQuest}>
+          질문하기
+        </button>
       </StCategory>
     </StNavBar>
   );
@@ -27,7 +38,8 @@ const NavBar = () => {
 
 const StNavBar = styled.div`
   display: flex;
-  width: 716px;
+  width: 100%;
+  max-width: 716px;
   height: 70px;
   align-items: center;
   justify-content: space-between;
@@ -42,13 +54,15 @@ const StCategory = styled.div`
   gap: 47px;
   flex-shrink: 0;
 
-  color: ${({ theme }) => theme.color.Brown['40']};
-  font-family: Pretendard;
-  font-size: 2rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 25px;
-  letter-spacing: -2px;
+  & button {
+    color: ${({ theme }) => theme.color.Brown['40']};
+    font-family: Pretendard;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 25px;
+    letter-spacing: -2px;
+  }
 
   & :hover {
     color: ${({ theme }) => theme.color.Brown['30']};
