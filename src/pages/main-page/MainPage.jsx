@@ -50,10 +50,10 @@ const MainPage = () => {
         </Button>
       </StButtonPosition>
       <StMainWrapper>
-        <Logo width='462px' height='180px' />
+        <Logo pcWidth='46.3rem' pcHeight='18rem' width='25.1rem' height='9.8rem' />
         <StInputName>
           <InputField onChangeHandler={handleInputChange} />
-          <Button width='336px' onClickHandler={() => handlePost(userName)}>
+          <Button width='100%' onClickHandler={() => handlePost(userName)}>
             질문 받기
           </Button>
         </StInputName>
@@ -71,9 +71,16 @@ const StInputName = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  width: 100%;
+  max-width: 400px;
 
   background-color: ${({ theme }) => theme.color.Grayscale['10']};
   border-radius: 16px;
+
+  & button {
+    height: 4.6rem;
+    font-size: 1.6rem;
+  }
 `;
 
 const StMainWrapper = styled.div`
@@ -89,6 +96,19 @@ const StMainWrapper = styled.div`
 
 const StButtonPosition = styled.div`
   position: absolute;
-  top: 100px;
-  right: 50px;
+
+  @media screen and (min-width: 1025px) {
+    top: 50px;
+    right: 10vh;
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    top: 50px;
+    right: 10vh;
+  }
+
+  @media screen and (max-width: 768px) {
+    top: 50px;
+    right: 5vh;
+  }
 `;
