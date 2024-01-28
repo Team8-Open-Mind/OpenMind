@@ -28,5 +28,4 @@ jobs:
         run: npm ci
 
       - name: Run prettier and eslint
-        run: |
-          npm run prettier-lint || (echo "You should run prettier-lint before pr" && exit 1)
+        run: npm run prettier-lint

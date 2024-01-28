@@ -11,7 +11,7 @@ import { timeStamp } from '@utils/time/timeStamp';
 import EditButton from '../button/edit-button/EditButton';
 import Reaction from '../reaction/Reaction';
 import ReadTypeSwitch from '../read-type-switch/ReadTypeSwitch';
-import ReplyTypeSwitch from '../replyTypeSwitch.jsx/ReplyTypeSwitch';
+import ReplyTypeSwitch from '../reply-type-switch/ReplyTypeSwitch';
 
 // read, edit, reply type에 맞게 component 불러온다.
 

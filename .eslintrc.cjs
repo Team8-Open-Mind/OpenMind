@@ -16,6 +16,7 @@ module.exports = {
   settings: { react: { version: '18.2' } },
   plugins: ['react', 'react-refresh', 'react-hooks', 'jsx-a11y', 'prettier', 'import'],
   rules: {
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
     'no-shadow': 'off',
