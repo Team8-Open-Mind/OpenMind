@@ -39,7 +39,7 @@ const QuestFeedPage = () => {
         </StSnsWrapper>
       </StQuestFeedPageWrapper>
       {userInfo?.questionCount === 0 ? (
-        <NoLists>아직 질문이 없습니다</NoLists>
+        <NoLists type='feedPage'>아직 질문이 없습니다</NoLists>
       ) : (
         <>
           <FeedCardContainer
@@ -69,6 +69,7 @@ export const StBackground = styled.div`
   background-attachment: fixed;
   padding-bottom: 142px;
   padding: 20px;
+  min-height: 100%;
 `;
 
 const StQuestFeedPageWrapper = styled.div`

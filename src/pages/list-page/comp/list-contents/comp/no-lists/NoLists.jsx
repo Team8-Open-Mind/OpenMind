@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { ReactComponent as NoMessageBox } from '@assets/message-box.svg';
 import { StMessageIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
 
-const NoLists = ({ children }) => {
+const NoLists = ({ children, type }) => {
   return (
-    <StNoListWrapper>
+    <StNoListWrapper type={type}>
       <StBoxWrapper>
         <StMessageTextBox>
           <StMessageIcon $size={24} $color='brown40' />
@@ -20,8 +20,7 @@ const NoLists = ({ children }) => {
 export default NoLists;
 
 const StNoListWrapper = styled.div`
-  padding: 7.4rem 2.4rem;
-
+  padding: ${(props) => (props.type ? '0rem' : '7.4rem')} 2.4rem;
   width: 100%;
 `;
 
