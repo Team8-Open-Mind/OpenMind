@@ -18,16 +18,14 @@ import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 import { useCloseModal } from '@hooks/useCloseModal';
 import useScrollToTop from '@hooks/useScrollToTop';
 import { useSNSShare } from '@hooks/useSNSShare';
-import { useToggle } from '@hooks/useToggle';
 
 const QuestFeedPage = () => {
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
-  const [rerenderTrigger, toggleRerenderTrigger] = useToggle();
   const { id: userId } = useParams();
 
   // const { userName, userProfile, createdAt, questionCount } = useSetUser(getUserData);
-  const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, rerenderTrigger]);
-  const { result: answerResults } = useAsyncOnMount(() => getAnswerLists({ userId }), [userId, rerenderTrigger]);
+  const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId]);
+  const { result: answerResults } = useAsyncOnMount(() => getAnswerLists({ userId }), [userId]);
   const [isVisible, handleScrollToTop] = useScrollToTop();
   // const { isModalOpen, toggleAndSetModal, ModalComponent } = useModalComponent();
   const { isModalOpen, modalRef, toggleModal } = useCloseModal();
@@ -50,7 +48,6 @@ const QuestFeedPage = () => {
         ) : (
           <>
             <FeedCardContainer
-              toggleRerenderTrigger={toggleRerenderTrigger}
               cardLength={userInfo?.questionCount}
               onDeleteCard={null}
               userName={userInfo?.name}

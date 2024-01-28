@@ -5,12 +5,12 @@ import { ReactComponent as ThumbsUp } from '@assets/thumbs-up.svg';
 import { postReaction } from '@api/questions/postReaction';
 import { useAsync } from '@hooks/useAsync';
 
-const Reaction = ({ questionId, likeCount, toggleRerenderTrigger }) => {
+const Reaction = ({ questionId, likeCount, setRequestType }) => {
   const { setAsyncFunction } = useAsync(postReaction);
 
   const handleReactionCount = async () => {
     const res = await setAsyncFunction(questionId);
-    toggleRerenderTrigger();
+    setRequestType('reaction');
 
     return res;
   };
