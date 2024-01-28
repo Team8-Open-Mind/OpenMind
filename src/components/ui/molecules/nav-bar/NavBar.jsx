@@ -22,16 +22,18 @@ const NavBar = () => {
   };
 
   return (
-    <StNavBar>
+    <StNavBar className={myId !== null ? 'log-in' : null}>
       <Logo onClickHandler={handleToMain} />
-      <StCategory>
-        <button type='button' onClick={handleToAnswer}>
-          받은 질문
-        </button>
-        <button type='button' onClick={handleToQuest}>
-          질문하기
-        </button>
-      </StCategory>
+      {myId !== null ? (
+        <StCategory>
+          <button type='button' onClick={handleToAnswer}>
+            받은 질문
+          </button>
+          <button type='button' onClick={handleToQuest}>
+            질문하기
+          </button>
+        </StCategory>
+      ) : null}
     </StNavBar>
   );
 };
@@ -42,9 +44,13 @@ const StNavBar = styled.div`
   max-width: 716px;
   height: 70px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin: 0 auto;
   padding-top: 26px;
+
+  &.log-in {
+    justify-content: space-between;
+  }
 `;
 
 const StCategory = styled.div`
