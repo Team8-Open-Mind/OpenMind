@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Button from '@components/ui/atoms/button/Button';
 import InputTextArea from '@components/ui/atoms/input/input-text-area/InputTextArea';
@@ -32,10 +32,17 @@ const AddQuestionModal = ({ userProfile = PROFILE_SAMPLE, userName = '닉네임'
       <StAddQuestionModal ref={modalRef}>
         <div className='close'>
           <div className='title'>
-            <StMessageIcon size={28} color='gray60' />
+            <StMessageIcon $size={28} $color='gray60' />
             <h2>질문을 작성하세요</h2>
           </div>
-          <StCloseIcon size={28} color='gray60' onClick={toggleModal} />
+          <StCloseIcon
+            $size={28}
+            $color='gray60'
+            onClick={toggleModal}
+            css={css`
+              cursor: pointer;
+            `}
+          />
         </div>
         <StExceptTitle>
           <StQuestionTo>
