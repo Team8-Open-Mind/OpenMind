@@ -6,6 +6,8 @@ import { useDropdownProvider } from './context/DropdownProvider';
 const DropdownMenu = ({ children, positionTop = '38', positionRight, width }) => {
   const { isOpen } = useDropdownProvider();
 
+  console.log(isOpen);
+
   return (
     <>
       <StDropdownMenu $isOpen={isOpen} $width={width} $positionTop={positionTop} $positionRight={positionRight}>
