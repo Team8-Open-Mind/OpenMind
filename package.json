@@ -10,6 +10,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "prepare": "husky install",
+    "gitconfig": "git config --local include.path ../.gitconfig",
     "prettier-lint": "prettier \"./src/**/*.{js,jsx}\" --write && eslint --fix \"./src/**/*.{js,jsx}\" "
   },
   "lint-staged": {
