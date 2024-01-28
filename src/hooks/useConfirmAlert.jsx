@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import PortalContainer from '@components/portal/Portal';
-import Button from '@components/ui/atoms/Button/Button';
+import Button from '@components/ui/atoms/button/Button';
 import Toast from '@components/ui/atoms/toast/Toast';
 
 import { useCloseModal } from './useCloseModal';

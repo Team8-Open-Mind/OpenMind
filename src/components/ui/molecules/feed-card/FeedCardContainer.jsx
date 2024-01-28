@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import PortalContainer from '@components/portal/Portal';
-import FloatingButton from '@components/ui/atoms/Button/floating-button/FloatingButton';
+import FloatingButton from '@components/ui/atoms/button/floating-button/FloatingButton';
 import { StMessageIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
 import Toast from '@components/ui/atoms/toast/Toast';
 

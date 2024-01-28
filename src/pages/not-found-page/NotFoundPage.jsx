@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { device } from '@device/mediaBreakpoints';
 import styled from 'styled-components';
 
-import Button from '@components/ui/atoms/Button/Button';
+import Button from '@components/ui/atoms/button/Button';
 import Logo from '@components/ui/atoms/logo/Logo';
 import { StBackground } from '@pages/question-feed-page/QuestFeedPage';
 
@@ -48,7 +48,7 @@ const StMainWrapper = styled.div`
 
 const StError = styled.h2`
   font-size: 2.8rem;
-  letter-space: -0.024em;
+  letter-spacing: -0.024em;
   line-height: 30px;
   color: ${({ theme }) => theme.color.Brown[40]};
   text-align: center;
