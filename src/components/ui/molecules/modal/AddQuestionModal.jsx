@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import Button from '@components/ui/atoms/Button/Button';
+import Button from '@components/ui/atoms/button/Button';
 import InputTextArea from '@components/ui/atoms/input/input-text-area/InputTextArea';
 import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 import { StCloseIcon, StMessageIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';

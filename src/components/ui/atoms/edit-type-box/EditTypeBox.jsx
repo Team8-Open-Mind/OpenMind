@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { patchAnswer } from '@api/answers/patchAnswer';
 import { useAsync } from '@hooks/useAsync';
 
-import Button from '../Button/Button';
+import Button from '../button/Button';
 import InputTextArea from '../input/input-text-area/InputTextArea';
 import RejectReplyButton from '../reject-reply/RejectReplyButton';
 

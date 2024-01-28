@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Button from '@components/ui/atoms/Button/Button';
+import Button from '@components/ui/atoms/button/Button';
 
 // title이나 content에 줄바꿈이 필요하다면 `` 안에 \n을 사용하면 된다.
 

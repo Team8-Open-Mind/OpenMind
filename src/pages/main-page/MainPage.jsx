@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import Button from '@components/ui/atoms/Button/Button';
+import Button from '@components/ui/atoms/button/Button';
 import InputField from '@components/ui/atoms/input/input-field/InputField';
 import Logo from '@components/ui/atoms/logo/Logo';
 import { StBackground } from '@pages/question-feed-page/QuestFeedPage';
