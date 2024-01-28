@@ -21,8 +21,8 @@ export const useCheckAnswerPath = () => {
   useEffect(() => {
     if (path === 'answer') {
       if (!isUser) {
-        navigate('/');
         alert('접근권한이 없습니다.');
+        navigate('/');
       }
     }
   });
