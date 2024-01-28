@@ -1,7 +1,6 @@
 import axiosInstance from '@api/instance/axiosInstance';
 
 // const USER_API = import.meta.env.VITE_SUBJECTS_API;
-// console.log(USER_API); // https://openmind-api.vercel.app/3-8/subjects/
 
 /**
  *

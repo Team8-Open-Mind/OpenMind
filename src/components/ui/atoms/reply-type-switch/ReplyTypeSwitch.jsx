@@ -6,7 +6,7 @@ import ReplyTypeBox from '../reply-type-box/ReplyTypeBox';
 // reply, edit, read, rejected 상태 타입
 
 const ReplyTypeSwitch = ({
-  toggleRerenderTrigger,
+  setRequestType,
   answerId,
   questionId,
   type,
@@ -19,14 +19,14 @@ const ReplyTypeSwitch = ({
     case 'reply':
       return (
         <ReplyTypeBox
-          toggleRerenderTrigger={toggleRerenderTrigger}
+          setRequestType={setRequestType}
           questionId={questionId}
           answerId={answerId}
           isRejected={isRejected}
         />
       );
     case 'rejected':
-      return <RejectedTypeBox toggleRerenderTrigger={toggleRerenderTrigger} questionId={questionId} />;
+      return <RejectedTypeBox />;
     case 'edit':
       return (
         <EditTypeBox
@@ -35,7 +35,7 @@ const ReplyTypeSwitch = ({
           isRejected={isRejected}
           answerId={answerId}
           questionId={questionId}
-          toggleRerenderTrigger={toggleRerenderTrigger}
+          setRequestType={setRequestType}
           editTextValue={value}
           setEditTypeState={setEditTypeState}
         />

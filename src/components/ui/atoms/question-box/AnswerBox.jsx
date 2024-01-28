@@ -17,7 +17,7 @@ import ReplyTypeSwitch from '../reply-type-switch/ReplyTypeSwitch';
 
 const AnswerBox = ({
   path,
-  toggleRerenderTrigger,
+  setRequestType,
   answerId,
   questionId,
   answerResult,
@@ -47,7 +47,7 @@ const AnswerBox = ({
             </StUser>
             <ReplyTypeSwitch
               setIsEdit={setIsEdit}
-              toggleRerenderTrigger={toggleRerenderTrigger}
+              setRequestType={setRequestType}
               answerId={answerId}
               questionId={questionId}
               type={isEdit ? 'edit' : feedCardType(answerResult?.answer)}
@@ -81,11 +81,7 @@ const AnswerBox = ({
         <StLine />
         {/* answer가 null이 아니면 === 답변이 있으면 */}
         <StReactionAndEdit>
-          <Reaction
-            toggleRerenderTrigger={toggleRerenderTrigger}
-            questionId={questionId}
-            likeCount={answerResult?.like}
-          />
+          <Reaction setRequestType={setRequestType} questionId={questionId} likeCount={answerResult?.like} />
           {path === 'answer' && feedCardType(answerResult?.answer) !== 'reply' ? (
             <EditButton onClickEdit={handleEditToggle} isEdit={isEdit} />
           ) : null}

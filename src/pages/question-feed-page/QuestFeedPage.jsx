@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import styled from 'styled-components';
+import { css, styled } from 'styled-components';
 
 import PortalContainer from '@components/portal/Portal';
 import FloatingWriteQuestionButton from '@components/ui/atoms/button/floating-button/floating-write-question-button/FloatingWriteQuestionButton';
@@ -13,24 +14,80 @@ import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';
 import getUserData from '@api/subjects/getUserData';
+import { useAsync_V2 } from '@hooks/useAsync_V2';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 // import { useModalComponent } from '@hooks/useModalComponent';
 import { useCloseModal } from '@hooks/useCloseModal';
+import { useInView } from '@hooks/useInView';
 import useScrollToTop from '@hooks/useScrollToTop';
 import { useSNSShare } from '@hooks/useSNSShare';
-import { useToggle } from '@hooks/useToggle';
+import { getQueryStringObject } from '@utils/url/getQueryStringObject';
 
 const QuestFeedPage = () => {
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
-  const [rerenderTrigger, toggleRerenderTrigger] = useToggle();
   const { id: userId } = useParams();
 
+  const [requestType, setRequestType] = useState('mount'); // 'default' | 'mount' | 'delete' | 'deleteAll' | 'edit' | 'reply' ---> 전부 다 처음부터 불러올 거
+  const [answerLists, setAnswerLists] = useState([]);
+  const { intersectionObserveTargetRef, isIntersecting } = useInView();
+
   // const { userName, userProfile, createdAt, questionCount } = useSetUser(getUserData);
-  const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, rerenderTrigger]);
-  const { result: answerResults } = useAsyncOnMount(() => getAnswerLists({ userId }), [userId, rerenderTrigger]);
   const [isVisible, handleScrollToTop] = useScrollToTop();
   // const { isModalOpen, toggleAndSetModal, ModalComponent } = useModalComponent();
   const { isModalOpen, modalRef, toggleModal } = useCloseModal();
+
+  const [{ nextLimit, nextOffset }, setNext] = useState({
+    nextOffset: 0,
+    nextLimit: 10,
+  });
+
+  // 고정: 맨 mount 시에만 실행
+  const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, isIntersecting, requestType]);
+
+  // mount랑 interset 때 실행
+  useAsync_V2({
+    deps: [isIntersecting, nextLimit, nextOffset, userId],
+    asyncFn: () => {
+      if (isIntersecting) {
+        return getAnswerLists({ userId, limit: nextLimit, offset: nextOffset });
+      }
+    },
+    onSuccess: (result) => {
+      if (!result || result?.results?.length === 0) return;
+
+      setAnswerLists((prev) => [...prev, ...result?.results]);
+
+      if (result?.next) {
+        const { limit, offset } = getQueryStringObject(result?.next);
+        setNext({ nextLimit: limit, nextOffset: offset });
+      } else {
+        setNext((prev) => ({ nextOffset: prev.nextOffset + prev.nextLimit, nextLimit: 0 }));
+      }
+    },
+  });
+
+  useAsync_V2({
+    deps: [userId, requestType],
+    asyncFn: () => {
+      // mount나 default 시에는 실행하지 않음.
+      if (requestType === 'mount' || requestType === 'default') return;
+
+      return getAnswerLists({ userId });
+    },
+    onSuccess: (result) => {
+      if (!result || result?.results?.length === 0) return;
+
+      setAnswerLists(result?.results);
+      setRequestType('default');
+
+      if (result?.next) {
+        const { limit, offset } = getQueryStringObject(result?.next);
+        setNext({ nextLimit: limit, nextOffset: offset });
+      } else {
+        setNext((prev) => ({ nextOffset: prev.nextOffset + prev.nextLimit, nextLimit: 0 }));
+      }
+    },
+  });
 
   return (
     <>
@@ -50,17 +107,34 @@ const QuestFeedPage = () => {
         ) : (
           <>
             <FeedCardContainer
-              toggleRerenderTrigger={toggleRerenderTrigger}
               cardLength={userInfo?.questionCount}
               onDeleteCard={null}
               userName={userInfo?.name}
               userProfile={userInfo?.imageSource}
-              answerResults={answerResults?.results}
+              answerResults={answerLists}
+              intersectionObserveTargetRef={intersectionObserveTargetRef}
             />
-            {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
+            <p
+              ref={intersectionObserveTargetRef}
+              css={css`
+                position: relative;
+                width: 100%;
+                height: 0;
+              `}
+            />
           </>
         )}
-        <FloatingWriteQuestionButton onClick={toggleModal} />
+        <FloatingWriteQuestionButton
+          onClick={toggleModal}
+          css={
+            isVisible
+              ? css`
+                  right: 80px;
+                `
+              : null
+          }
+        />
+        {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
       </StBackground>
       <PortalContainer>
         {isModalOpen && (

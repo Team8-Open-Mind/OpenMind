@@ -7,7 +7,7 @@ import Button from '../button/Button';
 import InputTextArea from '../input/input-text-area/InputTextArea';
 import RejectReplyButton from '../reject-reply/RejectReplyButton';
 
-const EditTypeBox = ({ toggleRerenderTrigger, editTextValue, answerId, setIsEdit }) => {
+const EditTypeBox = ({ setRequestType, editTextValue, answerId, setIsEdit }) => {
   const [editValue, setEditValue] = useState(editTextValue);
   const [isDisabled, setIsDisabled] = useState(true);
   const { setAsyncFunction } = useAsync(patchAnswer);
@@ -27,7 +27,7 @@ const EditTypeBox = ({ toggleRerenderTrigger, editTextValue, answerId, setIsEdit
 
   const handleEditClick = async () => {
     const res = await setAsyncFunction(answerId, editValue);
-    toggleRerenderTrigger();
+    setRequestType('edit');
     setIsEdit(false);
 
     return res;
@@ -37,7 +37,7 @@ const EditTypeBox = ({ toggleRerenderTrigger, editTextValue, answerId, setIsEdit
     const content = '거절된 질문입니다.';
     const isRejected = true;
     const res = await setAsyncEditRejectFunction(answerId, content, isRejected);
-    toggleRerenderTrigger();
+    setRequestType('reject');
     setIsEdit(false);
 
     return res;

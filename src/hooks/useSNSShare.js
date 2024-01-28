@@ -35,7 +35,6 @@ const useSNSShare = () => {
   const copyUrl = async () => {
     try {
       await navigator.clipboard.writeText(urlAfterMount);
-      console.log('Content copied to clipboard');
     } catch (e) {
       console.error('Failed to copy');
     }
@@ -43,14 +42,6 @@ const useSNSShare = () => {
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
-
-    // ✅ clipboard api가 안되면 clipboard.js 라이브러리도 있다.
-    // chrome용 사용 가능 확인 api
-    navigator.permissions.query({ name: 'clipboard-write' }).then((result) => {
-      if (result.state === 'granted' || result.state === 'prompt') {
-        console.log('Write access granted!');
-      }
-    });
 
     const script = document.createElement('script');
     script.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js';

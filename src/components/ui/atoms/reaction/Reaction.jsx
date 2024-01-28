@@ -5,12 +5,12 @@ import { ReactComponent as ThumbsUp } from '@assets/thumbs-up.svg';
 import { postReaction } from '@api/questions/postReaction';
 import { useAsync } from '@hooks/useAsync';
 
-const Reaction = ({ questionId, likeCount, toggleRerenderTrigger }) => {
+const Reaction = ({ questionId, likeCount, setRequestType }) => {
   const { setAsyncFunction } = useAsync(postReaction);
 
   const handleReactionCount = async () => {
     const res = await setAsyncFunction(questionId);
-    toggleRerenderTrigger();
+    setRequestType('reaction');
 
     return res;
   };
@@ -36,19 +36,15 @@ const StReaction = styled.button`
   display: inline-flex;
   align-items: center;
   gap: 6px;
-
   &.active {
     color: ${({ theme }) => theme.color.Blue[50]};
   }
-
   &.active ${StThumbsUp} {
     fill: ${({ theme }) => theme.color.Blue[50]};
   }
-
   &:hover {
     color: ${({ theme }) => theme.color.Blue[50]};
   }
-
   &:hover ${StThumbsUp} {
     fill: ${({ theme }) => theme.color.Blue[50]};
   }

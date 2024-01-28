@@ -16,15 +16,12 @@ import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 import { useInView } from '@hooks/useInView';
 import useScrollToTop from '@hooks/useScrollToTop';
 import { useSNSShare } from '@hooks/useSNSShare';
-import { useToggle } from '@hooks/useToggle';
 import { getQueryStringObject } from '@utils/url/getQueryStringObject';
 
 import { useAsync_V2 } from '../../hooks/useAsync_V2';
 
 const AnswerPage = () => {
-  const [rerenderTrigger, toggleRerenderTrigger] = useToggle();
-  // const [requestType, setRequestType] = useState('mount'); // 'default' | 'mount' | 'delete' | 'deleteAll' | 'edit' | 'reply' ---> 전부 다 처음부터 불러올 거
-  const [requestType] = useState('mount'); // 'default' | 'mount' | 'delete' | 'deleteAll' | 'edit' | 'reply' ---> 전부 다 처음부터 불러올 거
+  const [requestType, setRequestType] = useState('mount'); // 'default' | 'mount' | 'delete' | 'deleteAll' | 'edit' | 'reply' ---> 전부 다 처음부터 불러올 거
   const [answerLists, setAnswerLists] = useState([]);
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const { intersectionObserveTargetRef, isIntersecting } = useInView();
@@ -37,21 +34,17 @@ const AnswerPage = () => {
   });
 
   // 고정: 맨 mount 시에만 실행
-  const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, rerenderTrigger, isIntersecting]);
+  const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, isIntersecting, requestType]);
 
   // mount랑 interset 때 실행
   useAsync_V2({
     deps: [isIntersecting, nextLimit, nextOffset, userId],
     asyncFn: () => {
       if (isIntersecting) {
-        // console.log('executed asyncFn');
-
         return getAnswerLists({ userId, limit: nextLimit, offset: nextOffset });
       }
     },
     onSuccess: (result) => {
-      // console.log(result);
-
       if (!result || result?.results?.length === 0) return;
 
       setAnswerLists((prev) => [...prev, ...result?.results]);
@@ -71,7 +64,7 @@ const AnswerPage = () => {
   // delete, deleteAll, edit, reply 시에만 실행하도록 할 것임. -> 처음부터 다시 가져오도록 할 것임.
   // toggleRerenderTrigger()쓴 부분을 setRequestType('delete'); setRequestType('deleteAll'); 이런 식으로 바꿔주세요.
   useAsync_V2({
-    deps: [userId, rerenderTrigger, requestType],
+    deps: [userId, requestType],
     asyncFn: () => {
       // mount나 default 시에는 실행하지 않음.
       if (requestType === 'mount' || requestType === 'default') return;
@@ -79,11 +72,10 @@ const AnswerPage = () => {
       return getAnswerLists({ userId });
     },
     onSuccess: (result) => {
-      // console.log(result);
-
       if (!result || result?.results?.length === 0) return;
 
       setAnswerLists(result?.results);
+      setRequestType('default');
 
       if (result?.next) {
         const { limit, offset } = getQueryStringObject(result?.next);
@@ -99,8 +91,7 @@ const AnswerPage = () => {
   const handleDeleteCard = async (id) => {
     await setDeleteCard(id);
 
-    // setRequestType('delete');
-    toggleRerenderTrigger();
+    setRequestType('delete');
   };
 
   return (
@@ -120,14 +111,12 @@ const AnswerPage = () => {
       ) : (
         <>
           <FeedCardContainer
-            toggleRerenderTrigger={toggleRerenderTrigger}
-            // setRequestType={setRequestType}
+            setRequestType={setRequestType}
             onDeleteCard={handleDeleteCard}
             cardLength={userInfo?.questionCount}
             userId={userId}
             userName={userInfo?.name}
             userProfile={userInfo?.imageSource}
-            // answerResults={answerResult?.results}
             answerResults={answerLists}
             intersectionObserveTargetRef={intersectionObserveTargetRef}
           />
