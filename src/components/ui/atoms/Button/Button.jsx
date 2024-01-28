@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { StArrowIcon } from '../sprite-icon/SpriteIcon';
 import { brown20Interaction, brown40Interaction } from './interaction';
 import { tabletSize } from './media-query';
+import { StArrowIcon } from '../sprite-icon/SpriteIcon';
 
 // default 값이 이미 들어가있음에 주의한다.
 // 특히 기본 너비는 "auto"이다.
