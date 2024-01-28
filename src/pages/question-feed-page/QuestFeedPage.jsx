@@ -2,16 +2,20 @@ import { useParams } from 'react-router-dom';
 
 import styled from 'styled-components';
 
+import PortalContainer from '@components/portal/Portal';
 import FloatingWriteQuestionButton from '@components/ui/atoms/Button/floating-button/floating-write-question-button/FloatingWriteQuestionButton';
 import ShareButton from '@components/ui/atoms/Button/share-button/ShareButton';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
+import AddQuestionModal from '@components/ui/molecules/modal/AddQuestionModal';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';
 import getUserData from '@api/subjects/getUserData';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
+// import { useModalComponent } from '@hooks/useModalComponent';
+import { useCloseModal } from '@hooks/useCloseModal';
 import useScrollToTop from '@hooks/useScrollToTop';
 import { useSNSShare } from '@hooks/useSNSShare';
 import { useToggle } from '@hooks/useToggle';
@@ -25,36 +29,50 @@ const QuestFeedPage = () => {
   const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, rerenderTrigger]);
   const { result: answerResults } = useAsyncOnMount(() => getAnswerLists({ userId }), [userId, rerenderTrigger]);
   const [isVisible, handleScrollToTop] = useScrollToTop();
+  // const { isModalOpen, toggleAndSetModal, ModalComponent } = useModalComponent();
+  const { isModalOpen, modalRef, toggleModal } = useCloseModal();
 
   return (
-    <StBackground>
-      <NavBar />
-      <StQuestFeedPageWrapper>
-        <img className='user-profile' src={userInfo?.imageSource} alt='프로필' />
-        <span className='pageName'>{userInfo?.name}</span>
-        <StSnsWrapper>
-          <ShareButton iconName='clipboard' onClickHandler={copyUrl} />
-          <ShareButton iconName='kakao' onClickHandler={shareToKakaotalk} />
-          <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
-        </StSnsWrapper>
-      </StQuestFeedPageWrapper>
-      {userInfo?.questionCount === 0 ? (
-        <NoLists type='feedPage'>아직 질문이 없습니다</NoLists>
-      ) : (
-        <>
-          <FeedCardContainer
-            toggleRerenderTrigger={toggleRerenderTrigger}
-            cardLength={userInfo?.questionCount}
-            onDeleteCard={null}
+    <>
+      <StBackground>
+        <NavBar />
+        <StQuestFeedPageWrapper>
+          <img className='user-profile' src={userInfo?.imageSource} alt='프로필' />
+          <span className='pageName'>{userInfo?.name}</span>
+          <StSnsWrapper>
+            <ShareButton iconName='clipboard' onClickHandler={copyUrl} />
+            <ShareButton iconName='kakao' onClickHandler={shareToKakaotalk} />
+            <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
+          </StSnsWrapper>
+        </StQuestFeedPageWrapper>
+        {userInfo?.questionCount === 0 ? (
+          <NoLists type='feedPage'>아직 질문이 없습니다</NoLists>
+        ) : (
+          <>
+            <FeedCardContainer
+              toggleRerenderTrigger={toggleRerenderTrigger}
+              cardLength={userInfo?.questionCount}
+              onDeleteCard={null}
+              userName={userInfo?.name}
+              userProfile={userInfo?.imageSource}
+              answerResults={answerResults?.results}
+            />
+            {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
+          </>
+        )}
+        <FloatingWriteQuestionButton onClick={toggleModal} />
+      </StBackground>
+      <PortalContainer>
+        {isModalOpen && (
+          <AddQuestionModal
             userName={userInfo?.name}
             userProfile={userInfo?.imageSource}
-            answerResults={answerResults?.results}
+            modalRef={modalRef}
+            toggleModal={toggleModal}
           />
-          {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
-        </>
-      )}
-      <FloatingWriteQuestionButton />
-    </StBackground>
+        )}
+      </PortalContainer>
+    </>
   );
 };
 

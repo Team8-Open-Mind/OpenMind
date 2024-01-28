@@ -7,36 +7,52 @@ import InputTextArea from '@components/ui/atoms/input/input-text-area/InputTextA
 import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 import { StCloseIcon, StMessageIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
 
-const AddQuestionModal = ({ userProfile = PROFILE_SAMPLE, userName = '닉네임' }) => {
+const AddQuestionModal = ({ userProfile = PROFILE_SAMPLE, userName = '닉네임', modalRef, toggleModal }) => {
   const [questionValue, setQuestionValue] = useState('');
 
   const handleQuestionValue = (event) => {
     setQuestionValue(event.target.value);
   };
 
+  const postQuestion = () => {};
+
   return (
-    <StAddQuestionModal>
-      <div className='close'>
-        <div className='title'>
-          <StMessageIcon size={28} color='gray60' />
-          <h2>질문을 작성하세요</h2>
+    <StModalWrapper>
+      <StAddQuestionModal ref={modalRef}>
+        <div className='close'>
+          <div className='title'>
+            <StMessageIcon size={28} color='gray60' />
+            <h2>질문을 작성하세요</h2>
+          </div>
+          <StCloseIcon size={28} color='gray60' onClick={toggleModal} />
         </div>
-        <StCloseIcon size={28} color='gray60' />
-      </div>
-      <StExceptTitle>
-        <StQuestionTo>
-          To.
-          <img src={userProfile} alt='프로필' />
-          <span>{userName}</span>
-        </StQuestionTo>
-        <InputTextArea onChangeHandler={handleQuestionValue}>질문을 입력해주세요</InputTextArea>
-        <Button disabled={questionValue.length === 0}>질문 보내기</Button>
-      </StExceptTitle>
-    </StAddQuestionModal>
+        <StExceptTitle>
+          <StQuestionTo>
+            To.
+            <img src={userProfile} alt='프로필' />
+            <span>{userName}</span>
+          </StQuestionTo>
+          <InputTextArea onChangeHandler={handleQuestionValue}>질문을 입력해주세요</InputTextArea>
+          <Button disabled={questionValue.length === 0} onClick={postQuestion}>
+            질문 보내기
+          </Button>
+        </StExceptTitle>
+      </StAddQuestionModal>
+    </StModalWrapper>
   );
 };
 
 export default AddQuestionModal;
+
+const StModalWrapper = styled.div`
+  background-color: rgba(0, 0, 0, 0.56);
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+`;
 
 const StAddQuestionModal = styled.div`
   display: flex;
@@ -53,7 +69,6 @@ const StAddQuestionModal = styled.div`
 
   @media (max-width: 660px) {
     width: 100%;
-    height: 100%;
     max-height: 568px;
     margin: 24px auto;
   }
@@ -101,6 +116,7 @@ const StQuestionTo = styled.div`
     height: 28px;
     justify-content: center;
     align-items: center;
+    border-radius: 999px;
     @media (max-width: 375px) {
       width: 22px;
       height: 22px;
