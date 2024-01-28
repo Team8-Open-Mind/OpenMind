@@ -21,26 +21,28 @@ const ListContents = () => {
   const itemsPerPage = 8;
   const navigate = useNavigate();
 
-  const { changePage, currentPage, ...usePaginateRest } = usePaginate({
+  const { changePage, currentPage, setCurrentPage, ...usePaginateRest } = usePaginate({
     count: result?.count,
-    sort,
     itemsPerPage,
     pagesPerGroup,
   });
 
   const { result: res } = useAsyncOnMount(
-    () => getQuestionLists({ offset: (currentPage - 1) * 8, sortOrder: sort, limit: itemsPerPage }),
+    () => getQuestionLists({ offset: (currentPage - 1) * itemsPerPage, sortOrder: sort, limit: itemsPerPage }),
     [sort, currentPage],
   );
+
+  const changeQuestionListSortingOrder = (selectedOptionText) => {
+    setSort(questionListSort[selectedOptionText]);
+  };
 
   useEffect(() => {
     setResult(res);
   }, [res]);
 
-  const changeQuestionListSortingOrder = (e) => {
-    const currentSort = questionListSort[e.target.textContent];
-    setSort(currentSort);
-  };
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [sort, setCurrentPage]);
 
   return (
     <StContentsWrapper>

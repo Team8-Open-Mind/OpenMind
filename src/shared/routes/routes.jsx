@@ -1,15 +1,18 @@
+import { lazy } from 'react';
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 
-import AnswerPage from '@pages/answer-page/AnswerPage';
-import ListPage from '@pages/list-page/ListPage';
-import MainPage from '@pages/main-page/MainPage';
-import NotFoundPage from '@pages/not-found-page/NotFoundPage';
-import QuestFeedPage from '@pages/question-feed-page/QuestFeedPage';
-import TestPage from '@pages/test-page/TestPage';
-import TestPage2 from '@pages/test2-page/TestPage2';
+import LoadingSpinner from '@layout/loading-spinner/LoadingSpinner';
+
+const AnswerPage = lazy(() => import('@pages/answer-page/AnswerPage'));
+const ListPage = lazy(() => import('@pages/list-page/ListPage'));
+const MainPage = lazy(() => import('@pages/main-page/MainPage'));
+const NotFoundPage = lazy(() => import('@pages/not-found-page/NotFoundPage'));
+const QuestFeedPage = lazy(() => import('@pages/question-feed-page/QuestFeedPage'));
+const TestPage = lazy(() => import('@pages/test-page/TestPage'));
+const TestPage2 = lazy(() => import('@pages/test2-page/TestPage2'));
 
 const PrimaryRoute = (
-  <Route path='/'>
+  <Route path='/' element={<LoadingSpinner />}>
     <Route index element={<MainPage />} />
     <Route path='list' element={<ListPage />} />
     <Route path='post/:id/answer' element={<AnswerPage />} />

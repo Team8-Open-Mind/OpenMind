@@ -1,15 +1,25 @@
+import { useEffect } from 'react';
+
 import styled from 'styled-components';
 
 import { useDropdownProvider } from './context/DropdownProvider';
 
-const DropdownOption = ({ children, callbackFn }) => {
+/**
+ *
+ * @param {{ children: string | number; callbackFn: VoidFunction; selected?: boolean}} DropdownOptionProps
+ */
+const DropdownOption = ({ children, callbackFn, selected }) => {
   const { changeSelectedOption } = useDropdownProvider();
 
-  const onClickHandler = (e) => {
-    changeSelectedOption(e);
+  const onClickHandler = () => {
+    changeSelectedOption(children);
 
-    if (typeof callbackFn === 'function') callbackFn(e);
+    if (typeof callbackFn === 'function') callbackFn(children);
   };
+
+  useEffect(() => {
+    if (selected) changeSelectedOption(children);
+  }, [selected, changeSelectedOption, children]);
 
   return <StDropdownOption onClick={onClickHandler}>{children}</StDropdownOption>;
 };
