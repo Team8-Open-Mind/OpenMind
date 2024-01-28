@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -7,14 +8,26 @@ import InputTextArea from '@components/ui/atoms/input/input-text-area/InputTextA
 import PROFILE_SAMPLE from '@components/ui/atoms/profile-sample';
 import { StCloseIcon, StMessageIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
 
+import { postNewQuestion } from '@api/questions/postNewQuestion';
+import { useAsync } from '@hooks/useAsync';
+
 const AddQuestionModal = ({ userProfile = PROFILE_SAMPLE, userName = '닉네임', modalRef, toggleModal }) => {
   const [questionValue, setQuestionValue] = useState('');
+  const { setAsyncFunction } = useAsync(postNewQuestion);
+  const { id } = useParams();
 
   const handleQuestionValue = (event) => {
     setQuestionValue(event.target.value);
   };
 
-  const postQuestion = () => {};
+  const handlePost = async () => {
+    if (!questionValue) return;
+
+    await setAsyncFunction(questionValue, id);
+    window.location.reload();
+  };
+
+  console.log(questionValue);
 
   return (
     <StModalWrapper>
@@ -33,7 +46,7 @@ const AddQuestionModal = ({ userProfile = PROFILE_SAMPLE, userName = '닉네임'
             <span>{userName}</span>
           </StQuestionTo>
           <InputTextArea onChangeHandler={handleQuestionValue}>질문을 입력해주세요</InputTextArea>
-          <Button disabled={questionValue.length === 0} onClick={postQuestion}>
+          <Button disabled={questionValue.length === 0} onClickHandler={handlePost}>
             질문 보내기
           </Button>
         </StExceptTitle>
