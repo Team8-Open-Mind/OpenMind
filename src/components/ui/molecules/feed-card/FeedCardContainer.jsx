@@ -23,6 +23,7 @@ const FeedCardContainer = ({
   userProfile,
   answerResults,
   userId,
+  // setRequestType,
 }) => {
   const { isModalOpen, toggleModal } = useCloseModal();
   const { isDeleteOpen, toggleDeleteCard } = useCloseModal();
@@ -34,6 +35,8 @@ const FeedCardContainer = ({
   const handleDeleteAllClick = async () => {
     await setAsyncFunction(userId);
     toggleRerenderTrigger();
+    // setRequestType('deleteAll');
+
     localStorage.removeItem('userId', null);
     navigate('/');
   };

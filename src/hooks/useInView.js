@@ -26,7 +26,7 @@ const useInView = (root, rootMargin, threshold) => {
     if (intersectionObserveTargetRef.current) observer.observe(intersectionObserveTargetRef.current);
 
     return () => {
-      if (intersectionObserveTargetRef.current) observer.unobserve(intersectionObserveTargetRef.current);
+      if (intersectionObserveTargetRef.current) observer.disconnect();
     };
   }, []);
 
