@@ -108,7 +108,7 @@ const QuestFeedPage = () => {
             <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
           </StSnsWrapper>
         </StQuestFeedPageWrapper>
-        {userInfo?.questionCount === 0 || userInfo?.questionCount === null ? (
+        {userInfo?.questionCount === 0 || userInfo === undefined ? (
           <NoLists type='feedPage'>아직 질문이 없습니다</NoLists>
         ) : (
           <>

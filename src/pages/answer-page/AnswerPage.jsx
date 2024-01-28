@@ -36,6 +36,8 @@ const AnswerPage = () => {
   // 고정: 맨 mount 시에만 실행
   const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, isIntersecting, requestType]);
 
+  console.log(userInfo);
+
   // mount랑 interset 때 실행
   useAsync_V2({
     deps: [isIntersecting, nextLimit, nextOffset, userId],
@@ -112,7 +114,7 @@ const AnswerPage = () => {
           <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
         </StSnsWrapper>
       </StQuestFeedPageWrapper>
-      {userInfo?.questionCount === 0 || userInfo?.questionCount === null ? (
+      {userInfo?.questionCount === 0 || userInfo === undefined ? (
         <NoLists>아직 질문이 없습니다</NoLists>
       ) : (
         <>
