@@ -32,38 +32,38 @@ const AnswerBox = ({
   const handleEditToggle = () => {
     setIsEdit();
   };
+  console.log(answerResult?.answer?.content);
 
   return (
     <>
-      {path === 'question' ? (
-        <StAnswerBox>
-          <ReadTypeSwitch value={answerResult?.answer?.content} />
-        </StAnswerBox>
-      ) : (
-        <>
-          <StAnswerBox>
-            <StImg src={userProfile} alt='프로필 이미지' />
-            <StAnswer>
-              <StUser>
-                <span className='name'>{userName}</span>
-                {answerResult?.answer !== null ? (
-                  <span className='time'>{timeStamp(answerResult?.answer?.createdAt)}</span>
-                ) : null}
-              </StUser>
-              <ReplyTypeSwitch
-                setIsEdit={setIsEdit}
-                toggleRerenderTrigger={toggleRerenderTrigger}
-                answerId={answerId}
-                questionId={questionId}
-                type={isEdit ? 'edit' : feedCardType(answerResult?.answer)}
-                value={answerResult?.answer?.content}
-                setEditTypeState={setEditTypeState}
-                isRejected={answerResult?.isRejected}
-              />
-            </StAnswer>
-          </StAnswerBox>
-        </>
-      )}
+      <StAnswerBox>
+        <StImg src={userProfile} alt='프로필 이미지' />
+        <StAnswer>
+          <StUser>
+            <span className='name'>{userName}</span>
+            {answerResult?.answer !== null ? (
+              <span className='time'>{timeStamp(answerResult?.answer?.createdAt)}</span>
+            ) : null}
+          </StUser>
+          {path === 'answer' ? (
+            <ReplyTypeSwitch
+              setIsEdit={setIsEdit}
+              toggleRerenderTrigger={toggleRerenderTrigger}
+              answerId={answerId}
+              questionId={questionId}
+              type={isEdit ? 'edit' : feedCardType(answerResult?.answer)}
+              value={answerResult?.answer?.content}
+              setEditTypeState={setEditTypeState}
+              isRejected={answerResult?.isRejected}
+            />
+          ) : (
+            <StAnswerBox>
+              <ReadTypeSwitch value={answerResult?.answer?.content} type='read' />
+            </StAnswerBox>
+          )}
+        </StAnswer>
+      </StAnswerBox>
+
       <StBottom>
         <StLine />
         {/* answer가 null이 아니면 === 답변이 있으면 */}
