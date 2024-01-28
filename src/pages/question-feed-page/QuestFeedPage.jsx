@@ -112,6 +112,7 @@ const QuestFeedPage = () => {
               userName={userInfo?.name}
               userProfile={userInfo?.imageSource}
               answerResults={answerLists}
+              setRequestType={setRequestType}
               intersectionObserveTargetRef={intersectionObserveTargetRef}
             />
             <p
