@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
 
 import ShareButton from '@components/ui/atoms/Button/share-button/ShareButton';
@@ -11,11 +14,14 @@ import { deleteQuestion } from '@api/questions/deleteQuestion';
 import getUserData from '@api/subjects/getUserData';
 import { useAsync } from '@hooks/useAsync';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
+import { useCheckAuth } from '@hooks/useCheckAuth';
 import useScrollToTop from '@hooks/useScrollToTop';
 import { useSNSShare } from '@hooks/useSNSShare';
 import { useToggle } from '@hooks/useToggle';
 
 const AnswerPage = () => {
+  const navigate = useNavigate();
+  const { isUser, navigate: redirectUser } = useCheckAuth();
   const [rerenderTrigger, toggleRerenderTrigger] = useToggle();
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const userId = localStorage.getItem('userId');
@@ -29,6 +35,13 @@ const AnswerPage = () => {
 
     toggleRerenderTrigger();
   };
+
+  useEffect(() => {
+    if (!isUser) {
+      redirectUser('/');
+      alert('접근 권한이 없습니다.');
+    }
+  }, [isUser, redirectUser]);
 
   return (
     <StBackground>
