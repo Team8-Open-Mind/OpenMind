@@ -23,7 +23,8 @@ import { useAsync_V2 } from '../../hooks/useAsync_V2';
 
 const AnswerPage = () => {
   const [rerenderTrigger, toggleRerenderTrigger] = useToggle();
-  const [requestType, setRequestType] = useState('mount'); // 'default' | 'mount' | 'delete' | 'deleteAll' | 'edit' | 'reply' ---> 전부 다 처음부터 불러올 거
+  // const [requestType, setRequestType] = useState('mount'); // 'default' | 'mount' | 'delete' | 'deleteAll' | 'edit' | 'reply' ---> 전부 다 처음부터 불러올 거
+  const [requestType] = useState('mount'); // 'default' | 'mount' | 'delete' | 'deleteAll' | 'edit' | 'reply' ---> 전부 다 처음부터 불러올 거
   const [answerLists, setAnswerLists] = useState([]);
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const { intersectionObserveTargetRef, isIntersecting } = useInView();

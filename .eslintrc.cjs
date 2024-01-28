@@ -45,6 +45,7 @@ module.exports = {
       },
     ],
     'no-unused-vars': 'error',
+    'no-alert': 'off',
     'no-console': 'off',
     'react/function-component-definition': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],

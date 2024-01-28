@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useEffect, useState } from 'react';
 
 import PortalContainer from '@components/portal/Portal';
@@ -11,9 +12,9 @@ const TestPage = () => {
   const { isModalOpen, toggleModal } = useCloseModal();
   // const {  ModalComponent, ModalInfo, isModalOpen, toggleAndSetModal } = useModalComponent();
 
-  const [userName, setUserName] = useState('');
-  const [userProfile, setUserProfile] = useState(PROFILE_SAMPLE);
-  const [createdAt, setCreatedAt] = useState('');
+  const [, setUserName] = useState('');
+  const [, setUserProfile] = useState(PROFILE_SAMPLE);
+  const [, setCreatedAt] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {

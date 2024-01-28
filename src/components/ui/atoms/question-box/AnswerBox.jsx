@@ -24,7 +24,7 @@ const AnswerBox = ({
   userProfile = PROFILE_SAMPLE,
   userName,
 }) => {
-  const [editTypeState, setEditTypeState] = useState({
+  const [, setEditTypeState] = useState({
     isEdit: false,
   });
   const [isEdit, setIsEdit] = useToggle();
