@@ -7,7 +7,7 @@ import Button from '../button/Button';
 import InputTextArea from '../input/input-text-area/InputTextArea';
 import RejectReplyButton from '../reject-reply/RejectReplyButton';
 
-const ReplyBox = ({ toggleRerenderTrigger, questionId }) => {
+const ReplyBox = ({ setRequestType, questionId }) => {
   const [replyValue, setReplyValue] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const { setAsyncFunction: postAnswerAsync } = useAsync(postAnswer);
@@ -28,7 +28,7 @@ const ReplyBox = ({ toggleRerenderTrigger, questionId }) => {
   const handleReplySubmitClick = async () => {
     const isRejected = false;
     const res = await postAnswerAsync(questionId, replyValue, isRejected);
-    toggleRerenderTrigger();
+    setRequestType('reply');
 
     return res;
   };
@@ -37,7 +37,7 @@ const ReplyBox = ({ toggleRerenderTrigger, questionId }) => {
     const content = '거절된 질문입니다.';
     const isRejected = true;
     const res = await setAsyncReplyRejectFunction(questionId, content, isRejected);
-    toggleRerenderTrigger();
+    setRequestType('reject');
 
     return res;
   };

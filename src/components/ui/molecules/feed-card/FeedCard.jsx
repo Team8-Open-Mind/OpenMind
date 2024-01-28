@@ -7,7 +7,7 @@ import QuestionBox from '@components/ui/atoms/question-box/QuestionBox';
 import { feedCardType } from '@utils/card-type/feedCardType';
 import { timeStamp } from '@utils/time/timeStamp';
 
-const FeedCard = ({ path, toggleRerenderTrigger, onDeleteCard, answerResult, userName, userProfile }) => {
+const FeedCard = ({ path, setRequestType, onDeleteCard, answerResult, userName, userProfile }) => {
   return (
     <StFeedCard>
       <BadgeBox
@@ -15,11 +15,12 @@ const FeedCard = ({ path, toggleRerenderTrigger, onDeleteCard, answerResult, use
         onDeleteCard={onDeleteCard}
         value={feedCardType(answerResult?.answer)}
         questionId={answerResult?.id}
+        setRequestType={setRequestType}
       />
       <QuestionBox question={answerResult?.content} elapsedTime={timeStamp(answerResult?.createdAt)} />
       <AnswerBox
         path={path}
-        toggleRerenderTrigger={toggleRerenderTrigger}
+        setRequestType={setRequestType}
         answerId={answerResult?.answer?.id}
         questionId={answerResult?.id}
         answerResult={answerResult}

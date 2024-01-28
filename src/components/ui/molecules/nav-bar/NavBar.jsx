@@ -24,7 +24,7 @@ const NavBar = () => {
   return (
     <StNavBar className={myId !== null ? 'log-in' : null}>
       <Logo onClickHandler={handleToMain} />
-      {myId !== null ? (
+      {myId ? (
         <StCategory>
           <button type='button' onClick={handleToAnswer}>
             받은 질문

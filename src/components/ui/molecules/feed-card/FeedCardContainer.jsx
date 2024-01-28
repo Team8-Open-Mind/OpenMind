@@ -16,14 +16,13 @@ import { useConfirmAlert } from '@hooks/useConfirmAlert';
 import FeedCard from './FeedCard';
 
 const FeedCardContainer = ({
-  toggleRerenderTrigger,
   onDeleteCard,
   cardLength,
   userName,
   userProfile,
   answerResults,
   userId,
-  // setRequestType,
+  setRequestType,
 }) => {
   const { isModalOpen, toggleModal } = useCloseModal();
   const { isDeleteOpen, toggleDeleteCard } = useCloseModal();
@@ -34,8 +33,7 @@ const FeedCardContainer = ({
 
   const handleDeleteAllClick = async () => {
     await setAsyncFunction(userId);
-    toggleRerenderTrigger();
-    // setRequestType('deleteAll');
+    setRequestType('deleteAll');
 
     localStorage.removeItem('userId', null);
     navigate('/');
@@ -71,7 +69,7 @@ const FeedCardContainer = ({
         {answerResults?.map((answerResult) => {
           return (
             <FeedCard
-              toggleRerenderTrigger={toggleRerenderTrigger}
+              setRequestType={setRequestType}
               onDeleteCard={onDeleteCard}
               key={answerResult.id}
               answerResult={answerResult}
