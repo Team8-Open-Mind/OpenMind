@@ -19,7 +19,7 @@ const NavBar = () => {
       <Logo onClickHandler={handleRedirectMainClick} />
       <StCategory>
         <Link to={`/post/${id}/answer`}>받은 질문</Link>
-        <Link to='/'>질문하기</Link>
+        <Link to='/list'>질문하기</Link>
       </StCategory>
     </StNavBar>
   );
