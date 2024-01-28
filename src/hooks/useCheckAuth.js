@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export const useCheckAuth = () => {
-  const location = useLocation();
+  const { id } = useParams();
   const navigate = useNavigate();
-  const userIdMatch = location.pathname.match(/\/post\/(\d+)\/answer/);
-  const userId = userIdMatch ? userIdMatch[1] : null;
+  const userId = id;
   const storedUserId = localStorage.getItem('userId');
   const [isUser, setIsUser] = useState(false);
 
