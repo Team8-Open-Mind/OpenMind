@@ -33,10 +33,10 @@ const useCloseModal = () => {
       }
     };
 
-    window.addEventListener('mousedown', closeModal);
+    document.addEventListener('mousedown', closeModal);
 
     return () => {
-      window.removeEventListener('mousedown', closeModal);
+      document.removeEventListener('mousedown', closeModal);
     };
   }, [isModalOpen, toggleModal]);
 
