@@ -25,11 +25,9 @@ const ListPage = () => {
       <StNavWrapper>
         <StNav>
           <Logo onClickHandler={() => navigate('/')} />
-          {id ? (
-            <Button theme='brown20' arrow onClickHandler={navigateToAnswerPage}>
-              답변하러 가기
-            </Button>
-          ) : null}
+          <Button theme='brown20' arrow onClickHandler={navigateToAnswerPage}>
+            답변하러 가기
+          </Button>
         </StNav>
       </StNavWrapper>
       <ListContents />
