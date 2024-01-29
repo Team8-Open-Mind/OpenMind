@@ -12,6 +12,7 @@ import AddQuestionModal from '@components/ui/molecules/modal/AddQuestionModal';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 import DocumentTitle from '@layout/document-title/DocumentTitle';
 import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
+import Toast from '@components/ui/atoms/toast/Toast';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';
 import getUserData from '@api/subjects/getUserData';
@@ -38,6 +39,11 @@ const QuestFeedPage = () => {
   const [isVisible, handleScrollToTop] = useScrollToTop();
   // const { isModalOpen, toggleAndSetModal, ModalComponent } = useModalComponent();
   const { isModalOpen, modalRef, toggleModal } = useCloseModal();
+  const { isModalOpen: isToastOpen, toggleModal: toggleToast } = useCloseModal();
+
+  const handleToast = () => {
+    toggleToast();
+  };
 
   const [{ nextLimit, nextOffset }, setNext] = useState({
     nextOffset: 0,
@@ -101,7 +107,13 @@ const QuestFeedPage = () => {
           <img className='user-profile' src={userInfo?.imageSource} alt='프로필' />
           <span className='pageName'>{userInfo?.name}</span>
           <StSnsWrapper>
-            <ShareButton iconName='clipboard' onClickHandler={copyUrl} />
+            <ShareButton
+              iconName='clipboard'
+              onClickHandler={() => {
+                copyUrl();
+                handleToast();
+              }}
+            />
             <ShareButton iconName='kakao' onClickHandler={shareToKakaotalk} />
             <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
           </StSnsWrapper>
@@ -152,6 +164,7 @@ const QuestFeedPage = () => {
             toggleModal={toggleModal}
           />
         )}
+        {isToastOpen && <Toast closeModal={toggleToast}>URL이 복사되었습니다.</Toast>}
       </PortalContainer>
     </>
   );
