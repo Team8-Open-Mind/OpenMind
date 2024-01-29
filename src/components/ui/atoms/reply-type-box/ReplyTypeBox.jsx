@@ -34,7 +34,7 @@ const ReplyBox = ({ setRequestType, questionId }) => {
   };
 
   const handleReplyRejectClick = async () => {
-    const content = '거절된 질문입니다.';
+    const content = '내용을 입력해 답변하시거나 수정 취소 버튼을 눌러주세요.';
     const isRejected = true;
     const res = await setAsyncReplyRejectFunction(questionId, content, isRejected);
     setRequestType('reject');
