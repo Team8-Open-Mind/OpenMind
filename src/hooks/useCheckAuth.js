@@ -10,12 +10,12 @@ export const useCheckAuth = () => {
 
   // userId와 storedUerId 값이 둘 다 존재하는데 두 값이 서로 다를 경우
   useEffect(() => {
-    if (userId !== storedUserId) {
-      // 로그인된 user가 아님
-      setIsUser(false);
-    } else {
+    if (userId === storedUserId) {
       // 로그인된 user가 맞음
       setIsUser(true);
+    } else {
+      // 로그인된 user가 아님
+      setIsUser(false);
     }
   }, [storedUserId, userId]);
 
