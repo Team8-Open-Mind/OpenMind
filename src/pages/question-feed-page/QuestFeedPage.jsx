@@ -10,6 +10,7 @@ import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 import AddQuestionModal from '@components/ui/molecules/modal/AddQuestionModal';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
+import DocumentTitle from '@layout/document-title/DocumentTitle';
 import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';
@@ -91,6 +92,7 @@ const QuestFeedPage = () => {
 
   return (
     <>
+      <DocumentTitle>질문 모아보기 페이지</DocumentTitle>
       <StBackground>
         <NavBar />
         <StQuestFeedPageWrapper>
