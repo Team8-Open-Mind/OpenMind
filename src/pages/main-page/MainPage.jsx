@@ -45,6 +45,7 @@ const MainPage = () => {
       <StMainWrapper>
         <Logo pcWidth='46.3rem' pcHeight='18rem' width='25.1rem' height='9.8rem' />
         <StInputName>
+          <StDescription>질문을 받으려면 이름을 입력해 주세요</StDescription>
           <InputField onChangeHandler={handleInputChange} />
           <Button width='100%' onClickHandler={() => handlePost(userName)}>
             질문 받기
@@ -104,4 +105,9 @@ const StButtonPosition = styled.div`
     top: 50px;
     right: 5vh;
   }
+`;
+
+const StDescription = styled.p`
+  font-size: 1.6rem;
+  margin-bottom: 4px;
 `;

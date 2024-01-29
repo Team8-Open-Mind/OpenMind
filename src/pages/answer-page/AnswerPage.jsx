@@ -6,6 +6,7 @@ import ShareButton from '@components/ui/atoms/button/share-button/ShareButton';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
+import DocumentTitle from '@layout/document-title/DocumentTitle';
 import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';
@@ -95,43 +96,46 @@ const AnswerPage = () => {
   };
 
   return (
-    <StBackground>
-      <NavBar />
-      <StQuestFeedPageWrapper>
-        <img className='user-profile' src={userInfo?.imageSource} alt='프로필' />
-        <span className='pageName'>{userInfo?.name}</span>
-        <StSnsWrapper>
-          <ShareButton iconName='clipboard' onClickHandler={copyUrl} />
-          <ShareButton iconName='kakao' onClickHandler={shareToKakaotalk} />
-          <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
-        </StSnsWrapper>
-      </StQuestFeedPageWrapper>
-      {userInfo?.questionCount === 0 ? (
-        <NoLists>아직 질문이 없습니다</NoLists>
-      ) : (
-        <>
-          <FeedCardContainer
-            setRequestType={setRequestType}
-            onDeleteCard={handleDeleteCard}
-            cardLength={userInfo?.questionCount}
-            userId={userId}
-            userName={userInfo?.name}
-            userProfile={userInfo?.imageSource}
-            answerResults={answerLists}
-            intersectionObserveTargetRef={intersectionObserveTargetRef}
-          />
-          <p
-            ref={intersectionObserveTargetRef}
-            css={css`
-              position: relative;
-              width: 100%;
-              height: 0;
-            `}
-          />
-          {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
-        </>
-      )}
-    </StBackground>
+    <>
+      <DocumentTitle>답변하기 페이지</DocumentTitle>
+      <StBackground>
+        <NavBar />
+        <StQuestFeedPageWrapper>
+          <img className='user-profile' src={userInfo?.imageSource} alt='프로필' />
+          <span className='pageName'>{userInfo?.name}</span>
+          <StSnsWrapper>
+            <ShareButton iconName='clipboard' onClickHandler={copyUrl} />
+            <ShareButton iconName='kakao' onClickHandler={shareToKakaotalk} />
+            <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
+          </StSnsWrapper>
+        </StQuestFeedPageWrapper>
+        {userInfo?.questionCount === 0 ? (
+          <NoLists>아직 질문이 없습니다</NoLists>
+        ) : (
+          <>
+            <FeedCardContainer
+              setRequestType={setRequestType}
+              onDeleteCard={handleDeleteCard}
+              cardLength={userInfo?.questionCount}
+              userId={userId}
+              userName={userInfo?.name}
+              userProfile={userInfo?.imageSource}
+              answerResults={answerLists}
+              intersectionObserveTargetRef={intersectionObserveTargetRef}
+            />
+            <p
+              ref={intersectionObserveTargetRef}
+              css={css`
+                position: relative;
+                width: 100%;
+                height: 0;
+              `}
+            />
+            {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
+          </>
+        )}
+      </StBackground>
+    </>
   );
 };
 

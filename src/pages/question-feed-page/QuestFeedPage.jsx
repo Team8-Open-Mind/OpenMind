@@ -10,6 +10,7 @@ import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 import AddQuestionModal from '@components/ui/molecules/modal/AddQuestionModal';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
+import DocumentTitle from '@layout/document-title/DocumentTitle';
 import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';
@@ -17,6 +18,7 @@ import getUserData from '@api/subjects/getUserData';
 import { useAsync_V2 } from '@hooks/useAsync_V2';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 // import { useModalComponent } from '@hooks/useModalComponent';
+import { useCheckAuth } from '@hooks/useCheckAuth';
 import { useCloseModal } from '@hooks/useCloseModal';
 import { useInView } from '@hooks/useInView';
 import useScrollToTop from '@hooks/useScrollToTop';
@@ -26,6 +28,7 @@ import { getQueryStringObject } from '@utils/url/getQueryStringObject';
 const QuestFeedPage = () => {
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const { id: userId } = useParams();
+  const { isUser } = useCheckAuth();
 
   const [requestType, setRequestType] = useState('mount'); // 'default' | 'mount' | 'delete' | 'deleteAll' | 'edit' | 'reply' ---> 전부 다 처음부터 불러올 거
   const [answerLists, setAnswerLists] = useState([]);
@@ -91,6 +94,7 @@ const QuestFeedPage = () => {
 
   return (
     <>
+      <DocumentTitle>질문 모아보기 페이지</DocumentTitle>
       <StBackground>
         <NavBar />
         <StQuestFeedPageWrapper>
@@ -125,16 +129,18 @@ const QuestFeedPage = () => {
             />
           </>
         )}
-        <FloatingWriteQuestionButton
-          onClick={toggleModal}
-          css={
-            isVisible
-              ? css`
-                  right: 80px;
-                `
-              : null
-          }
-        />
+        {isUser ? null : (
+          <FloatingWriteQuestionButton
+            onClick={toggleModal}
+            css={
+              isVisible
+                ? css`
+                    right: 80px;
+                  `
+                : null
+            }
+          />
+        )}
         {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
       </StBackground>
       <PortalContainer>
