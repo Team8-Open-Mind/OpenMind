@@ -10,13 +10,16 @@ import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 import AddQuestionModal from '@components/ui/molecules/modal/AddQuestionModal';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
+import DocumentTitle from '@layout/document-title/DocumentTitle';
 import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
+import Toast from '@components/ui/atoms/toast/Toast';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';
 import getUserData from '@api/subjects/getUserData';
 import { useAsync_V2 } from '@hooks/useAsync_V2';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 // import { useModalComponent } from '@hooks/useModalComponent';
+import { useCheckAuth } from '@hooks/useCheckAuth';
 import { useCloseModal } from '@hooks/useCloseModal';
 import { useInView } from '@hooks/useInView';
 import useScrollToTop from '@hooks/useScrollToTop';
@@ -26,6 +29,7 @@ import { getQueryStringObject } from '@utils/url/getQueryStringObject';
 const QuestFeedPage = () => {
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const { id: userId } = useParams();
+  const { isUser } = useCheckAuth();
 
   const [requestType, setRequestType] = useState('mount'); // 'default' | 'mount' | 'delete' | 'deleteAll' | 'edit' | 'reply' ---> 전부 다 처음부터 불러올 거
   const [answerLists, setAnswerLists] = useState([]);
@@ -35,6 +39,11 @@ const QuestFeedPage = () => {
   const [isVisible, handleScrollToTop] = useScrollToTop();
   // const { isModalOpen, toggleAndSetModal, ModalComponent } = useModalComponent();
   const { isModalOpen, modalRef, toggleModal } = useCloseModal();
+  const { isModalOpen: isToastOpen, toggleModal: toggleToast } = useCloseModal();
+
+  const handleToast = () => {
+    toggleToast();
+  };
 
   const [{ nextLimit, nextOffset }, setNext] = useState({
     nextOffset: 0,
@@ -91,13 +100,20 @@ const QuestFeedPage = () => {
 
   return (
     <>
+      <DocumentTitle>질문 모아보기 페이지</DocumentTitle>
       <StBackground>
         <NavBar />
         <StQuestFeedPageWrapper>
           <img className='user-profile' src={userInfo?.imageSource} alt='프로필' />
           <span className='pageName'>{userInfo?.name}</span>
           <StSnsWrapper>
-            <ShareButton iconName='clipboard' onClickHandler={copyUrl} />
+            <ShareButton
+              iconName='clipboard'
+              onClickHandler={() => {
+                copyUrl();
+                handleToast();
+              }}
+            />
             <ShareButton iconName='kakao' onClickHandler={shareToKakaotalk} />
             <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
           </StSnsWrapper>
@@ -125,16 +141,18 @@ const QuestFeedPage = () => {
             />
           </>
         )}
-        <FloatingWriteQuestionButton
-          onClick={toggleModal}
-          css={
-            isVisible
-              ? css`
-                  right: 80px;
-                `
-              : null
-          }
-        />
+        {isUser ? null : (
+          <FloatingWriteQuestionButton
+            onClick={toggleModal}
+            css={
+              isVisible
+                ? css`
+                    right: 80px;
+                  `
+                : null
+            }
+          />
+        )}
         {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
       </StBackground>
       <PortalContainer>
@@ -146,6 +164,7 @@ const QuestFeedPage = () => {
             toggleModal={toggleModal}
           />
         )}
+        {isToastOpen && <Toast closeModal={toggleToast}>URL이 복사되었습니다.</Toast>}
       </PortalContainer>
     </>
   );

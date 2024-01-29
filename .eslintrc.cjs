@@ -75,6 +75,7 @@ module.exports = {
     camelcase: 'off',
     'import/prefer-default-export': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'no-plusplus': 'off',
     'consistent-return': 'off',
     'import/order': [
       'error',

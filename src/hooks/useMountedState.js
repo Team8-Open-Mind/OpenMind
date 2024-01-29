@@ -18,4 +18,4 @@ const useMountedState = () => {
   return get;
 };
 
-export default useMountedState;
+export { useMountedState };
