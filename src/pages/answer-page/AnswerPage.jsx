@@ -32,6 +32,7 @@ const AnswerPage = () => {
   const [isVisible, handleScrollToTop] = useScrollToTop();
   const userId = localStorage.getItem('userId');
   const { isModalOpen, toggleModal } = useCloseModal();
+  const { isModalOpen: isToastOpen, toggleModal: toggleToast } = useCloseModal();
 
   const [{ nextLimit, nextOffset }, setNext] = useState({
     nextOffset: 0,
@@ -94,7 +95,7 @@ const AnswerPage = () => {
   };
 
   const handleToast = () => {
-    toggleModal();
+    toggleToast();
   };
 
   return (
@@ -143,7 +144,10 @@ const AnswerPage = () => {
           </>
         )}
       </StBackground>
-      <PortalContainer>{isModalOpen && <Toast closeModal={toggleModal}>삭제 되었습니다.</Toast>}</PortalContainer>
+      <PortalContainer>
+        {isModalOpen && <Toast closeModal={toggleModal}>삭제 되었습니다.</Toast>}
+        {isToastOpen && <Toast closeModal={toggleToast}>URL이 복사되었습니다.</Toast>}
+      </PortalContainer>
     </>
   );
 };
