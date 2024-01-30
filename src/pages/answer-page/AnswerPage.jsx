@@ -93,22 +93,32 @@ const AnswerPage = () => {
     toggleModal();
   };
 
+  const handleToast = () => {
+    toggleModal();
+  };
+
   return (
     <>
       <DocumentTitle>답변하기 페이지</DocumentTitle>
       <StBackground>
-        <NavBar />
+        <NavBar page='answer' />
         <StQuestFeedPageWrapper>
           <img className='user-profile' src={userInfo?.imageSource} alt='프로필' />
           <span className='pageName'>{userInfo?.name}</span>
           <StSnsWrapper>
-            <ShareButton iconName='clipboard' onClickHandler={copyUrl} />
+            <ShareButton
+              iconName='clipboard'
+              onClickHandler={() => {
+                copyUrl();
+                handleToast();
+              }}
+            />
             <ShareButton iconName='kakao' onClickHandler={shareToKakaotalk} />
             <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
           </StSnsWrapper>
         </StQuestFeedPageWrapper>
         {userInfo?.questionCount === 0 ? (
-          <NoLists>아직 질문이 없습니다</NoLists>
+          <NoLists type='feedPage'>아직 질문이 없습니다</NoLists>
         ) : (
           <>
             <FeedCardContainer
