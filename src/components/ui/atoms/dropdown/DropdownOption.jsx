@@ -6,13 +6,19 @@ import { useDropdownProvider } from './context/DropdownProvider';
 
 /**
  *
- * @param {{ children: string | number; callbackFn: VoidFunction; selected?: boolean; disabled?: boolean}} DropdownOptionProps
+ * @param {{ children: string | number; onSelect: VoidFunction; selected?: boolean; disabled?: boolean}} DropdownOptionProps
  */
-const DropdownOption = ({ children, selected, disabled }) => {
-  const { changeSelectedOption, setSelectedOption } = useDropdownProvider();
+const DropdownOption = ({ children, selected, disabled, onSelect }) => {
+  const { setSelectedOption, toggleDropdown, isDropdownOpen } = useDropdownProvider();
 
-  const onClickHandler = () => {
-    if (!disabled) changeSelectedOption(children);
+  const onClickHandler = (selectedOptionText) => {
+    if (!disabled) {
+      if (typeof onSelect === 'function') onSelect(selectedOptionText);
+
+      setSelectedOption(selectedOptionText);
+
+      if (isDropdownOpen) toggleDropdown();
+    }
   };
 
   useEffect(() => {
@@ -21,7 +27,7 @@ const DropdownOption = ({ children, selected, disabled }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <StDropdownOption onClick={onClickHandler}>{children}</StDropdownOption>;
+  return <StDropdownOption onClick={() => onClickHandler(children)}>{children}</StDropdownOption>;
 };
 
 export default DropdownOption;
