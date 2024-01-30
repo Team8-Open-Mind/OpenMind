@@ -7,16 +7,19 @@ import { useCloseModal } from '@hooks/useCloseModal';
 
 const DropdownContext = createContext();
 
-const DropdownProvider = ({ children }) => {
+const DropdownProvider = ({ children, callbackFn }) => {
   const { toggleModal: toggleDropdown, isModalOpen: isDropdownOpen, modalRef: dropdownRef } = useCloseModal();
   const [selectedOption, setSelectedOption] = useState();
 
   const changeSelectedOption = useCallback(
     (selectedOptionText) => {
       setSelectedOption(selectedOptionText);
+
+      if (typeof callbackFn === 'function') callbackFn(selectedOptionText);
+
       toggleDropdown();
     },
-    [toggleDropdown],
+    [toggleDropdown, callbackFn],
   );
 
   return (

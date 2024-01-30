@@ -6,20 +6,18 @@ import { useDropdownProvider } from './context/DropdownProvider';
 
 /**
  *
- * @param {{ children: string | number; callbackFn: VoidFunction; selected?: boolean}} DropdownOptionProps
+ * @param {{ children: string | number; callbackFn: VoidFunction; selected?: boolean; disabled?: boolean}} DropdownOptionProps
  */
-const DropdownOption = ({ children, callbackFn, selected }) => {
+const DropdownOption = ({ children, selected, disabled }) => {
   const { changeSelectedOption } = useDropdownProvider();
 
   const onClickHandler = () => {
-    changeSelectedOption(children);
-
-    if (typeof callbackFn === 'function') callbackFn(children);
+    if (!disabled) changeSelectedOption(children);
   };
 
   useEffect(() => {
-    if (selected) changeSelectedOption(children);
-  }, [selected, changeSelectedOption, children]);
+    if (selected && !disabled) changeSelectedOption(children);
+  }, [selected, disabled, changeSelectedOption, children]);
 
   return <StDropdownOption onClick={onClickHandler}>{children}</StDropdownOption>;
 };

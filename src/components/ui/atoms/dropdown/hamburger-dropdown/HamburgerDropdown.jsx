@@ -6,11 +6,11 @@ import Dropdown from '..';
  */
 const HamburgerDropdown = ({ callbackFn }) => {
   return (
-    <Dropdown>
+    <Dropdown callbackFn={callbackFn}>
       <Dropdown.Hamburger />
       <Dropdown.Menu width='9.2rem' positionTop={41} positionRight={-3}>
-        <Dropdown.Option callbackFn={callbackFn}>받은 질문</Dropdown.Option>
-        <Dropdown.Option callbackFn={callbackFn}>질문하기</Dropdown.Option>
+        <Dropdown.Option>받은 질문</Dropdown.Option>
+        <Dropdown.Option>질문하기</Dropdown.Option>
       </Dropdown.Menu>
     </Dropdown>
   );

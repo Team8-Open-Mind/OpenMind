@@ -2,13 +2,17 @@ import { useCallback, useRef, useState } from 'react';
 
 import { useMountedState } from '@hooks/useMountedState';
 
-const useAsyncFn_V2 = ({ asyncFn, onSuccess, onError, deps = [] }) => {
+const useAsyncFn_V2 = ({ asyncFn, onSuccess, onError, onSettled, deps = [] }) => {
   const [{ data, error, isError, isLoading }, setState] = useState({
     isLoading: false,
     data: null,
     isError: false,
     error: new Error(),
   });
+
+  // onSettled로 넘길 ref(항상 최신값을 참조하기 위함)
+  const dataRef = useRef();
+  const errorRef = useRef();
 
   // 맨 마지막 요청만 처리
   const queueRef = useRef(0);
@@ -24,19 +28,31 @@ const useAsyncFn_V2 = ({ asyncFn, onSuccess, onError, deps = [] }) => {
         const res = await asyncFn(...args);
 
         // Todo: res가 undefined일 때도 일단은 onSuccess를 호출하도록 해야 할까? 고민.
-        if (isMounted() && queueRef.current === lastIndexOfQueue && onSuccess && typeof onSuccess === 'function') {
-          onSuccess(res);
+        if (isMounted() && queueRef.current === lastIndexOfQueue) {
+          if (onSuccess && typeof onSuccess === 'function') {
+            onSuccess(res, ...args);
+          }
+
+          dataRef.current = res;
           setState({ data: res, isLoading: false, isError: false });
         }
 
         return res;
       } catch (error) {
-        if (isMounted() && queueRef.current === lastIndexOfQueue && onError && typeof onError === 'function') {
-          onError(error);
+        if (isMounted() && queueRef.current === lastIndexOfQueue) {
+          if (onError && typeof onError === 'function') {
+            onError(error, ...args, data);
+          }
+
+          errorRef.current = error;
           setState({ error, isLoading: false, isError: true });
         }
 
         return error;
+      } finally {
+        if (isMounted() && queueRef.current === lastIndexOfQueue && onSettled && typeof onSettled === 'function') {
+          onSettled(dataRef.current, errorRef.current, ...args);
+        }
       }
     })();
 

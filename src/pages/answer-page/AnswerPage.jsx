@@ -31,7 +31,7 @@ const AnswerPage = () => {
   const { intersectionObserveTargetRef, isIntersecting } = useInView();
   const [isVisible, handleScrollToTop] = useScrollToTop();
   const userId = localStorage.getItem('userId');
-  const { isModalOpen: isToastOpen, toggleModal: toggleToast } = useCloseModal();
+  const { isModalOpen, toggleModal } = useCloseModal();
 
   const [{ nextLimit, nextOffset }, setNext] = useState({
     nextOffset: 0,
@@ -44,11 +44,8 @@ const AnswerPage = () => {
   // mount랑 interset 때 실행
   useAsync_V2({
     deps: [isIntersecting, nextLimit, nextOffset, userId],
-    asyncFn: () => {
-      if (isIntersecting) {
-        return getAnswerLists({ userId, limit: nextLimit, offset: nextOffset });
-      }
-    },
+    enabled: isIntersecting,
+    asyncFn: () => getAnswerLists({ userId, limit: nextLimit, offset: nextOffset }),
     onSuccess: (result) => {
       if (!result || result?.results?.length === 0) return;
 
@@ -70,12 +67,8 @@ const AnswerPage = () => {
   // toggleRerenderTrigger()쓴 부분을 setRequestType('delete'); setRequestType('deleteAll'); 이런 식으로 바꿔주세요.
   useAsync_V2({
     deps: [userId, requestType],
-    asyncFn: () => {
-      // mount나 default 시에는 실행하지 않음.
-      if (requestType === 'mount' || requestType === 'default') return;
-
-      return getAnswerLists({ userId });
-    },
+    enabled: requestType !== 'mount' && requestType !== 'default',
+    asyncFn: () => getAnswerLists({ userId }),
     onSuccess: (result) => {
       if (!result || result?.results?.length === 0) return;
 
@@ -97,6 +90,7 @@ const AnswerPage = () => {
     await setDeleteCard(id);
 
     setRequestType('delete');
+    toggleModal();
   };
 
   const handleToast = () => {
@@ -149,7 +143,7 @@ const AnswerPage = () => {
           </>
         )}
       </StBackground>
-      <PortalContainer>{isToastOpen && <Toast closeModal={toggleToast}>URL이 복사되었습니다.</Toast>}</PortalContainer>
+      <PortalContainer>{isModalOpen && <Toast closeModal={toggleModal}>삭제 되었습니다.</Toast>}</PortalContainer>
     </>
   );
 };
