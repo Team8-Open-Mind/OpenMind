@@ -26,7 +26,6 @@ const FeedCardContainer = ({
   setRequestType,
 }) => {
   const { isModalOpen, toggleModal } = useCloseModal();
-  // const [deleteAllSuccess, setDeleteAllSuccess] = useState(false);
   const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
   const { setAsyncFunction } = useAsync(deleteSubject);
   const navigate = useNavigate();

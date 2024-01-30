@@ -2,8 +2,10 @@ import { useState } from 'react';
 
 import { css, styled } from 'styled-components';
 
+import PortalContainer from '@components/portal/Portal';
 import ShareButton from '@components/ui/atoms/button/share-button/ShareButton';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
+import Toast from '@components/ui/atoms/toast/Toast';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 import DocumentTitle from '@layout/document-title/DocumentTitle';
@@ -14,6 +16,7 @@ import { deleteQuestion } from '@api/questions/deleteQuestion';
 import getUserData from '@api/subjects/getUserData';
 import { useAsync } from '@hooks/useAsync';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
+import { useCloseModal } from '@hooks/useCloseModal';
 import { useInView } from '@hooks/useInView';
 import useScrollToTop from '@hooks/useScrollToTop';
 import { useSNSShare } from '@hooks/useSNSShare';
@@ -28,6 +31,7 @@ const AnswerPage = () => {
   const { intersectionObserveTargetRef, isIntersecting } = useInView();
   const [isVisible, handleScrollToTop] = useScrollToTop();
   const userId = localStorage.getItem('userId');
+  const { isModalOpen, toggleModal } = useCloseModal();
 
   const [{ nextLimit, nextOffset }, setNext] = useState({
     nextOffset: 0,
@@ -93,6 +97,7 @@ const AnswerPage = () => {
     await setDeleteCard(id);
 
     setRequestType('delete');
+    toggleModal();
   };
 
   return (
@@ -135,6 +140,7 @@ const AnswerPage = () => {
           </>
         )}
       </StBackground>
+      <PortalContainer>{isModalOpen && <Toast closeModal={toggleModal}>삭제 되었습니다.</Toast>}</PortalContainer>
     </>
   );
 };
