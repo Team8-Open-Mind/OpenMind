@@ -162,6 +162,7 @@ const StBackground = styled.div`
   background-position: bottom;
   background-attachment: fixed;
   padding-bottom: 142px;
+  padding: 20px;
   min-height: 100%;
 `;
 
