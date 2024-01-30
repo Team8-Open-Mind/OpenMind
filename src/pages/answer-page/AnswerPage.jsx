@@ -44,11 +44,8 @@ const AnswerPage = () => {
   // mount랑 interset 때 실행
   useAsync_V2({
     deps: [isIntersecting, nextLimit, nextOffset, userId],
-    asyncFn: () => {
-      if (isIntersecting) {
-        return getAnswerLists({ userId, limit: nextLimit, offset: nextOffset });
-      }
-    },
+    enabled: isIntersecting,
+    asyncFn: () => getAnswerLists({ userId, limit: nextLimit, offset: nextOffset }),
     onSuccess: (result) => {
       if (!result || result?.results?.length === 0) return;
 
@@ -70,12 +67,8 @@ const AnswerPage = () => {
   // toggleRerenderTrigger()쓴 부분을 setRequestType('delete'); setRequestType('deleteAll'); 이런 식으로 바꿔주세요.
   useAsync_V2({
     deps: [userId, requestType],
-    asyncFn: () => {
-      // mount나 default 시에는 실행하지 않음.
-      if (requestType === 'mount' || requestType === 'default') return;
-
-      return getAnswerLists({ userId });
-    },
+    enabled: requestType !== 'mount' && requestType !== 'default',
+    asyncFn: () => getAnswerLists({ userId }),
     onSuccess: (result) => {
       if (!result || result?.results?.length === 0) return;
 

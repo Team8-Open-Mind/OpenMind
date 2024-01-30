@@ -7,12 +7,12 @@ import PortalContainer from '@components/portal/Portal';
 import FloatingWriteQuestionButton from '@components/ui/atoms/button/floating-button/floating-write-question-button/FloatingWriteQuestionButton';
 import ShareButton from '@components/ui/atoms/button/share-button/ShareButton';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
+import Toast from '@components/ui/atoms/toast/Toast';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 import AddQuestionModal from '@components/ui/molecules/modal/AddQuestionModal';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 import DocumentTitle from '@layout/document-title/DocumentTitle';
 import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
-import Toast from '@components/ui/atoms/toast/Toast';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';
 import getUserData from '@api/subjects/getUserData';
@@ -56,11 +56,8 @@ const QuestFeedPage = () => {
   // mount랑 interset 때 실행
   useAsync_V2({
     deps: [isIntersecting, nextLimit, nextOffset, userId],
-    asyncFn: () => {
-      if (isIntersecting) {
-        return getAnswerLists({ userId, limit: nextLimit, offset: nextOffset });
-      }
-    },
+    enabled: isIntersecting,
+    asyncFn: () => getAnswerLists({ userId, limit: nextLimit, offset: nextOffset }),
     onSuccess: (result) => {
       if (!result || result?.results?.length === 0) return;
 
@@ -77,12 +74,8 @@ const QuestFeedPage = () => {
 
   useAsync_V2({
     deps: [userId, requestType],
-    asyncFn: () => {
-      // mount나 default 시에는 실행하지 않음.
-      if (requestType === 'mount' || requestType === 'default') return;
-
-      return getAnswerLists({ userId });
-    },
+    enabled: requestType !== 'mount' && requestType !== 'default',
+    asyncFn: () => getAnswerLists({ userId }),
     onSuccess: (result) => {
       if (!result || result?.results?.length === 0) return;
 
