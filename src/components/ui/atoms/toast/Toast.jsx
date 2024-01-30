@@ -4,7 +4,6 @@ import { css, keyframes, styled } from 'styled-components';
 
 const Toast = ({ closeModal, children }) => {
   const [show, setShow] = useState(true);
-  console.log(show);
   useEffect(() => {
     const timerId = setTimeout(() => {
       setShow(false);
@@ -53,7 +52,7 @@ const StToast = styled.div`
   animation: ${(props) =>
     props.$show
       ? css`
-          ${fadein} 0.5s, ${fadeout} 0.5s 3.5s
+          ${fadein} 0.5s, ${fadeout} 0.5s 3.55s
         `
       : 'none'};
 
