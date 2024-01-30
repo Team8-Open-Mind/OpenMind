@@ -19,15 +19,8 @@ import { useNavigateToAnswer } from './hooks/useNavigateAnswer';
 const MainPage = () => {
   const [userName, setUserName] = useState(null);
   const { state } = useLocation();
-  const { deleteSuccess } = state || {};
-  const { isModalOpen, toggleModal } = useCloseModal();
-  // const USER_API = import.meta.env.VITE_SUBJECTS_API;
-
-  useEffect(() => {
-    if (deleteSuccess) {
-      toggleModal();
-    }
-  }, [deleteSuccess, toggleModal]);
+  const { deleteAllSuccess } = state || {};
+  const { isModalOpen, toggleModal } = useCloseModal(deleteAllSuccess);
 
   const navigate = useNavigate();
 

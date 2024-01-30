@@ -27,7 +27,7 @@ const FeedCardContainer = ({
   setRequestType,
 }) => {
   const { isModalOpen, toggleModal } = useCloseModal();
-  const [deleteAllSuccess, setDeleteAllSuccess] = useState(false);
+  // const [deleteAllSuccess, setDeleteAllSuccess] = useState(false);
   const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
   const { setAsyncFunction } = useAsync(deleteSubject);
   const navigate = useNavigate();
@@ -39,10 +39,9 @@ const FeedCardContainer = ({
       if (isUser) {
         await setAsyncFunction(userId);
         setRequestType('deleteAll');
-        setDeleteAllSuccess(true);
         localStorage.removeItem('userId', null);
         navigate('/', {
-          state: { deleteAllSuccess },
+          state: { deleteAllSuccess: true },
         });
       } else {
         alert('삭제 권한이 없습니다.');
