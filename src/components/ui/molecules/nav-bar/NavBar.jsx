@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Logo from '@components/ui/atoms/logo/Logo';
 
-const NavBar = () => {
+const NavBar = ({ page }) => {
   const navigate = useNavigate();
 
   const myId = localStorage.getItem('userId');
@@ -25,11 +25,11 @@ const NavBar = () => {
     <StNavBar className={myId !== null ? 'log-in' : null}>
       <Logo onClickHandler={handleToMain} />
       {myId ? (
-        <StCategory>
-          <button type='button' onClick={handleToAnswer}>
+        <StCategory page={page}>
+          <button className='answer' type='button' onClick={handleToAnswer}>
             받은 질문
           </button>
-          <button type='button' onClick={handleToQuest}>
+          <button className='question' type='button' onClick={handleToQuest}>
             질문하기
           </button>
         </StCategory>
@@ -70,11 +70,15 @@ const StCategory = styled.div`
     letter-spacing: -2px;
   }
 
-  & :hover {
-    color: ${({ theme }) => theme.color.Brown['30']};
+  & .answer {
+    color: ${({ theme, page }) => (page === 'answer' ? theme.color.Brown['30'] : theme.color.Brown['40'])};
   }
 
-  & :active {
+  & .question {
+    color: ${({ theme, page }) => (page === 'question' ? theme.color.Brown['30'] : theme.color.Brown['40'])};
+  }
+
+  & :hover {
     color: ${({ theme }) => theme.color.Brown['30']};
   }
 `;

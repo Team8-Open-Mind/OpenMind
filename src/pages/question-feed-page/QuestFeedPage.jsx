@@ -95,7 +95,7 @@ const QuestFeedPage = () => {
     <>
       <DocumentTitle>질문 모아보기 페이지</DocumentTitle>
       <StBackground>
-        <NavBar />
+        <NavBar page='question' />
         <StQuestFeedPageWrapper>
           <img className='user-profile' src={userInfo?.imageSource} alt='프로필' />
           <span className='pageName'>{userInfo?.name}</span>
