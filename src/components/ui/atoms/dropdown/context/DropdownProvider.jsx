@@ -17,13 +17,16 @@ const DropdownProvider = ({ children, callbackFn }) => {
 
       if (typeof callbackFn === 'function') callbackFn(selectedOptionText);
 
-      toggleDropdown();
+      if (isDropdownOpen) toggleDropdown();
     },
-    [toggleDropdown, callbackFn],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isDropdownOpen],
   );
 
   return (
-    <DropdownContext.Provider value={{ isOpen: isDropdownOpen, toggleDropdown, selectedOption, changeSelectedOption }}>
+    <DropdownContext.Provider
+      value={{ isOpen: isDropdownOpen, toggleDropdown, selectedOption, changeSelectedOption, setSelectedOption }}
+    >
       <div
         ref={dropdownRef}
         css={css`
