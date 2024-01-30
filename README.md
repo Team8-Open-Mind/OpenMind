@@ -1,3 +1,6 @@
+# ✨ 배포 주소
+![OPEN MIND 배포 사이트 보러가기](https://rococo-kleicha-e4e6ed.netlify.app/)
+
 # 💻 프로젝트 실행시키기
 1. 프로젝트를 clone 하세요.
    ```
