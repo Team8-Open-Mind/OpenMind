@@ -1,21 +1,34 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
+import PortalContainer from '@components/portal/Portal';
 import Button from '@components/ui/atoms/button/Button';
 import InputField from '@components/ui/atoms/input/input-field/InputField';
 import Logo from '@components/ui/atoms/logo/Logo';
+import Toast from '@components/ui/atoms/toast/Toast';
 import { StBackground } from '@pages/question-feed-page/QuestFeedPage';
 
 import { postNewFeedId } from '@api/subjects/postNewFeedId';
 import { useAsync } from '@hooks/useAsync';
+import { useCloseModal } from '@hooks/useCloseModal';
 
 import { useNavigateToAnswer } from './hooks/useNavigateAnswer';
 
 const MainPage = () => {
   const [userName, setUserName] = useState(null);
+  const { state } = useLocation();
+  const { deleteSuccess } = state || {};
+  const { isModalOpen, toggleModal } = useCloseModal();
   // const USER_API = import.meta.env.VITE_SUBJECTS_API;
+
+  useEffect(() => {
+    if (deleteSuccess) {
+      toggleModal();
+    }
+  }, [deleteSuccess, toggleModal]);
+
   const navigate = useNavigate();
 
   const navigateToList = () => {
@@ -36,23 +49,26 @@ const MainPage = () => {
   useNavigateToAnswer(result, navigate);
 
   return (
-    <StBackground>
-      <StButtonPosition>
-        <Button theme='brown10' arrow='true' onClickHandler={navigateToList}>
-          질문하러 가기
-        </Button>
-      </StButtonPosition>
-      <StMainWrapper>
-        <Logo pcWidth='46.3rem' pcHeight='18rem' width='25.1rem' height='9.8rem' />
-        <StInputName>
-          <StDescription>질문을 받으려면 이름을 입력해 주세요</StDescription>
-          <InputField onChangeHandler={handleInputChange} />
-          <Button width='100%' onClickHandler={() => handlePost(userName)}>
-            질문 받기
+    <>
+      <StBackground>
+        <StButtonPosition>
+          <Button theme='brown10' arrow='true' onClickHandler={navigateToList}>
+            질문하러 가기
           </Button>
-        </StInputName>
-      </StMainWrapper>
-    </StBackground>
+        </StButtonPosition>
+        <StMainWrapper>
+          <Logo pcWidth='46.3rem' pcHeight='18rem' width='25.1rem' height='9.8rem' />
+          <StInputName>
+            <StDescription>질문을 받으려면 이름을 입력해 주세요</StDescription>
+            <InputField onChangeHandler={handleInputChange} />
+            <Button width='100%' onClickHandler={() => handlePost(userName)}>
+              질문 받기
+            </Button>
+          </StInputName>
+        </StMainWrapper>
+      </StBackground>
+      <PortalContainer>{isModalOpen && <Toast closeModal={toggleModal}>삭제 되었습니다.</Toast>}</PortalContainer>
+    </>
   );
 };
 
