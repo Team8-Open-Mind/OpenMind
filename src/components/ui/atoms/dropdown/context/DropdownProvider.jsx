@@ -7,9 +7,9 @@ import { useCloseModal } from '@hooks/useCloseModal';
 
 const DropdownContext = createContext();
 
-const DropdownProvider = ({ children, callbackFn }) => {
+const DropdownProvider = ({ children, callbackFn, initialSelectedValue }) => {
   const { toggleModal: toggleDropdown, isModalOpen: isDropdownOpen, modalRef: dropdownRef } = useCloseModal();
-  const [selectedOption, setSelectedOption] = useState();
+  const [selectedOption, setSelectedOption] = useState(initialSelectedValue);
 
   const changeSelectedOption = useCallback(
     (selectedOptionText) => {
