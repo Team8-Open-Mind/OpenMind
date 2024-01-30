@@ -94,7 +94,7 @@ const AnswerPage = () => {
   };
 
   const handleToast = () => {
-    toggleToast();
+    toggleModal();
   };
 
   return (
