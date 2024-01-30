@@ -12,8 +12,8 @@ import { useToggle } from './useToggle';
  * </div>
  * ```
  */
-const useCloseModal = () => {
-  const [isModalOpen, toggleModal] = useToggle();
+const useCloseModal = (initialValue = false) => {
+  const [isModalOpen, toggleModal] = useToggle(initialValue);
 
   /**
    * 모달이나 드롭다운의 최상위 태그의 ref에 걸어줘야 한다.
