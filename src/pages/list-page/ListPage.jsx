@@ -21,7 +21,7 @@ const ListPage = () => {
 
   return (
     <StWrap>
-      <DocumentTitle>오픈마인드 질문대상 선택 페이지</DocumentTitle>
+      <DocumentTitle>질문대상 선택 페이지</DocumentTitle>
       <StNavWrapper>
         <StNav>
           <Logo onClickHandler={() => navigate('/')} />

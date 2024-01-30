@@ -8,6 +8,7 @@ import Button from '@components/ui/atoms/button/Button';
 import InputField from '@components/ui/atoms/input/input-field/InputField';
 import Logo from '@components/ui/atoms/logo/Logo';
 import Toast from '@components/ui/atoms/toast/Toast';
+import DocumentTitle from '@layout/document-title/DocumentTitle';
 import { StBackground } from '@pages/question-feed-page/QuestFeedPage';
 
 import { postNewFeedId } from '@api/subjects/postNewFeedId';
@@ -43,6 +44,7 @@ const MainPage = () => {
 
   return (
     <>
+      <DocumentTitle>이름 등록 페이지</DocumentTitle>
       <StBackground>
         <StButtonPosition>
           <Button theme='brown10' arrow='true' onClickHandler={navigateToList}>
