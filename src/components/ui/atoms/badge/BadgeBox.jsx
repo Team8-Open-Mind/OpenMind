@@ -5,9 +5,9 @@ import PortalContainer from '@components/portal/Portal';
 import { useCloseModal } from '@hooks/useCloseModal';
 import { useConfirmAlert } from '@hooks/useConfirmAlert';
 
-import Badge from './Badge';
 import { StCloseIcon } from '../sprite-icon/SpriteIcon';
 import Toast from '../toast/Toast';
+import Badge from './Badge';
 
 const BadgeBox = ({ path, onDeleteCard, value, questionId }) => {
   const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
