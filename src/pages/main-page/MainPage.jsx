@@ -60,7 +60,9 @@ const MainPage = () => {
           </StInputName>
         </StMainWrapper>
       </StBackground>
-      <PortalContainer>{isModalOpen && <Toast closeModal={toggleModal}>삭제 되었습니다.</Toast>}</PortalContainer>
+      <PortalContainer>
+        {isModalOpen && <Toast closeModal={toggleModal}>내 계정이 삭제 되었습니다.</Toast>}
+      </PortalContainer>
     </>
   );
 };
