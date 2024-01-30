@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { useDropdownProvider } from './context/DropdownProvider';
 
 const DropdownMenu = ({ children, positionTop = '38', positionRight, width }) => {
-  const { isOpen } = useDropdownProvider();
+  const { isDropdownOpen } = useDropdownProvider();
 
   return (
     <>
-      <StDropdownMenu $isOpen={isOpen} $width={width} $positionTop={positionTop} $positionRight={positionRight}>
+      <StDropdownMenu $isOpen={isDropdownOpen} $width={width} $positionTop={positionTop} $positionRight={positionRight}>
         {children}
       </StDropdownMenu>
     </>

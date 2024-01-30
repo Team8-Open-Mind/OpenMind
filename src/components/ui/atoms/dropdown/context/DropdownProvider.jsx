@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import { createContext, useCallback, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 import { css } from 'styled-components';
 
@@ -7,26 +7,12 @@ import { useCloseModal } from '@hooks/useCloseModal';
 
 const DropdownContext = createContext();
 
-const DropdownProvider = ({ children, callbackFn }) => {
+const DropdownProvider = ({ children }) => {
   const { toggleModal: toggleDropdown, isModalOpen: isDropdownOpen, modalRef: dropdownRef } = useCloseModal();
   const [selectedOption, setSelectedOption] = useState();
 
-  const changeSelectedOption = useCallback(
-    (selectedOptionText) => {
-      setSelectedOption(selectedOptionText);
-
-      if (typeof callbackFn === 'function') callbackFn(selectedOptionText);
-
-      if (isDropdownOpen) toggleDropdown();
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isDropdownOpen],
-  );
-
   return (
-    <DropdownContext.Provider
-      value={{ isOpen: isDropdownOpen, toggleDropdown, selectedOption, changeSelectedOption, setSelectedOption }}
-    >
+    <DropdownContext.Provider value={{ isDropdownOpen, toggleDropdown, selectedOption, setSelectedOption }}>
       <div
         ref={dropdownRef}
         css={css`

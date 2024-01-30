@@ -53,7 +53,7 @@ const QuestFeedPage = () => {
   // 고정: 맨 mount 시에만 실행
   const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, isIntersecting, requestType]);
 
-  // mount랑 interset 때 실행
+  // mount랑 intersect 때 실행
   useAsync_V2({
     deps: [isIntersecting, nextLimit, nextOffset, userId],
     enabled: isIntersecting,
