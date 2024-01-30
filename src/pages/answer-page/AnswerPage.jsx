@@ -2,8 +2,10 @@ import { useState } from 'react';
 
 import { css, styled } from 'styled-components';
 
+import PortalContainer from '@components/portal/Portal';
 import ShareButton from '@components/ui/atoms/button/share-button/ShareButton';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
+import Toast from '@components/ui/atoms/toast/Toast';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 import DocumentTitle from '@layout/document-title/DocumentTitle';
@@ -14,6 +16,7 @@ import { deleteQuestion } from '@api/questions/deleteQuestion';
 import getUserData from '@api/subjects/getUserData';
 import { useAsync } from '@hooks/useAsync';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
+import { useCloseModal } from '@hooks/useCloseModal';
 import { useInView } from '@hooks/useInView';
 import useScrollToTop from '@hooks/useScrollToTop';
 import { useSNSShare } from '@hooks/useSNSShare';
@@ -28,6 +31,7 @@ const AnswerPage = () => {
   const { intersectionObserveTargetRef, isIntersecting } = useInView();
   const [isVisible, handleScrollToTop] = useScrollToTop();
   const userId = localStorage.getItem('userId');
+  const { isModalOpen: isToastOpen, toggleModal: toggleToast } = useCloseModal();
 
   const [{ nextLimit, nextOffset }, setNext] = useState({
     nextOffset: 0,
@@ -95,6 +99,10 @@ const AnswerPage = () => {
     setRequestType('delete');
   };
 
+  const handleToast = () => {
+    toggleToast();
+  };
+
   return (
     <>
       <DocumentTitle>답변하기 페이지</DocumentTitle>
@@ -104,7 +112,13 @@ const AnswerPage = () => {
           <img className='user-profile' src={userInfo?.imageSource} alt='프로필' />
           <span className='pageName'>{userInfo?.name}</span>
           <StSnsWrapper>
-            <ShareButton iconName='clipboard' onClickHandler={copyUrl} />
+            <ShareButton
+              iconName='clipboard'
+              onClickHandler={() => {
+                copyUrl();
+                handleToast();
+              }}
+            />
             <ShareButton iconName='kakao' onClickHandler={shareToKakaotalk} />
             <ShareButton iconName='facebook' onClickHandler={shareToFacebook} />
           </StSnsWrapper>
@@ -135,6 +149,7 @@ const AnswerPage = () => {
           </>
         )}
       </StBackground>
+      <PortalContainer>{isToastOpen && <Toast closeModal={toggleToast}>URL이 복사되었습니다.</Toast>}</PortalContainer>
     </>
   );
 };

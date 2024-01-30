@@ -7,12 +7,12 @@ import PortalContainer from '@components/portal/Portal';
 import FloatingWriteQuestionButton from '@components/ui/atoms/button/floating-button/floating-write-question-button/FloatingWriteQuestionButton';
 import ShareButton from '@components/ui/atoms/button/share-button/ShareButton';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
+import Toast from '@components/ui/atoms/toast/Toast';
 import FeedCardContainer from '@components/ui/molecules/feed-card/FeedCardContainer';
 import AddQuestionModal from '@components/ui/molecules/modal/AddQuestionModal';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 import DocumentTitle from '@layout/document-title/DocumentTitle';
 import NoLists from '@pages/list-page/comp/list-contents/comp/no-lists/NoLists';
-import Toast from '@components/ui/atoms/toast/Toast';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';
 import getUserData from '@api/subjects/getUserData';
