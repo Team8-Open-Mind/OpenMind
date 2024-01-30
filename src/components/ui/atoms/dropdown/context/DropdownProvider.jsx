@@ -7,9 +7,9 @@ import { useCloseModal } from '@hooks/useCloseModal';
 
 const DropdownContext = createContext();
 
-const DropdownProvider = ({ children, callbackFn, initialSelectedValue }) => {
+const DropdownProvider = ({ children, callbackFn }) => {
   const { toggleModal: toggleDropdown, isModalOpen: isDropdownOpen, modalRef: dropdownRef } = useCloseModal();
-  const [selectedOption, setSelectedOption] = useState(initialSelectedValue);
+  const [selectedOption, setSelectedOption] = useState();
 
   const changeSelectedOption = useCallback(
     (selectedOptionText) => {
@@ -17,13 +17,16 @@ const DropdownProvider = ({ children, callbackFn, initialSelectedValue }) => {
 
       if (typeof callbackFn === 'function') callbackFn(selectedOptionText);
 
-      toggleDropdown();
+      if (isDropdownOpen) toggleDropdown();
     },
-    [toggleDropdown, callbackFn],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isDropdownOpen],
   );
 
   return (
-    <DropdownContext.Provider value={{ isOpen: isDropdownOpen, toggleDropdown, selectedOption, changeSelectedOption }}>
+    <DropdownContext.Provider
+      value={{ isOpen: isDropdownOpen, toggleDropdown, selectedOption, changeSelectedOption, setSelectedOption }}
+    >
       <div
         ref={dropdownRef}
         css={css`

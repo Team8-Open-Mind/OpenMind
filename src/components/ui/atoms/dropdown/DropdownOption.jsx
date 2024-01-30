@@ -9,15 +9,17 @@ import { useDropdownProvider } from './context/DropdownProvider';
  * @param {{ children: string | number; callbackFn: VoidFunction; selected?: boolean; disabled?: boolean}} DropdownOptionProps
  */
 const DropdownOption = ({ children, selected, disabled }) => {
-  const { changeSelectedOption } = useDropdownProvider();
+  const { changeSelectedOption, setSelectedOption } = useDropdownProvider();
 
   const onClickHandler = () => {
     if (!disabled) changeSelectedOption(children);
   };
 
   useEffect(() => {
-    if (selected && !disabled) changeSelectedOption(children);
-  }, [selected, disabled, changeSelectedOption, children]);
+    if (selected && !disabled) setSelectedOption(children);
+    // 맨 처음에만 호출
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return <StDropdownOption onClick={onClickHandler}>{children}</StDropdownOption>;
 };

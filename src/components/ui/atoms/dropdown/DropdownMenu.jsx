@@ -8,11 +8,9 @@ const DropdownMenu = ({ children, positionTop = '38', positionRight, width }) =>
 
   return (
     <>
-      {isOpen && (
-        <StDropdownMenu $isOpen={isOpen} $width={width} $positionTop={positionTop} $positionRight={positionRight}>
-          {children}
-        </StDropdownMenu>
-      )}
+      <StDropdownMenu $isOpen={isOpen} $width={width} $positionTop={positionTop} $positionRight={positionRight}>
+        {children}
+      </StDropdownMenu>
     </>
   );
 };
@@ -20,7 +18,7 @@ const DropdownMenu = ({ children, positionTop = '38', positionRight, width }) =>
 export default DropdownMenu;
 
 const StDropdownMenu = styled.ul`
-  display: flex;
+  display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
   flex-direction: column;
   justify-content: center;
   align-items: center;
