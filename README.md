@@ -2,6 +2,26 @@
 <img width="400" src="https://github.com/Team8-Open-Mind/OpenMind/assets/134386378/601f1c47-2743-498e-86c4-b6178d0899f2" alt="logo"/>
 </div>
 
+<div align="center">
+  <img src="https://img.shields.io/badge/git-F05032?style=flat-square&logo=git&logoColor=white"/>
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=flat-square&logo=javascript&logoColor=white"/>
+    <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=white"/>
+    <img src="https://img.shields.io/badge/StyledComponent-DB7093?style=flat-square&logo=styledcomponents&logoColor=white"/>
+  <img src="https://img.shields.io/badge/axios-5A29E4?style=flat-square&logo=axios&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Env-E34F26?style=flat-square&logo=dotenv&logoColor=white"/>
+</div>
+
+<div align="center">
+  <img src="https://img.shields.io/badge/discord-5865F2?style=flat-square&logo=discord&logoColor=white"/>
+  <img src="https://img.shields.io/badge/editorconfig-FEFEFE?style=flat-square&logo=editorconfig&logoColor=white"/>
+    <img src="https://img.shields.io/badge/github-181717?style=flat-square&logo=github&logoColor=white"/>
+    <img src="https://img.shields.io/badge/notion-000000?style=flat-square&logo=notion&logoColor=white"/>
+</div>
+
+<div align="center">
+  <img src="https://img.shields.io/badge/netlify-00C7B7?style=flat-square&logo=netlify&logoColor=white"/>
+</div>
+
 ## 배포 주소
 🔗 [바로가기](https://rococo-kleicha-e4e6ed.netlify.app/)
 
