@@ -17,6 +17,7 @@ import getUserData from '@api/subjects/getUserData';
 import { useAsync } from '@hooks/useAsync';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 import { useCloseModal } from '@hooks/useCloseModal';
+import { useConfirmAlert } from '@hooks/useConfirmAlert';
 import { useInView } from '@hooks/useInView';
 import useScrollToTop from '@hooks/useScrollToTop';
 import { useSNSShare } from '@hooks/useSNSShare';
@@ -33,6 +34,8 @@ const AnswerPage = () => {
   const userId = localStorage.getItem('userId');
   const { isModalOpen, toggleModal } = useCloseModal();
   const { isModalOpen: isToastOpen, toggleModal: toggleToast } = useCloseModal();
+  const { isModalOpen: isCancelDeleteCardOpen, toggleModal: toggleCancelDeleteCard } = useCloseModal();
+  const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
 
   const [{ nextLimit, nextOffset }, setNext] = useState({
     nextOffset: 0,
@@ -87,6 +90,11 @@ const AnswerPage = () => {
 
   const { setAsyncFunction: setDeleteCard } = useAsync(deleteQuestion);
 
+  const handleDeleteConfirmAlert = (confirm, cancel) => {
+    // 카드 한개 삭제할래? 물어보는 알럿
+    showConfirm(confirm, cancel);
+  };
+
   const handleDeleteCard = async (id) => {
     await setDeleteCard(id);
 
@@ -94,7 +102,13 @@ const AnswerPage = () => {
     toggleModal();
   };
 
+  const handleCancelDeleteCard = () => {
+    // 카드 한개 삭제 취소
+    toggleCancelDeleteCard();
+  };
+
   const handleToast = () => {
+    // url 복사 토스트
     toggleToast();
   };
 
@@ -125,6 +139,8 @@ const AnswerPage = () => {
             <FeedCardContainer
               setRequestType={setRequestType}
               onDeleteCard={handleDeleteCard}
+              onCancelDeleteCard={handleCancelDeleteCard}
+              handleDeleteConfirmAlert={handleDeleteConfirmAlert}
               cardLength={userInfo?.questionCount}
               userId={userId}
               userName={userInfo?.name}
@@ -145,8 +161,10 @@ const AnswerPage = () => {
         )}
       </StBackground>
       <PortalContainer>
+        <ConfirmAlertComponent title='선택하신 질문 카드가 삭제됩니다' content='삭제된 피드는 복구할 수 없습니다.' />
         {isModalOpen && <Toast closeModal={toggleModal}>삭제 되었습니다.</Toast>}
         {isToastOpen && <Toast closeModal={toggleToast}>URL이 복사되었습니다.</Toast>}
+        {isCancelDeleteCardOpen && <Toast closeModal={toggleCancelDeleteCard}>취소 되었습니다.</Toast>}
       </PortalContainer>
     </>
   );

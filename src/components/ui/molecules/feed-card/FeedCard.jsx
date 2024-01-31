@@ -7,10 +7,21 @@ import QuestionBox from '@components/ui/atoms/question-box/QuestionBox';
 import { feedCardType } from '@utils/card-type/feedCardType';
 import { timeStamp } from '@utils/time/timeStamp';
 
-const FeedCard = ({ path, setRequestType, onDeleteCard, answerResult, userName, userProfile }) => {
+const FeedCard = ({
+  handleDeleteConfirmAlert,
+  onCancelDeleteCard,
+  path,
+  setRequestType,
+  onDeleteCard,
+  answerResult,
+  userName,
+  userProfile,
+}) => {
   return (
     <StFeedCard>
       <BadgeBox
+        handleDeleteConfirmAlert={handleDeleteConfirmAlert}
+        onCancelDeleteCard={onCancelDeleteCard}
         path={path}
         onDeleteCard={onDeleteCard}
         value={feedCardType(answerResult?.answer)}
