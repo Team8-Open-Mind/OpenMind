@@ -17,7 +17,9 @@ import { useConfirmAlert } from '@hooks/useConfirmAlert';
 import FeedCard from './FeedCard';
 
 const FeedCardContainer = ({
+  handleDeleteConfirmAlert,
   onDeleteCard,
+  onCancelDeleteCard,
   cardLength,
   userName,
   userProfile,
@@ -32,7 +34,7 @@ const FeedCardContainer = ({
   const { path } = useCheckAnswerPath();
   const { isUser } = useCheckAuth();
 
-  const handleDeleteAllClick = async () => {
+  const handleDeleteAll = async () => {
     try {
       if (isUser) {
         await setAsyncFunction(userId);
@@ -50,12 +52,12 @@ const FeedCardContainer = ({
     }
   };
 
-  const handleCancelDeleteAllClick = () => {
+  const handleCancelDeleteAll = () => {
     toggleModal();
   };
 
-  const handleDeleteClick = async () => {
-    showConfirm(handleDeleteAllClick, handleCancelDeleteAllClick);
+  const handleDeleteAllClick = async () => {
+    showConfirm(handleDeleteAll, handleCancelDeleteAll);
   };
 
   return (
@@ -70,7 +72,7 @@ const FeedCardContainer = ({
             <FloatingButton
               position='static'
               boxSizeOnResize={{ onMobile: { width: 10.3, height: 2.5 }, onPc: { width: 13, height: 3.5 } }}
-              onClickHandler={handleDeleteClick}
+              onClickHandler={handleDeleteAllClick}
               hasBoxShadow={false}
             >
               내 마음 닫기
@@ -80,7 +82,9 @@ const FeedCardContainer = ({
         {answerResults?.map((answerResult) => {
           return (
             <FeedCard
+              onCancelDeleteCard={onCancelDeleteCard}
               setRequestType={setRequestType}
+              handleDeleteConfirmAlert={handleDeleteConfirmAlert}
               onDeleteCard={onDeleteCard}
               key={answerResult.id}
               answerResult={answerResult}
