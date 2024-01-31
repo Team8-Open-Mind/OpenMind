@@ -77,6 +77,7 @@
 ![답변계정삭제시연](https://github.com/Team8-Open-Mind/OpenMind/assets/134386378/16a271c5-57c3-41db-9308-1b06c1fb39a1)
 
 - 내 질문에 대한 삭제 그리고 계정 삭제가 가능합니다.
+- 계정을 삭제하면 메인으로 이동하고 localStorage 기록이 삭제됩니다.
 
 ### 접근 권한 제한
 ![접근권한제한](https://github.com/Team8-Open-Mind/OpenMind/assets/134386378/41bd4a51-99d5-4026-8bff-fd4a12bfb686)
