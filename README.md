@@ -7,6 +7,10 @@
   🔗 <a href="https://rococo-kleicha-e4e6ed.netlify.app/">오픈마인드 배포 주소</a>
 </div>
 </br>
+<div align="center"> 
+  🔗 <a href="https://github.com/Team8-Open-Mind/OpenMind/wiki/8%ED%8C%80%EC%9B%90-%EC%86%8C%EA%B0%9C">팀원 소개 및 R&R 보러가기</a>
+</div>
+</br>
 <div align="center">
   <img src="https://img.shields.io/badge/git-F05032?style=flat-square&logo=git&logoColor=white"/>
   <img src="https://img.shields.io/badge/javascript-F7DF1E?style=flat-square&logo=javascript&logoColor=white"/>
@@ -42,7 +46,8 @@
    ```js
    npm run dev
    ```
-
+## 📌 자세한 정보는 Wiki
+[위키 바로가기](https://github.com/Team8-Open-Mind/OpenMind/wiki)
 
 ## 🎥 웹 페이지 시연 GIF
 ### 메인 질문자 등록
@@ -77,7 +82,6 @@
 ![접근권한제한](https://github.com/Team8-Open-Mind/OpenMind/assets/134386378/41bd4a51-99d5-4026-8bff-fd4a12bfb686)
 
 - 내가 아닌 다른 사람의 질문을 수정할 위험이 있기 때문에 `post/:id/answer` 페이지에 대한 접근을 제한하였습니다. 
-
 
 
 ## ✏️ 프로젝트 진행 관리
