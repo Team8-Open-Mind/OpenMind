@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-import EditButton from '@components/ui/atoms/button/edit-button/EditButton';
-import Reaction from '@components/ui/atoms/reaction/Reaction';
-
 import { timeStamp } from '@utils/time/timeStamp';
 
 const CardAnswerBox = ({ userInfo, answerResult }) => {
