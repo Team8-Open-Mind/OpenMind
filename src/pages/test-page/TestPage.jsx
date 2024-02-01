@@ -3,9 +3,7 @@ import { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import PortalContainer from '@components/portal/Portal';
-import EditButton from '@components/ui/atoms/button/edit-button/EditButton';
 import ShareButton from '@components/ui/atoms/button/share-button/ShareButton';
-import Reaction from '@components/ui/atoms/reaction/Reaction';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import Toast from '@components/ui/atoms/toast/Toast';
 import Card from '@components/ui/molecules/card';
@@ -118,10 +116,6 @@ const TestPage = () => {
                 <Card.BadgeBox value={feedCardType(answerResult?.answer)} />
                 <Card.QuestionBox question={answerResult?.content} elapsedTime={timeStamp(answerResult?.createdAt)} />
                 <Card.AnswerBox userInfo={userInfo} answerResult={answerResult} />
-                <Card.BottomBox>
-                  <Reaction />
-                  <EditButton />
-                </Card.BottomBox>
               </Card>
             );
           })}
