@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import ReplyTypeSwitch from '@components/ui/atoms/reply-type-switch/ReplyTypeSwitch';
+
 import { timeStamp } from '@utils/time/timeStamp';
 
 const CardAnswerBox = ({ userInfo, answerResult }) => {
@@ -15,9 +17,7 @@ const CardAnswerBox = ({ userInfo, answerResult }) => {
             ) : null}
           </StUser>
         </StAnswer>
-        <div>readOnly</div>
-        <div>답변하기/수정하기/거절하기</div>
-        <div>좋아요/수정하기</div>
+        <ReplyTypeSwitch isRejected={answerResult?.isRejected} />
       </StAnswerBox>
     </>
   );
