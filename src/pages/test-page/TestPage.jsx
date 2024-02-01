@@ -6,6 +6,7 @@ import PortalContainer from '@components/portal/Portal';
 import EditButton from '@components/ui/atoms/button/edit-button/EditButton';
 import ShareButton from '@components/ui/atoms/button/share-button/ShareButton';
 import Reaction from '@components/ui/atoms/reaction/Reaction';
+import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import Toast from '@components/ui/atoms/toast/Toast';
 import Card from '@components/ui/molecules/card';
 import CardListContainer from '@components/ui/molecules/card-list-container/CardListContainer';
@@ -18,6 +19,7 @@ import { useAsync_V2 } from '@hooks/useAsync_V2';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 import { useCloseModal } from '@hooks/useCloseModal';
 import { useInView } from '@hooks/useInView';
+import useScrollToTop from '@hooks/useScrollToTop';
 import { useSNSShare } from '@hooks/useSNSShare';
 import { feedCardType } from '@utils/card-type/feedCardType';
 import { timeStamp } from '@utils/time/timeStamp';
@@ -30,6 +32,7 @@ const TestPage = () => {
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const [answerLists, setAnswerLists] = useState([]);
   const { isModalOpen: isToastOpen, toggleModal: toggleToast } = useCloseModal();
+  const [isVisible, handleScrollToTop] = useScrollToTop();
 
   // 고정: 맨 mount 시에만 실행
   const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, isIntersecting, requestType]);
@@ -131,6 +134,7 @@ const TestPage = () => {
             height: 0;
           `}
         />
+        {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
       </StBackground>
       <PortalContainer>{isToastOpen && <Toast closeModal={toggleToast}>URL이 복사되었습니다.</Toast>}</PortalContainer>
     </>
