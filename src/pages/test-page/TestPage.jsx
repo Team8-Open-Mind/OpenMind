@@ -112,9 +112,12 @@ const TestPage = () => {
           <CardListInformation cardListInfo={userInfo} />
           {answerLists.map((answerResult) => {
             return (
+              // compound component 주 목적인 헤드리스에 부합하지 않는 것 같다
+              // 공통되는 데이터를 context에 넣어줘야할 것 같은데 그 부분이 너무 어렵다
               <Card key={answerResult?.id}>
                 <Card.BadgeBox value={feedCardType(answerResult?.answer)} />
                 <Card.QuestionBox question={answerResult?.content} elapsedTime={timeStamp(answerResult?.createdAt)} />
+                {/* 이렇게 uersInfo 통째로 prop 넘겨주면 안좋을까요? */}
                 <Card.AnswerBox userInfo={userInfo} answerResult={answerResult} />
               </Card>
             );
