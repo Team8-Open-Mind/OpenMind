@@ -18,13 +18,13 @@
     <img src="https://img.shields.io/badge/StyledComponent-DB7093?style=flat-square&logo=styledcomponents&logoColor=white"/>
   <img src="https://img.shields.io/badge/axios-5A29E4?style=flat-square&logo=axios&logoColor=white"/>
   <img src="https://img.shields.io/badge/Env-E34F26?style=flat-square&logo=dotenv&logoColor=white"/>
+  <img src="https://img.shields.io/badge/gitAction-181717?style=flat-square&logo=git&logoColor=white"/>
 </div>
 
 <div align="center">
   <img src="https://img.shields.io/badge/discord-5865F2?style=flat-square&logo=discord&logoColor=white"/>
-  <img src="https://img.shields.io/badge/editorconfig-FEFEFE?style=flat-square&logo=editorconfig&logoColor=white"/>
-    <img src="https://img.shields.io/badge/github-181717?style=flat-square&logo=github&logoColor=white"/>
-    <img src="https://img.shields.io/badge/notion-000000?style=flat-square&logo=notion&logoColor=white"/>
+  <img src="https://img.shields.io/badge/github-181717?style=flat-square&logo=github&logoColor=white"/>
+  <img src="https://img.shields.io/badge/notion-000000?style=flat-square&logo=notion&logoColor=white"/>
 </div>
 
 <div align="center">
@@ -46,6 +46,11 @@
    ```js
    npm run dev
    ```
+## 🌳브랜치 전략
+github 브랜치 전략을 사용
+![image](https://github.com/Team8-Open-Mind/OpenMind/assets/123563774/d16362f2-8914-40da-a965-720e2c28bc30)
+
+   
 ## 📌 자세한 정보는 Wiki
 [위키 바로가기](https://github.com/Team8-Open-Mind/OpenMind/wiki)
 
