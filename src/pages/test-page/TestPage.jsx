@@ -118,7 +118,9 @@ const TestPage = () => {
           <CardListInformation cardListInfo={userInfo} />
           {answerLists.map((cardData) => {
             return (
-              // todo: compound component 재사용 목적에 맞게 세분화 시도
+              // todo: 진짜 재사용 가능한 prop들인지? 다시 체크하기
+              // todo: component 하나 더 만들어서 여기 있는것들 다 뭉쳐 담아주고, 그 컴포넌트 하나만 여기 넣기
+              // todo: 시간이 된다면 필요로하는 함수들을 넣어서 기능하도록 만들어 줘 미래의 나야~~~
               <Card key={cardData?.id}>
                 <Card.Badge value={feedCardType(cardData?.answer)} />
                 <Card.ElapsedTime createAt={cardData?.createdAt} />
