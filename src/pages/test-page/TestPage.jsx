@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 
 import PortalContainer from '@components/portal/Portal';
 import ShareButton from '@components/ui/atoms/button/share-button/ShareButton';
+import ReplyTypeSwitch from '@components/ui/atoms/reply-type-switch/ReplyTypeSwitch';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import Toast from '@components/ui/atoms/toast/Toast';
 import Card from '@components/ui/molecules/card';
@@ -19,8 +20,8 @@ import { useCloseModal } from '@hooks/useCloseModal';
 import { useInView } from '@hooks/useInView';
 import useScrollToTop from '@hooks/useScrollToTop';
 import { useSNSShare } from '@hooks/useSNSShare';
+import { useToggle } from '@hooks/useToggle';
 import { feedCardType } from '@utils/card-type/feedCardType';
-import { timeStamp } from '@utils/time/timeStamp';
 import { getQueryStringObject } from '@utils/url/getQueryStringObject';
 
 const TestPage = () => {
@@ -31,6 +32,7 @@ const TestPage = () => {
   const [answerLists, setAnswerLists] = useState([]);
   const { isModalOpen: isToastOpen, toggleModal: toggleToast } = useCloseModal();
   const [isVisible, handleScrollToTop] = useScrollToTop();
+  const [isEdit, setIsEdit] = useToggle();
 
   // 고정: 맨 mount 시에만 실행
   const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, isIntersecting, requestType]);
@@ -89,6 +91,10 @@ const TestPage = () => {
     toggleToast();
   };
 
+  const handleEditToggle = () => {
+    setIsEdit();
+  };
+
   return (
     <>
       <StBackground>
@@ -110,15 +116,19 @@ const TestPage = () => {
         </StQuestFeedPageWrapper>
         <CardListContainer>
           <CardListInformation cardListInfo={userInfo} />
-          {answerLists.map((answerResult) => {
+          {answerLists.map((cardData) => {
             return (
-              // compound component 주 목적인 헤드리스에 부합하지 않는 것 같다
-              // 공통되는 데이터를 context에 넣어줘야할 것 같은데 그 부분이 너무 어렵다
-              <Card key={answerResult?.id}>
-                <Card.BadgeBox value={feedCardType(answerResult?.answer)} />
-                <Card.QuestionBox question={answerResult?.content} elapsedTime={timeStamp(answerResult?.createdAt)} />
-                {/* 이렇게 uersInfo 통째로 prop 넘겨주면 안좋을까요? */}
-                <Card.AnswerBox userInfo={userInfo} answerResult={answerResult} />
+              // todo: compound component 재사용 목적에 맞게 세분화 시도
+              <Card key={cardData?.id}>
+                <Card.Badge value={feedCardType(cardData?.answer)} />
+                <Card.ElapsedTime createAt={cardData?.createdAt} />
+                <Card.Question questionContent={cardData?.content} />
+                <Card.ProfileImage answerProfileImageSrc={userInfo?.imageSource} />
+                <Card.Name name={userInfo?.name} />
+                <ReplyTypeSwitch cardData={cardData} />
+                <StLine />
+                <Card.LikeButton likeCount={cardData?.like} />
+                <Card.EditButton onClickEdit={handleEditToggle} isEdit={isEdit} />
               </Card>
             );
           })}
@@ -181,4 +191,10 @@ const StQuestFeedPageWrapper = styled.div`
 const StSnsWrapper = styled.div`
   display: flex;
   gap: 12px;
+`;
+
+const StLine = styled.div`
+  height: 1px;
+  align-self: stretch;
+  background: ${({ theme }) => theme.color.Grayscale[30]};
 `;

@@ -1,3 +1,7 @@
+import { useCardProvider } from '@components/ui/molecules/card/context/cardProvider';
+
+import { feedCardType } from '@utils/card-type/feedCardType';
+
 import EditTypeBox from '../edit-type-box/EditTypeBox';
 import ReadTypeBox from '../question-box/ReadTypeBox';
 import RejectedTypeBox from '../rejected-type-box/RejectedTypeBox';
@@ -5,24 +9,16 @@ import ReplyTypeBox from '../reply-type-box/ReplyTypeBox';
 
 // reply, edit, read, rejected 상태 타입
 
-const ReplyTypeSwitch = ({
-  setRequestType,
-  answerId,
-  questionId,
-  type,
-  value,
-  setEditTypeState,
-  isRejected,
-  setIsEdit,
-}) => {
-  switch (type) {
+const ReplyTypeSwitch = ({ setRequestType, cardData }) => {
+  const { isEdit } = useCardProvider();
+  switch (isEdit ? 'edit' : feedCardType(cardData?.answer)) {
     case 'reply':
       return (
         <ReplyTypeBox
           setRequestType={setRequestType}
-          questionId={questionId}
-          answerId={answerId}
-          isRejected={isRejected}
+          questionId={cardData?.id}
+          answerId={cardData?.answer?.id}
+          isRejected={cardData?.isRejected}
         />
       );
     case 'rejected':
@@ -30,18 +26,16 @@ const ReplyTypeSwitch = ({
     case 'edit':
       return (
         <EditTypeBox
-          setIsEdit={setIsEdit}
-          type={type}
-          isRejected={isRejected}
-          answerId={answerId}
-          questionId={questionId}
+          type='edit'
+          isRejected={cardData?.isRejected}
+          answerId={cardData?.answer?.id}
+          questionId={cardData?.id}
           setRequestType={setRequestType}
-          editTextValue={value}
-          setEditTypeState={setEditTypeState}
+          editTextValue={cardData?.answer?.content}
         />
       );
     default:
-      return <ReadTypeBox readTypeValue={value} />;
+      return <ReadTypeBox readTypeValue={cardData?.answer?.content} />;
   }
 };
 

@@ -2,11 +2,15 @@ import { createContext, useContext } from 'react';
 
 import styled from 'styled-components';
 
+import { useToggle } from '@hooks/useToggle';
+
 const CardContext = createContext();
 
 const CardProvider = ({ children }) => {
+  const [isEdit, setIsEdit] = useToggle();
+
   return (
-    <CardContext.Provider value=''>
+    <CardContext.Provider value={(isEdit, setIsEdit)}>
       <StCardContainer>{children}</StCardContainer>
     </CardContext.Provider>
   );

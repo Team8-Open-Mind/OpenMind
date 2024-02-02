@@ -3,11 +3,17 @@ import styled from 'styled-components';
 import Badge from '@components/ui/atoms/badge/Badge';
 import { StCloseIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
 
-const CardBadgeBox = ({ value, handleDeleteCard }) => {
+import { feedCardType } from '@utils/card-type/feedCardType';
+
+import { useCardProvider } from './context/cardProvider';
+
+const CardBadgeBox = ({ handleDeleteCard }) => {
+  const { cardData } = useCardProvider();
+
   return (
     <>
       <StBadgeBox>
-        <Badge value={value} />
+        <Badge value={feedCardType(cardData?.answer)} />
         <button type='button' onClick={handleDeleteCard}>
           <StCloseIcon $size={20} $color='gray60' />
         </button>
