@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 
-import { useDropdownProvider } from './context/DropdownProvider';
 import { StHamburger } from '../sprite-icon/SpriteIcon';
+import { useDropdownProvider } from './context/DropdownProvider';
 
 const DropdownHamburger = () => {
   const { toggleDropdown } = useDropdownProvider();

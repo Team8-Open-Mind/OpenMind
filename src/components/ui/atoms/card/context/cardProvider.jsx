@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useMemo, useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -10,8 +10,12 @@ const CardProvider = ({ cardListData, children }) => {
   const [cardData, setCardData] = useState(cardListData);
   const [isEdit, setIsEdit] = useToggle();
 
-  // !: useMemo를 쓰라는 에러가 뜨는데 반드시 그렇게 해야하는건지??
-  const providerValue = { cardData, setCardData, isEdit, setIsEdit };
+  // !: providerValue가 렌더링 될 때 마다 새로 생성되고 있음을 경고해주고 있어서 useMemo훅으로 감싸주었음
+  // The 'providerValue' object (at line 14) passed as the value prop to the Context provider (at line 17) changes every render. To fix this consider wrapping it in a useMemo hook
+  const providerValue = useMemo(
+    () => ({ cardData, setCardData, isEdit, setIsEdit }),
+    [cardData, setCardData, isEdit, setIsEdit],
+  );
 
   return (
     <CardContext.Provider value={providerValue}>
