@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 import { foundation } from '/src/style/theme/theme';
 
+import { feedCardType } from '@utils/card-type/feedCardType';
+
+import { useCardProvider } from './context/cardProvider';
+
 // 배지는 answer의 유무에 따라 정해짐.
 // answer의 경우 boolean이 아니라 null이 기본임.
 // 답변 거절 상태가 추가되었음. isRejected로 boolean 값을 받아와 처리함.
@@ -10,7 +14,11 @@ const gray = foundation.color.Grayscale[40];
 const brown = foundation.color.Brown[40];
 const red = foundation.color.Red[50];
 
-const CardStateBadge = ({ value }) => {
+const CardStateBadge = () => {
+  const { cardData } = useCardProvider();
+
+  const value = feedCardType(cardData?.answer);
+
   if (value === 'read') {
     return <StBadge value={value}>답변 완료</StBadge>;
   }
