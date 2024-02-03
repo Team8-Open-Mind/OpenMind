@@ -31,6 +31,8 @@ const TestPage = () => {
   const { copyUrl, shareToFacebook, shareToKakaotalk } = useSNSShare();
   const [answerLists, setAnswerLists] = useState([]);
   const { isModalOpen: isToastOpen, toggleModal: toggleToast } = useCloseModal();
+  const { isModalOpen: isDeleteToastOpen, toggleModal: toggleDeleteToast } = useCloseModal();
+  const { isModalOpen: isDeleteCancelToastOpen, toggleModal: toggleDeleteCancelToast } = useCloseModal();
   const [isVisible, handleScrollToTop] = useScrollToTop();
   const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
 
@@ -105,11 +107,12 @@ const TestPage = () => {
     await setDeleteCard(deleteId);
 
     setRequestType('delete');
+    toggleDeleteToast();
   };
 
   const handleDeleteCancelClick = () => {
     // 질문 카드 삭제 cancel
-    console.log('취소되었어요');
+    toggleDeleteCancelToast();
   };
 
   return (
@@ -157,6 +160,8 @@ const TestPage = () => {
       </StBackground>
       <PortalContainer>
         {isToastOpen && <Toast closeModal={toggleToast}>URL이 복사되었습니다.</Toast>}
+        {isDeleteToastOpen && <Toast closeModal={toggleDeleteToast}>삭제되었습니다.</Toast>}
+        {isDeleteCancelToastOpen && <Toast closeModal={toggleDeleteCancelToast}>취소되었습니다.</Toast>}
         <ConfirmAlertComponent
           title='선택하신 질문 카드 1개가 삭제됩니다'
           content='삭제된 질문 카드는 복구할 수 없습니다.'
