@@ -9,7 +9,6 @@ const CardContext = createContext();
 const CardProvider = ({ cardData, userInfo, setRequestType, children }) => {
   const [isEdit, setIsEdit] = useToggle();
 
-  // Todo: providerValue가 렌더링 될 때 마다 새로 생성되고 있음을 경고해주고 있어서 useMemo훅으로 감싸주었음 (기록필요)
   const providerValue = useMemo(
     () => ({ cardData, userInfo, setRequestType, isEdit, setIsEdit }),
     [cardData, userInfo, setRequestType, isEdit, setIsEdit],
