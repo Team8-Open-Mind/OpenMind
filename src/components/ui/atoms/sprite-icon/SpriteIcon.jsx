@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 // size와 color를 props로 내려줄 수 있습니다.
-// ex) <StHamburger size={20} color='gray40' />
+// ex) <StHamburger $size={20} $color='gray40' />
 const icon = styled.div`
   width: ${(props) => props.$size}px;
   height: ${(props) => props.$size}px;

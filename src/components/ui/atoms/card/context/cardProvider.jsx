@@ -10,7 +10,6 @@ const CardProvider = ({ cardData, userInfo, children }) => {
   const [isEdit, setIsEdit] = useToggle();
 
   // Todo: providerValue가 렌더링 될 때 마다 새로 생성되고 있음을 경고해주고 있어서 useMemo훅으로 감싸주었음 (기록필요)
-  // The 'providerValue' object (at line 14) passed as the value prop to the Context provider (at line 17) changes every render. To fix this consider wrapping it in a useMemo hook
   const providerValue = useMemo(
     () => ({ cardData, userInfo, isEdit, setIsEdit }),
     [cardData, userInfo, isEdit, setIsEdit],

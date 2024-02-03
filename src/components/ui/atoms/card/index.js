@@ -1,5 +1,6 @@
 import CardAnswerBox from './CardAnswerBox';
 import CardAnswerElapsedTime from './CardAnswerElapsedTime';
+import CardDeleteButton from './CardDeleteButton';
 import CardEditButton from './CardEditButton';
 import CardLikeButton from './CardLikeButton';
 import CardProfileImage from './CardProfileImage';
@@ -11,6 +12,7 @@ import CardProvider from './context/cardProvider';
 
 const Card = Object.assign(CardProvider, {
   Badge: CardStateBadge,
+  DeleteButton: CardDeleteButton,
   QuestionElapsedTime: CardQuestionElapsedTime,
   AnswerElapsedTime: CardAnswerElapsedTime,
   ProfileImage: CardProfileImage,
