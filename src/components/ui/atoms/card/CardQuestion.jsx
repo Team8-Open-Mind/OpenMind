@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
-const CardQuestion = ({ questionContent }) => {
-  return <StQuestionContent>{questionContent}</StQuestionContent>;
+import { useCardProvider } from './context/cardProvider';
+
+const CardQuestion = () => {
+  const { cardData } = useCardProvider();
+
+  return <StQuestionContent>{cardData?.content}</StQuestionContent>;
 };
 
 export default CardQuestion;

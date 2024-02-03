@@ -2,12 +2,16 @@ import styled from 'styled-components';
 
 import { ReactComponent as ThumbsUp } from '@assets/thumbs-up.svg';
 
-const CardLikeButton = ({ likeCount }) => {
+import { useCardProvider } from './context/cardProvider';
+
+const CardLikeButton = () => {
+  const { cardData } = useCardProvider();
+
   return (
     <StReaction>
       <StThumbsUp width='14px' height='14px' />
       <span>도움이 되었어요</span>
-      <span>{likeCount}</span>
+      <span>{cardData?.like}</span>
     </StReaction>
   );
 };

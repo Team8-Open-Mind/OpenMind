@@ -2,11 +2,18 @@ import styled from 'styled-components';
 
 import { timeStamp } from '@utils/time/timeStamp';
 
-const CardElapsedTime = ({ createAt }) => {
-  return <StElapsedTime>{timeStamp(createAt)}</StElapsedTime>;
+import { useCardProvider } from './context/cardProvider';
+
+const CardAnswerElapsedTime = () => {
+  const { cardData } = useCardProvider();
+
+  if (cardData?.answer !== null) {
+    // 답변이 있을 경우에만 보여준다.
+    return <StElapsedTime>{timeStamp(cardData?.answer?.createdAt)}</StElapsedTime>;
+  }
 };
 
-export default CardElapsedTime;
+export default CardAnswerElapsedTime;
 
 const StElapsedTime = styled.div`
   display: flex;

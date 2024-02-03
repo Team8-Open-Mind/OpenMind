@@ -9,13 +9,14 @@ const AnswerCardArea = ({ userInfo, cardData }) => {
     // todo: 시간이 된다면 필요로하는 함수들을 넣어서 기능하도록 만들어 줘 미래의 나야~~~
     <Card userInfo={userInfo} cardData={cardData}>
       <Card.Badge />
-      {/* <Card.ElapsedTime createAt={cardData?.createdAt} />
-      <Card.Question questionContent={cardData?.content} />
-      <Card.ProfileImage answerProfileImageSrc={userInfo?.imageSource} />
-      <Card.Name name={userInfo?.name} />
-      <ReplyTypeSwitch cardData={cardData} />
+      <Card.QuestionElapsedTime />
+      <Card.Question />
+      <Card.ProfileImage />
+      <Card.Name />
+      <Card.AnswerElapsedTime />
+      <ReplyTypeSwitch />
       <StLine />
-      <Card.LikeButton likeCount={cardData?.like} /> */}
+      <Card.LikeButton />
       <Card.EditButton />
     </Card>
   );

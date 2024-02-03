@@ -5,26 +5,29 @@ import { StMemoIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
 import { useCardProvider } from './context/cardProvider';
 
 const CardEditButton = () => {
-  const { isEdit, setIsEdit } = useCardProvider();
+  const { cardData, isEdit, setIsEdit } = useCardProvider();
 
   const handleEditToggleClick = () => {
     setIsEdit();
   };
 
-  return (
-    <StEditButton onClick={handleEditToggleClick} className={isEdit ? `editCancel` : null}>
-      {isEdit ? (
-        <>
-          <StEditCancelText>수정 취소</StEditCancelText>
-        </>
-      ) : (
-        <>
-          <StMemoIcon $size={14} $color='gray50' />
-          <StEditText>수정하기</StEditText>
-        </>
-      )}
-    </StEditButton>
-  );
+  if (cardData?.answer !== null) {
+    // 답변이 있는 경우에만 수정 버튼이 보여짐
+    return (
+      <StEditButton onClick={handleEditToggleClick} className={isEdit ? `editCancel` : null}>
+        {isEdit ? (
+          <>
+            <StEditCancelText>수정 취소</StEditCancelText>
+          </>
+        ) : (
+          <>
+            <StMemoIcon $size={14} $color='gray50' />
+            <StEditText>수정하기</StEditText>
+          </>
+        )}
+      </StEditButton>
+    );
+  }
 };
 
 export default CardEditButton;

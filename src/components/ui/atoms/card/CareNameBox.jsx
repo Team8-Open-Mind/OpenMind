@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
-const CardNameBox = ({ name }) => {
-  return <StName>{name}</StName>;
+import { useCardProvider } from './context/cardProvider';
+
+const CardNameBox = () => {
+  const { userInfo } = useCardProvider();
+
+  return <StName>{userInfo?.name}</StName>;
 };
 
 export default CardNameBox;
