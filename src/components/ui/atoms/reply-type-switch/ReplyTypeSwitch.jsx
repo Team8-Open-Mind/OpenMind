@@ -24,7 +24,7 @@ const ReplyTypeSwitch = ({ setRequestType }) => {
     case 'rejected':
       return <RejectedTypeBox />;
     case 'edit':
-      return <EditTypeBox type='edit' />;
+      return <EditTypeBox />;
     default:
       return <ReadTypeBox readTypeValue={cardData?.answer?.content} />;
   }
