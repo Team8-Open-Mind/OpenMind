@@ -12,10 +12,13 @@ import AnswerCardArea from '@components/ui/molecules/answer-card/AnswerCardArea'
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';
+import { deleteQuestion } from '@api/questions/deleteQuestion';
 import getUserData from '@api/subjects/getUserData';
+import { useAsync } from '@hooks/useAsync';
 import { useAsync_V2 } from '@hooks/useAsync_V2';
 import { useAsyncOnMount } from '@hooks/useAsyncOnMount';
 import { useCloseModal } from '@hooks/useCloseModal';
+import { useConfirmAlert } from '@hooks/useConfirmAlert';
 import { useInView } from '@hooks/useInView';
 import useScrollToTop from '@hooks/useScrollToTop';
 import { useSNSShare } from '@hooks/useSNSShare';
@@ -29,6 +32,7 @@ const TestPage = () => {
   const [answerLists, setAnswerLists] = useState([]);
   const { isModalOpen: isToastOpen, toggleModal: toggleToast } = useCloseModal();
   const [isVisible, handleScrollToTop] = useScrollToTop();
+  const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
 
   // 고정: 맨 mount 시에만 실행
   const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, isIntersecting, requestType]);
@@ -86,6 +90,27 @@ const TestPage = () => {
     // url 복사 토스트
     toggleToast();
   };
+  const { setAsyncFunction: setDeleteCard } = useAsync(deleteQuestion);
+  const [deleteId, setDeleteId] = useState('');
+
+  const handleDeleteAlertClick = (questionId) => {
+    // 질문 카드 삭제 alert 먼저 뜸
+    // 질문 카드 삭제할 때 필요한 questionId 받아와서 deleteId state에 저장해 둠
+    setDeleteId(questionId);
+    showConfirm(handleDeleteConfirmClick, handleDeleteCancelClick);
+  };
+
+  const handleDeleteConfirmClick = async () => {
+    // 질문 카드 삭제 confirm
+    await setDeleteCard(deleteId);
+
+    setRequestType('delete');
+  };
+
+  const handleDeleteCancelClick = () => {
+    // 질문 카드 삭제 cancel
+    console.log('취소되었어요');
+  };
 
   return (
     <>
@@ -115,6 +140,7 @@ const TestPage = () => {
                 userInfo={userInfo}
                 cardData={cardData}
                 setRequestType={setRequestType}
+                handleDeleteClick={handleDeleteAlertClick}
               />
             );
           })}
@@ -129,7 +155,13 @@ const TestPage = () => {
         />
         {isVisible ? <ScrollTopButton onClickHandler={handleScrollToTop} /> : null}
       </StBackground>
-      <PortalContainer>{isToastOpen && <Toast closeModal={toggleToast}>URL이 복사되었습니다.</Toast>}</PortalContainer>
+      <PortalContainer>
+        {isToastOpen && <Toast closeModal={toggleToast}>URL이 복사되었습니다.</Toast>}
+        <ConfirmAlertComponent
+          title='선택하신 질문 카드 1개가 삭제됩니다'
+          content='삭제된 질문 카드는 복구할 수 없습니다.'
+        />
+      </PortalContainer>
     </>
   );
 };
