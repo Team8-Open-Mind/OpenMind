@@ -9,24 +9,17 @@ import ReplyTypeBox from '../reply-type-box/ReplyTypeBox';
 
 // reply, edit, read, rejected 상태 타입
 
-const ReplyTypeSwitch = ({ setRequestType }) => {
+const ReplyTypeSwitch = () => {
   const { cardData, isEdit } = useCardProvider();
   switch (isEdit ? 'edit' : feedCardType(cardData?.answer)) {
     case 'reply':
-      return (
-        <ReplyTypeBox
-          setRequestType={setRequestType}
-          questionId={cardData?.id}
-          answerId={cardData?.answer?.id}
-          isRejected={cardData?.isRejected}
-        />
-      );
+      return <ReplyTypeBox />;
     case 'rejected':
       return <RejectedTypeBox />;
     case 'edit':
       return <EditTypeBox />;
     default:
-      return <ReadTypeBox readTypeValue={cardData?.answer?.content} />;
+      return <ReadTypeBox />;
   }
 };
 
