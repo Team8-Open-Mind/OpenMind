@@ -5,7 +5,7 @@ import ReplyTypeSwitch from '@components/ui/atoms/reply-type-switch/ReplyTypeSwi
 
 const AnswerCardArea = ({ userInfo, cardData }) => {
   return (
-    // todo: 시간이 된다면 필요로하는 함수들을 넣어서 기능하도록 만들어 줘 미래의 나야~~~
+    // todo: 이제 슬슬 기능을 넣어주라 미래의 나야~! 빨리 하고 타입스크립트 좀 해 ㅜㅜ
     <Card userInfo={userInfo} cardData={cardData}>
       <StFlexBox100>
         <Card.Badge />
