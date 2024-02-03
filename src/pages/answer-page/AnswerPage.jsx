@@ -141,10 +141,8 @@ const AnswerPage = () => {
               onDeleteCard={handleDeleteCard}
               onCancelDeleteCard={handleCancelDeleteCard}
               handleDeleteConfirmAlert={handleDeleteConfirmAlert}
-              cardLength={userInfo?.questionCount}
               userId={userId}
-              userName={userInfo?.name}
-              userProfile={userInfo?.imageSource}
+              userInfo={userInfo}
               answerResults={answerLists}
               intersectionObserveTargetRef={intersectionObserveTargetRef}
             />

@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 import { StMemoIcon } from '../../sprite-icon/SpriteIcon';
 
-const EditButton = ({ onClickEdit, isEdit }) => {
+const EditButton = ({ onClickEditHandle, isEdit }) => {
   return (
-    <StEditButton onClick={onClickEdit} className={isEdit ? `editCancel` : null}>
+    <StEditButton onClick={onClickEditHandle} className={isEdit ? `editCancel` : null}>
       {isEdit ? (
         <>
           <StEditCancelText>수정 취소</StEditCancelText>
