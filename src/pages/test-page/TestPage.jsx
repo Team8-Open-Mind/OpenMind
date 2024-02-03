@@ -34,7 +34,7 @@ const TestPage = () => {
   const { isModalOpen: isDeleteToastOpen, toggleModal: toggleDeleteToast } = useCloseModal();
   const { isModalOpen: isDeleteCancelToastOpen, toggleModal: toggleDeleteCancelToast } = useCloseModal();
   const [isVisible, handleScrollToTop] = useScrollToTop();
-  const { showConfirm, ConfirmAlertComponent } = useConfirmAlert();
+  const { showConfirm: showDeleteCardConfirm, ConfirmAlertComponent: DeleteCardConfirmComponent } = useConfirmAlert();
 
   // 고정: 맨 mount 시에만 실행
   const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, isIntersecting, requestType]);
@@ -99,7 +99,7 @@ const TestPage = () => {
     // 질문 카드 삭제 alert 먼저 뜸
     // 질문 카드 삭제할 때 필요한 questionId 받아와서 deleteId state에 저장해 둠
     setDeleteId(questionId);
-    showConfirm(handleDeleteConfirmClick, handleDeleteCancelClick);
+    showDeleteCardConfirm(handleDeleteConfirmClick, handleDeleteCancelClick);
   };
 
   const handleDeleteConfirmClick = async () => {
@@ -162,7 +162,7 @@ const TestPage = () => {
         {isToastOpen && <Toast closeModal={toggleToast}>URL이 복사되었습니다.</Toast>}
         {isDeleteToastOpen && <Toast closeModal={toggleDeleteToast}>삭제되었습니다.</Toast>}
         {isDeleteCancelToastOpen && <Toast closeModal={toggleDeleteCancelToast}>취소되었습니다.</Toast>}
-        <ConfirmAlertComponent
+        <DeleteCardConfirmComponent
           title='선택하신 질문 카드 1개가 삭제됩니다'
           content='삭제된 질문 카드는 복구할 수 없습니다.'
         />
