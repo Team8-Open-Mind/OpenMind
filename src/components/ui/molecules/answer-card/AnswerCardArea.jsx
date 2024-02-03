@@ -3,17 +3,17 @@ import styled from 'styled-components';
 import Card from '@components/ui/atoms/card';
 import ReplyTypeSwitch from '@components/ui/atoms/reply-type-switch/ReplyTypeSwitch';
 
-const AnswerCardArea = ({ userInfo, cardData }) => {
+const AnswerCardArea = ({ userInfo, cardData, setRequestType }) => {
   return (
     // todo: 이제 슬슬 기능을 넣어주라 미래의 나야~! 빨리 하고 타입스크립트 좀 해 ㅜㅜ
-    <Card userInfo={userInfo} cardData={cardData}>
+    <Card userInfo={userInfo} cardData={cardData} setRequestType={setRequestType}>
       <StFlexBox100>
         <Card.Badge />
         <Card.DeleteButton />
       </StFlexBox100>
       <StFlexColumnBox>
         <StFlexBox>
-          <span>질문 · </span>
+          <span>질문 ·</span>
           <Card.QuestionElapsedTime />
         </StFlexBox>
         <Card.Question />

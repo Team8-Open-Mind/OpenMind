@@ -109,7 +109,14 @@ const TestPage = () => {
         <CardListContainer>
           <CardListInformation cardListInfo={userInfo} />
           {answerLists.map((cardData) => {
-            return <AnswerCardArea key={cardData?.id} userInfo={userInfo} cardData={cardData} />;
+            return (
+              <AnswerCardArea
+                key={cardData?.id}
+                userInfo={userInfo}
+                cardData={cardData}
+                setRequestType={setRequestType}
+              />
+            );
           })}
         </CardListContainer>
         <p
