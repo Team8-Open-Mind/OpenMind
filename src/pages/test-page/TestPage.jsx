@@ -4,12 +4,12 @@ import styled, { css } from 'styled-components';
 
 import PortalContainer from '@components/portal/Portal';
 import ShareButton from '@components/ui/atoms/button/share-button/ShareButton';
+import Card from '@components/ui/atoms/card';
+import CardListContainer from '@components/ui/atoms/card-list-container/CardListContainer';
+import CardListInformation from '@components/ui/atoms/card-list-container/CardListInformation';
 import ReplyTypeSwitch from '@components/ui/atoms/reply-type-switch/ReplyTypeSwitch';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import Toast from '@components/ui/atoms/toast/Toast';
-import Card from '@components/ui/molecules/card';
-import CardListContainer from '@components/ui/molecules/card-list-container/CardListContainer';
-import CardListInformation from '@components/ui/molecules/card-list-container/CardListInformation';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';

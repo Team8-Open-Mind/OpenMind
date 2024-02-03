@@ -1,4 +1,4 @@
-import { useCardProvider } from '@components/ui/molecules/card/context/cardProvider';
+import { useCardProvider } from '@components/ui/atoms/card/context/cardProvider';
 
 import { feedCardType } from '@utils/card-type/feedCardType';
 
