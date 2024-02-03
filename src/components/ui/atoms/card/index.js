@@ -1,4 +1,3 @@
-import CardAnswerBox from './CardAnswerBox';
 import CardAnswerElapsedTime from './CardAnswerElapsedTime';
 import CardDeleteButton from './CardDeleteButton';
 import CardEditButton from './CardEditButton';
@@ -20,7 +19,6 @@ const Card = Object.assign(CardProvider, {
   LikeButton: CardLikeButton,
   EditButton: CardEditButton,
   Question: CardQuestion,
-  AnswerBox: CardAnswerBox,
 });
 
 export default Card;
