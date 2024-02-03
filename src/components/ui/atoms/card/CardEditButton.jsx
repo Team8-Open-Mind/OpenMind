@@ -2,9 +2,17 @@ import styled from 'styled-components';
 
 import { StMemoIcon } from '@components/ui/atoms/sprite-icon/SpriteIcon';
 
-const CardEditButton = ({ onClickEdit, isEdit }) => {
+import { useCardProvider } from './context/cardProvider';
+
+const CardEditButton = () => {
+  const { isEdit, setIsEdit } = useCardProvider();
+
+  const handleEditToggleClick = () => {
+    setIsEdit();
+  };
+
   return (
-    <StEditButton onClick={onClickEdit} className={isEdit ? `editCancel` : null}>
+    <StEditButton onClick={handleEditToggleClick} className={isEdit ? `editCancel` : null}>
       {isEdit ? (
         <>
           <StEditCancelText>수정 취소</StEditCancelText>

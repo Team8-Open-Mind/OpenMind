@@ -4,12 +4,11 @@ import styled, { css } from 'styled-components';
 
 import PortalContainer from '@components/portal/Portal';
 import ShareButton from '@components/ui/atoms/button/share-button/ShareButton';
-import Card from '@components/ui/atoms/card';
 import CardListContainer from '@components/ui/atoms/card-list-container/CardListContainer';
 import CardListInformation from '@components/ui/atoms/card-list-container/CardListInformation';
-import ReplyTypeSwitch from '@components/ui/atoms/reply-type-switch/ReplyTypeSwitch';
 import ScrollTopButton from '@components/ui/atoms/scroll-top/ScrollTopButton';
 import Toast from '@components/ui/atoms/toast/Toast';
+import AnswerCardArea from '@components/ui/molecules/answer-card/AnswerCardArea';
 import NavBar from '@components/ui/molecules/nav-bar/NavBar';
 
 import { getAnswerLists } from '@api/answers/getAnswerLists';
@@ -20,8 +19,6 @@ import { useCloseModal } from '@hooks/useCloseModal';
 import { useInView } from '@hooks/useInView';
 import useScrollToTop from '@hooks/useScrollToTop';
 import { useSNSShare } from '@hooks/useSNSShare';
-import { useToggle } from '@hooks/useToggle';
-import { feedCardType } from '@utils/card-type/feedCardType';
 import { getQueryStringObject } from '@utils/url/getQueryStringObject';
 
 const TestPage = () => {
@@ -32,7 +29,6 @@ const TestPage = () => {
   const [answerLists, setAnswerLists] = useState([]);
   const { isModalOpen: isToastOpen, toggleModal: toggleToast } = useCloseModal();
   const [isVisible, handleScrollToTop] = useScrollToTop();
-  const [isEdit, setIsEdit] = useToggle();
 
   // 고정: 맨 mount 시에만 실행
   const { result: userInfo } = useAsyncOnMount(() => getUserData(userId), [userId, isIntersecting, requestType]);
@@ -91,10 +87,6 @@ const TestPage = () => {
     toggleToast();
   };
 
-  const handleEditToggle = () => {
-    setIsEdit();
-  };
-
   return (
     <>
       <StBackground>
@@ -117,22 +109,7 @@ const TestPage = () => {
         <CardListContainer>
           <CardListInformation cardListInfo={userInfo} />
           {answerLists.map((cardData) => {
-            return (
-              // todo: 진짜 재사용 가능한 prop들인지? 다시 체크하기
-              // todo: component 하나 더 만들어서 여기 있는것들 다 뭉쳐 담아주고, 그 컴포넌트 하나만 여기 넣기
-              // todo: 시간이 된다면 필요로하는 함수들을 넣어서 기능하도록 만들어 줘 미래의 나야~~~
-              <Card key={cardData?.id}>
-                <Card.Badge value={feedCardType(cardData?.answer)} />
-                <Card.ElapsedTime createAt={cardData?.createdAt} />
-                <Card.Question questionContent={cardData?.content} />
-                <Card.ProfileImage answerProfileImageSrc={userInfo?.imageSource} />
-                <Card.Name name={userInfo?.name} />
-                <ReplyTypeSwitch cardData={cardData} />
-                <StLine />
-                <Card.LikeButton likeCount={cardData?.like} />
-                <Card.EditButton onClickEdit={handleEditToggle} isEdit={isEdit} />
-              </Card>
-            );
+            return <AnswerCardArea key={cardData?.id} userInfo={userInfo} cardData={cardData} />;
           })}
         </CardListContainer>
         <p
@@ -193,10 +170,4 @@ const StQuestFeedPageWrapper = styled.div`
 const StSnsWrapper = styled.div`
   display: flex;
   gap: 12px;
-`;
-
-const StLine = styled.div`
-  height: 1px;
-  align-self: stretch;
-  background: ${({ theme }) => theme.color.Grayscale[30]};
 `;

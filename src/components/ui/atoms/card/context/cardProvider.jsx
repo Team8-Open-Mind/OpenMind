@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -6,11 +6,15 @@ import { useToggle } from '@hooks/useToggle';
 
 const CardContext = createContext();
 
-const CardProvider = ({ children }) => {
+const CardProvider = ({ cardListData, children }) => {
+  const [cardData, setCardData] = useState(cardListData);
   const [isEdit, setIsEdit] = useToggle();
 
+  // !: useMemo를 쓰라는 에러가 뜨는데 반드시 그렇게 해야하는건지??
+  const providerValue = { cardData, setCardData, isEdit, setIsEdit };
+
   return (
-    <CardContext.Provider value={(isEdit, setIsEdit)}>
+    <CardContext.Provider value={providerValue}>
       <StCardContainer>{children}</StCardContainer>
     </CardContext.Provider>
   );
