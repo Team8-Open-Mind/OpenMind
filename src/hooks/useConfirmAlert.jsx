@@ -2,18 +2,13 @@ import { useState } from 'react';
 
 import styled from 'styled-components';
 
-import PortalContainer from '@components/portal/Portal';
 import Button from '@components/ui/atoms/button/Button';
-import Toast from '@components/ui/atoms/toast/Toast';
-
-import { useCloseModal } from './useCloseModal';
 
 // <Button onClickHandler={() => showConfirm(handleConfirm, handleCancel)}>전체 피드 삭제</Button> 이렇게 알럿을 연다
 const useConfirmAlert = () => {
   const [isConfirmVisible, setIsConfirmVisible] = useState(false);
   const [confirmCallback, setConfirmCallback] = useState(() => () => {});
   const [cancelCallback, setCancelCallback] = useState(() => () => {});
-  const { isModalOpen, toggleModal } = useCloseModal();
 
   // 함수를 통해 Confirm 알럿을 보여주고 콜백 함수 설정
   const showConfirm = (onConfirm, onCancel) => {
@@ -43,14 +38,7 @@ const useConfirmAlert = () => {
   const isConfirmOpen = () => isConfirmVisible;
 
   // title과 content 줄바꿈하고 싶을 때는 \n을 사용한다.
-  const ConfirmAlertComponent = ({
-    title,
-    content,
-    cancelText = '취소',
-    ConfirmText = '삭제',
-    hasDim = true,
-    hasToast = false,
-  }) => (
+  const ConfirmAlertComponent = ({ title, content, cancelText = '취소', ConfirmText = '삭제', hasDim = true }) => (
     <>
       {hasDim ? <StDim onClick={handleCancel} style={{ display: isConfirmVisible ? 'block' : 'none' }} /> : null}
 
@@ -68,11 +56,6 @@ const useConfirmAlert = () => {
           </StButtonGroup>
         </div>
       </StConfirmAlertModal>
-      {hasToast && isModalOpen ? (
-        <PortalContainer>
-          <Toast closeModal={toggleModal}>선택한 질문이 삭제되었습니다.</Toast>
-        </PortalContainer>
-      ) : null}
     </>
   );
 

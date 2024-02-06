@@ -4,10 +4,13 @@ import { postAnswer } from '@api/answers/postAnswer';
 import { useAsync } from '@hooks/useAsync';
 
 import Button from '../button/Button';
+import { useCardProvider } from '../card/context/cardProvider';
 import InputTextArea from '../input/input-text-area/InputTextArea';
 import RejectReplyButton from '../reject-reply/RejectReplyButton';
 
-const ReplyBox = ({ setRequestType, questionId }) => {
+const ReplyBox = () => {
+  const { cardData, setRequestType } = useCardProvider();
+  const questionId = cardData?.id;
   const [replyValue, setReplyValue] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const { setAsyncFunction: postAnswerAsync } = useAsync(postAnswer);

@@ -20,10 +20,8 @@ const FeedCardContainer = ({
   handleDeleteConfirmAlert,
   onDeleteCard,
   onCancelDeleteCard,
-  cardLength,
-  userName,
-  userProfile,
   answerResults,
+  userInfo,
   userId,
   setRequestType,
 }) => {
@@ -66,7 +64,7 @@ const FeedCardContainer = ({
         <StSubBox>
           <StLengthText>
             <StMessageIcon $size={24} $color='brown40' />
-            {cardLength}개의 질문이 있습니다
+            {userInfo?.questionCount}개의 질문이 있습니다
           </StLengthText>
           {path === 'answer' ? (
             <FloatingButton
@@ -88,8 +86,8 @@ const FeedCardContainer = ({
               onDeleteCard={onDeleteCard}
               key={answerResult.id}
               answerResult={answerResult}
-              userName={userName}
-              userProfile={userProfile}
+              userName={userInfo?.name}
+              userProfile={userInfo?.imageSource}
               path={path}
             />
           );

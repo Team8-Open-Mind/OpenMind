@@ -4,11 +4,14 @@ import { patchAnswer } from '@api/answers/patchAnswer';
 import { useAsync } from '@hooks/useAsync';
 
 import Button from '../button/Button';
+import { useCardProvider } from '../card/context/cardProvider';
 import InputTextArea from '../input/input-text-area/InputTextArea';
 import RejectReplyButton from '../reject-reply/RejectReplyButton';
 
-const EditTypeBox = ({ setRequestType, editTextValue, answerId, setIsEdit }) => {
-  const [editValue, setEditValue] = useState(editTextValue);
+const EditTypeBox = () => {
+  const { setRequestType, cardData, setIsEdit } = useCardProvider();
+  const answerId = cardData?.answer?.id;
+  const [editValue, setEditValue] = useState(cardData?.answer?.content);
   const [isDisabled, setIsDisabled] = useState(true);
   const { setAsyncFunction } = useAsync(patchAnswer);
   const { setAsyncFunction: setAsyncEditRejectFunction } = useAsync(patchAnswer);
@@ -28,7 +31,7 @@ const EditTypeBox = ({ setRequestType, editTextValue, answerId, setIsEdit }) => 
   const handleEditClick = async () => {
     const res = await setAsyncFunction(answerId, editValue);
     setRequestType('edit');
-    setIsEdit(false);
+    setIsEdit();
 
     return res;
   };
@@ -38,7 +41,7 @@ const EditTypeBox = ({ setRequestType, editTextValue, answerId, setIsEdit }) => 
     const isRejected = true;
     const res = await setAsyncEditRejectFunction(answerId, content, isRejected);
     setRequestType('reject');
-    setIsEdit(false);
+    setIsEdit();
 
     return res;
   };

@@ -15,7 +15,7 @@ export const feedCardType = (answer) => {
       type = 'edit';
     }
 
-    if (answer.isRejected) {
+    if (answer?.isRejected) {
       // 거절된 상태
       type = 'rejected';
     }

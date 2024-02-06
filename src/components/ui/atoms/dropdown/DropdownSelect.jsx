@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { useDropdownProvider } from './context/DropdownProvider';
 import { StDownIcon, StUpIcon } from '../sprite-icon/SpriteIcon';
+import { useDropdownProvider } from './context/DropdownProvider';
 
 const DropdownSelect = () => {
   const { toggleDropdown, isDropdownOpen, selectedOption } = useDropdownProvider();

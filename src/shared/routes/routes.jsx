@@ -9,7 +9,6 @@ const MainPage = lazy(() => import('@pages/main-page/MainPage'));
 const NotFoundPage = lazy(() => import('@pages/not-found-page/NotFoundPage'));
 const QuestFeedPage = lazy(() => import('@pages/question-feed-page/QuestFeedPage'));
 const TestPage = lazy(() => import('@pages/test-page/TestPage'));
-const TestPage2 = lazy(() => import('@pages/test2-page/TestPage2'));
 
 const PrimaryRoute = (
   <Route path='/' element={<LoadingSpinner />}>
@@ -18,7 +17,6 @@ const PrimaryRoute = (
     <Route path='post/:id/answer' element={<AnswerPage />} />
     <Route path='post/:id' element={<QuestFeedPage />} />
     <Route path='test' element={<TestPage />} />
-    <Route path='test2' element={<TestPage2 />} />
     <Route path='*' element={<NotFoundPage />} />
   </Route>
 );
