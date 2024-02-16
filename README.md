@@ -17,7 +17,6 @@
     <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=white"/>
     <img src="https://img.shields.io/badge/StyledComponent-DB7093?style=flat-square&logo=styledcomponents&logoColor=white"/>
   <img src="https://img.shields.io/badge/axios-5A29E4?style=flat-square&logo=axios&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Env-E34F26?style=flat-square&logo=dotenv&logoColor=white"/>
   <img src="https://img.shields.io/badge/gitAction-181717?style=flat-square&logo=git&logoColor=white"/>
 </div>
 
